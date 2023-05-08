@@ -1,0 +1,27 @@
+@import '/src/scss/custom';
+@import '../project-manager.component.scss';
+
+form {
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dateIpt-w{
+  width: 201px;
+}
+
+.ml-2{
+  margin-left: 2px;
+}
+
+.text-context {
+  font-weight: 500;
+  color: #000;
+  line-height: 24px;
+  margin-left: 15px;
+}
+
+mat-option{
+  height: 30px;
+}

@@ -1,0 +1,508 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+
+                    <li class="breadcrumb-item"><a href="/main/dashboard" class="a-blue">首頁</a></li>
+                    <li class="breadcrumb-item active"><a href="/main/cr-close-inform" class="a-blue">客需單待審核</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">客需單結案通知</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        客需單結案通知
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col-md-6">
+            <mat-card class="card search-group" style="height: 100%;">
+                <mat-card-content class="mat-card-content">
+                    <div class="edit-form-group pb-0">
+                        <div class="row" *ngIf="CRDatas[0]">
+
+
+                            <div class="col-6 mt-3">
+                                <dl class="row">
+                                    <dt class="px-0 col-sm-4">
+                                        <h4 class="text-head text-right">單號:</h4>
+                                    </dt>
+                                    <dd class="col-sm-8">
+                                        <h4 class="text-context">{{CRDatas[0].code}}</h4>
+                                    </dd>
+                                    <dt class="px-0 col-sm-4">
+                                        <h4 class="text-head text-right">客戶:</h4>
+                                    </dt>
+                                    <dd class="col-sm-8">
+                                        <h4 class="text-context">{{CRDatas[0].customer_name}}</h4>
+                                    </dd>
+                                    <dt class="px-0 col-sm-4">
+                                        <h4 class="text-head text-right">電話:</h4>
+                                    </dt>
+                                    <dd class="col-sm-8">
+                                        <h4></h4>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="col-6 mt-3">
+                                <dl class="row">
+                                    <dt class="px-0 col-sm-4">
+                                        <h4 class="text-head text-right">日期:</h4>
+                                    </dt>
+                                    <dd class="col-sm-8">
+                                        <h4 class="text-context">{{CRDatas[0].date_for_recive | date:
+                                            'yyyy/MM/dd'}}</h4>
+                                    </dd>
+                                    <dt class="px-0 col-sm-4">
+                                        <h4 class="text-head text-right">聯絡人:</h4>
+                                    </dt>
+                                    <dd class="col-sm-8">
+                                        <h4 class="text-context">{{CRDatas[0].contact_person_name}}</h4>
+                                    </dd>
+                                    <dt class="px-0 col-sm-4">
+                                        <h4 class="text-head text-right">Email:</h4>
+                                    </dt>
+                                    <dd class="col-sm-8">
+                                        <h4></h4>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="col-12">
+                                <dl class="row">
+                                    <dt class="px-0 col-sm-2">
+                                        <h4 class="text-head text-right">需求:</h4>
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        <h4 class="text-context">{{CRDatas[0].demand_content}}</h4>
+                                    </dd>
+                                    <dt class="px-0 col-sm-2">
+                                        <h4 class="text-head text-right">適用製程:</h4>
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        <h4 class="text-context">{{CRDatas[0].suitable_content}}</h4>
+                                    </dd>
+                                    <dt class="px-0 col-sm-2">
+                                        <h4 class="text-head text-right">其他:</h4>
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        <h4 class="text-context">{{CRDatas[0].other_content}}</h4>
+                                    </dd>
+                                    <dt class="px-0 col-sm-2">
+                                        <h4 class="text-head text-right">預算:</h4>
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        <h4 class="text-context">{{CRDatas[0].budget}}</h4>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                                <mat-list *ngIf="CRDatas[0]" class="row">
+                                    <h3>結論</h3>
+
+                                    <!--舊機型衍生/新機型-->
+                                    <mat-radio-group aria-label="Select an option" class="example-radio-group"
+                                        [(ngModel)]="CRDatas[0].machine_status_id" ngDefaultControl disabled>
+
+                                        <mat-list-item>
+                                            <mat-radio-button value="e3a5c393-bd97-4cb3-830d-6a59bb4fcd60">不承接此案
+                                            </mat-radio-button>
+                                        </mat-list-item>
+
+                                        <mat-list-item>
+                                            <mat-radio-button value="b996906d-d38b-42ea-b3ea-002c2a6f41e4">舊機型衍生
+                                            </mat-radio-button>
+                                            <h4 class="ml-2  my-auto">{{CRDatas[0].extend_rem}}</h4>
+                                        </mat-list-item>
+
+                                        <mat-list-item>
+                                            <mat-radio-button value="0707d4db-30fa-4053-85de-d8b837a3e22e">新機型
+                                            </mat-radio-button>
+                                        </mat-list-item>
+
+                                    </mat-radio-group>
+
+                                    <div class="col-12">
+                                        <dl class="row">
+                                            <dt class="px-0 col-sm-6">
+                                                <h4 class="text-head text-right">技術可行性評估報告，預計送審時間:</h4>
+                                            </dt>
+                                            <dd class="col-sm-6">
+                                                <h4 class="text-context">{{CRDatas[0].date_for_devlop|
+                                                    date:'yyyy/MM/dd'}}</h4>
+                                            </dd>
+                                            <dt class="px-0 col-sm-6">
+                                                <h4 class="text-head text-right">未來三年預估數量:</h4>
+                                            </dt>
+                                            <dd class="col-sm-6">
+                                                <h4 class="text-context">{{CRDatas[0].est_quantity }}</h4>
+                                            </dd>
+                                        </dl>
+                                    </div>
+
+                                    <!--不須提出技術可行性報告-->
+                                    <section class="example-section">
+                                        <mat-list>
+                                            <mat-list-item>
+                                                <mat-checkbox [(ngModel)]="CRDatas[0].eva_report" ngDefaultControl
+                                                    disabled>
+                                                    不須提出技術可行性評估報告
+                                                </mat-checkbox>
+                                            </mat-list-item>
+                                        </mat-list>
+                                    </section>
+
+                                    <!-- 是否填料 -->
+                                    <form [formGroup]="closeForm">
+                                        <!-- <section class="example-section" [(ngModel)]="CRDatas[0].fill">
+                                            <table class="example-full-width" cellspacing="0">
+                                                <tr>
+                                                    <td>
+                                                        <mat-list-item>
+                                                            <h4>是否填料: </h4>
+                                                        </mat-list-item>
+                                                    </td>
+                                                    <td>
+                                                        <mat-list-item>
+                                                            <mat-radio-button value="true">是
+                                                            </mat-radio-button>
+                                                        </mat-list-item>
+                                                    </td>
+                                                    <td>
+                                                        <mat-list-item>
+                                                            <mat-radio-button value="true">否
+                                                            </mat-radio-button>
+                                                        </mat-list-item>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </section> -->
+
+                                        <table class="example-full-width" cellspacing="0">
+                                            <tr>
+                                                <td>
+                                                    <mat-list-item>
+                                                        <h4>是否退料: </h4>
+                                                    </mat-list-item>
+                                                </td>
+                                                <td>
+                                                    <mat-radio-group aria-label="Select an option"
+                                                        class="example-radio-group" [(ngModel)]="CRDatas[0].fill"
+                                                        formControlName="fill" name="fill" ngDefaultControl>
+                                                        <mat-radio-button value="true">是
+                                                        </mat-radio-button>
+
+                                                        <mat-radio-button value="false" [checked]="true">否
+                                                        </mat-radio-button>
+
+                                                    </mat-radio-group>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+
+                                    </form>
+
+
+                                    <form [formGroup]="editRemarkForm">
+                                        <mat-form-field appearance="outline" class="width100">
+                                            <mat-label>處理情形及意見</mat-label>
+                                            <textarea matInput [(ngModel)]="remark" formControlName="remark"
+                                                name="remark" ngDefaultControl required></textarea>
+                                        </mat-form-field>
+                                    </form>
+                                </mat-list>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-6">
+            <mat-card class="card search-group" style="height: 100%;">
+                <mat-card-content class="mat-card-content">
+                    <div class="edit-form-group pb-0">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <mat-tab-group dynamicHeight>
+                                    <mat-tab label="會簽">
+
+                                        <div class="table-container">
+                                            <div class="table">
+
+                                                <table mat-table [dataSource]="csDatas" class="mat-elevation-z8">
+
+                                                    <ng-container [matColumnDef]="str.en"
+                                                        *ngFor="let str of countersignColumnObj">
+                                                        <th mat-header-cell *matHeaderCellDef> {{str.cn}}
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element[str.en]}}
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <ng-container matColumnDef="date_for_completion">
+                                                        <th mat-header-cell *matHeaderCellDef> 時間 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <span
+                                                                *ngIf="element.date_for_completion != '0001-01-01T00:00:00Z'">
+                                                                {{element.date_for_completion
+                                                                | date: 'yyyy/MM/dd hh:mm'}}
+                                                            </span>
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <tr mat-header-row
+                                                        *matHeaderRowDef="countersignColumn; sticky: true">
+                                                    </tr>
+                                                    <tr mat-row *matRowDef="let row; columns: countersignColumn;"></tr>
+                                                </table>
+
+                                            </div>
+                                        </div>
+
+                                    </mat-tab>
+                                    <mat-tab label="審核">
+                                        <div class="container">
+                                            <div class="pt-0 pb-0">
+                                                <div class="col mt-3">
+                                                    <dl class="row">
+                                                        <dt class="px-0 col-sm-2 ">
+                                                            <h4 class="text-head text-right">發文單位:</h4>
+                                                        </dt>
+                                                        <dd class="col-sm-10">
+                                                            <h4 class="text-context">營運業務部</h4>
+                                                        </dd>
+                                                        <dt class="px-0 col-sm-2 ">
+                                                            <h4 class="text-head text-right">發文者:</h4>
+                                                        </dt>
+                                                        <dd class="col-sm-10" *ngIf="CRDatas[0]">
+                                                            <h4 class="text-context">{{CRDatas[0].salesman_name}}
+                                                                {{CRDatas[0].create_time |
+                                                                date:
+                                                                'yyyy/MM/dd hh:mm'}}</h4>
+                                                        </dd>
+                                                        <dt class="px-0 col-sm-2">
+                                                            <h4 class="text-head text-right">單位主管: </h4>
+                                                        </dt>
+                                                        <dd class="col-sm-10">
+                                                            <h4 *ngIf="department_interview[0]">
+                                                                {{department_interview[0].creater_name}}
+                                                                {{department_interview[0].create_time | date:
+                                                                'yyyy/MM/dd hh:mm'}}</h4>
+                                                        </dd>
+                                                        <dt class="px-0 col-sm-2 ">
+                                                            <h4 class="text-head text-right">副總: </h4>
+                                                        </dt>
+                                                        <dd class="col-sm-10">
+                                                            <h4 *ngIf="department_interview[1]">
+                                                                {{department_interview[1].creater_name}}
+                                                                {{department_interview[1].create_time | date:
+                                                                'yyyy/MM/dd hh:mm'}}</h4>
+                                                        </dd>
+                                                        <dt class="px-0 col-sm-2 ">
+                                                            <h4 class="text-head text-right">總經理:</h4>
+                                                        </dt>
+                                                        <dd class="col-sm-10">
+                                                            <h4 *ngIf="department_interview[2]">
+                                                                {{department_interview[2].creater_name}}
+                                                                {{department_interview[2].create_time | date:
+                                                                'yyyy/MM/dd hh:mm'}}</h4>
+                                                        </dd>
+                                                        <dt class="px-0 col-sm-2">
+                                                            <h4 class="text-head text-right">PM: </h4>
+                                                        </dt>
+                                                        <dd class="col-sm-10">
+                                                            <h4 *ngIf="department_interview[3]">
+                                                                {{department_interview[3].creater_name}}
+                                                                {{department_interview[3].create_time | date:
+                                                                'yyyy/MM/dd hh:mm'}}</h4>
+                                                        </dd>
+                                                        <!-- <dt class="col-sm-2">
+                                                <h4 class="text-head text-right">完工日期: </h4>
+                                            </dt>
+                                            <dd class="col">
+                                                <h4 *ngIf="department_interview[4]">{{department_interview[4].create_time | date:
+                                                    'yyyy/MM/dd hh:mm'}}</h4>
+                                            </dd> -->
+
+                                                    </dl>
+                                                </div>
+                                                <!--會簽單位-->
+                                                <h3>會簽單位</h3>
+                                                <section class="example-section">
+                                                    <span class="example-list-section">
+                                                        <mat-list>
+                                                            <mat-list-item
+                                                                *ngFor="let item of CSdepartmentList;let i=index">
+                                                                <mat-checkbox [(ngModel)]="item.ckecked"
+                                                                    [disabled]="true" class="col-sm-5">
+                                                                    {{item.name}}:
+                                                                </mat-checkbox>
+                                                                <div *ngIf="item.countersign_user">
+                                                                    <span
+                                                                        *ngFor="let item of CSdepartmentList[i].countersign_user">
+                                                                        {{item.name}}
+                                                                    </span>
+                                                                </div>
+                                                            </mat-list-item>
+                                                        </mat-list>
+                                                    </span>
+                                                </section>
+
+                                            </div>
+                                        </div>
+                                    </mat-tab>
+                                    <mat-tab label="會議">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="table-container">
+                                                        <div class="table">
+                                                            <table #meetSort='matSort' matSort mat-table
+                                                                [dataSource]="meetDataSource" class="mat-elevation-z8">
+
+                                                                <!-- 會議名稱 -->
+                                                                <ng-container matColumnDef="m_name">
+                                                                    <th mat-header-cell *matHeaderCellDef
+                                                                        mat-sort-header> 會議名稱 </th>
+                                                                    <td mat-cell *matCellDef="let element">
+                                                                        {{element.m_name}} </td>
+                                                                </ng-container>
+
+                                                                <!-- 會議主席 -->
+                                                                <ng-container matColumnDef="name">
+                                                                    <th mat-header-cell *matHeaderCellDef
+                                                                        mat-sort-header> 會議主席 </th>
+                                                                    <td mat-cell *matCellDef="let element">
+                                                                        {{element.name}} </td>
+                                                                </ng-container>
+
+                                                                <!-- 會議日期 -->
+                                                                <ng-container matColumnDef="date_for_start">
+                                                                    <th mat-header-cell *matHeaderCellDef
+                                                                        mat-sort-header> 會議日期 </th>
+                                                                    <td mat-cell *matCellDef="let element">
+                                                                        {{element.date_for_start | date:
+                                                                        'yyyy/MM/dd'}} {{element.time_for_start}} ~
+                                                                        {{element.time_for_end}}
+                                                                    </td>
+                                                                </ng-container>
+
+                                                                <!-- Weight Column -->
+                                                                <!-- <ng-container matColumnDef="action_detail">
+                                                                    <th mat-header-cell *matHeaderCellDef> 檢視 </th>
+                                                                    <td mat-cell *matCellDef="let element">
+                                                                        <button mat-button class="" (click)="doPostMeet(element.m_id)">
+                                                                            <mat-icon>visibility</mat-icon>
+                                                                        </button>
+                                                                    </td>
+                                                                </ng-container> -->
+                                                                <tr mat-header-row *matHeaderRowDef="display_meet"></tr>
+                                                                <tr mat-row
+                                                                    *matRowDef="let row; columns: display_meet;"></tr>
+                                                            </table>
+                                                            <mat-paginator #meetPaginator [length]="meettotalCount"
+                                                                [pageIndex]="0" [pageSize]="10"
+                                                                [pageSizeOptions]="[5, 10, 15]"
+                                                                [showFirstLastButtons]="true">
+                                                            </mat-paginator>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </mat-tab>
+                                    <mat-tab label="紀錄">
+                                        <!--資料顯示區-->
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="table-container">
+                                                        <div class="table">
+                                                            <table #interviewSortSort='matSort' matSort mat-table
+                                                                [dataSource]="interviewDataSource"
+                                                                class="mat-elevation-z8">
+
+                                                                <ng-container matColumnDef="content">
+                                                                    <th mat-header-cell *matHeaderCellDef
+                                                                        mat-sort-header> 動作 </th>
+                                                                    <td mat-cell *matCellDef="let element">
+                                                                        {{element.actor}}{{element.content}}
+                                                                    </td>
+                                                                </ng-container>
+
+                                                                <!-- remark Column -->
+                                                                <ng-container matColumnDef="remark">
+                                                                    <th mat-header-cell *matHeaderCellDef
+                                                                        mat-sort-header> 備註說明 </th>
+                                                                    <td mat-cell *matCellDef="let element">
+                                                                        {{element.remark}}
+                                                                    </td>
+                                                                </ng-container>
+
+                                                                <!-- name Column -->
+                                                                <ng-container matColumnDef="creater_name">
+                                                                    <th mat-header-cell *matHeaderCellDef
+                                                                        mat-sort-header> 人員 </th>
+                                                                    <td mat-cell *matCellDef="let element">
+                                                                        {{element.creater_name}}
+                                                                    </td>
+                                                                </ng-container>
+
+                                                                <!-- creatTime Column -->
+                                                                <ng-container matColumnDef="create_time">
+                                                                    <th mat-header-cell *matHeaderCellDef
+                                                                        mat-sort-header> 創建時間 </th>
+                                                                    <td mat-cell *matCellDef="let element">
+                                                                        {{element.create_time | date:
+                                                                        'yyyy/MM/dd hh:mm'}}
+                                                                    </td>
+                                                                </ng-container>
+
+                                                                <tr mat-header-row *matHeaderRowDef="interviewcol"></tr>
+                                                                <tr mat-row
+                                                                    *matRowDef="let row; columns: interviewcol;"></tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-tab>
+
+                                </mat-tab-group>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="form-group pt-3 pb-0">
+                <mat-card class="card search-group">
+                    <!-- <button mat-button id="" class="btn-none" (click)="submitCase()">儲存並送出</button> -->
+                    <button mat-button id="" class="btn-green" (click)="submitCase()">送出</button>
+                    <!-- <button mat-button id="" class="btn-none" (click)="updateCustomerRequest()">儲存</button> -->
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

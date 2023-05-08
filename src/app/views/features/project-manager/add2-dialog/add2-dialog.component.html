@@ -1,0 +1,113 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">專案管理-新增2</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+<form [formGroup]="add2Form">
+    <mat-dialog-content>
+        <mat-form-field appearance="outline" class="w-100p">
+            <mat-label>套用範本</mat-label>
+            <mat-select formControlName="select">
+                <mat-option *ngFor="let select of [1,2,3,4,5,6]" [value]="select" title="{{select}}">
+                    {{select}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <table cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field appearance="outline">
+                        <mat-label>專案類型</mat-label>
+                        <mat-select formControlName="select">
+                            <mat-option *ngFor="let select of [1,2,3,4,5,6]" [value]="select" title="{{select}}">
+                                {{select}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="add2Form.controls['select'].hasError('required')">
+                            必選
+                        </mat-error>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field appearance="outline">
+                        <mat-label>專案代號</mat-label>
+                        <mat-select formControlName="select">
+                            <mat-option *ngFor="let select of [1,2,3,4,5,6]" [value]="select" title="{{select}}">
+                                {{select}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="add2Form.controls['select'].hasError('required')">
+                            必選
+                        </mat-error>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <mat-form-field appearance="outline">
+                        <mat-label>專案分類</mat-label>
+                        <input matInput type="text">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field appearance="outline">
+                        <mat-label>專案名稱</mat-label>
+                        <input matInput type="text">
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+        <table cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field appearance="outline">
+                        <mat-label>專案負責人</mat-label>
+                        <mat-select formControlName="select">
+                            <mat-option *ngFor="let select of [1,2,3,4,5,6]" [value]="select" title="{{select}}">
+                                {{select}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="add2Form.controls['select'].hasError('required')">
+                            必選
+                        </mat-error>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field appearance="outline">
+                        <mat-label>年度</mat-label>
+                        <mat-select formControlName="select">
+                            <mat-option *ngFor="let select of [1,2,3,4,5,6]" [value]="select" title="{{select}}">
+                                {{select}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="add2Form.controls['select'].hasError('required')">
+                            必選
+                        </mat-error>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+        <mat-form-field class="w-100p" appearance="outline">
+            <mat-label>任務時程</mat-label>
+            <mat-date-range-input>
+                <input matStartDate placeholder="Start date">
+                <input matEndDate placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+        </mat-form-field>
+
+        <mat-list>
+            <mat-list-item>
+                <h4>建檔人員:</h4>
+                <h4>admin</h4>
+                <h4 class="ml-10">建檔單位:</h4>
+                <h4>總經理室</h4>
+            </mat-list-item>
+        </mat-list>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-raised-button class="btn-normal-none reset" type="reset">回復重填</button>
+        <button mat-raised-button class="btn" (click)="submit(add2Form.value)">確認修改</button>
+    </mat-dialog-actions>
+</form>

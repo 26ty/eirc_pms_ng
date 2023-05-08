@@ -1,0 +1,9 @@
+@import '/src/scss/custom';
+@import '/src/scss/container_children';
+
+
+form {
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+}

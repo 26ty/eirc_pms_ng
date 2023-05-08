@@ -1,0 +1,28 @@
+@import '/src/scss/container_children';
+
+.textareaInput{
+    width: 1000px;
+}
+
+
+
+
+  .text-context{
+    color: #8b8689;
+    line-height: 24px;
+  }
+
+  .text-import{
+    color: #FF3D57;
+    line-height: 24px;
+  }
+
+  .bg-import{
+    display: block;
+    background: rgb(225, 225, 225);
+    border-radius: 10px;
+    padding: 2px;
+    padding-bottom: 0;
+
+    
+  }

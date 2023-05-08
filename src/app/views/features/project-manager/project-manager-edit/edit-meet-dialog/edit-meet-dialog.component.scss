@@ -1,0 +1,25 @@
+@import '../../project-manager.component.scss';
+
+.dateIpt-w{
+    width: 201px;
+}
+
+.ml-2{
+    margin-left: 2px;
+}
+
+.bg-import{
+  display: block;
+  background: rgb(225, 225, 225);
+  border-radius: 10px;
+  padding: 15px;
+  padding-bottom: 0;
+
+  h4{
+      margin-bottom: 5px;
+  }
+}
+
+.input-400{
+  width: 400px;
+}

@@ -1,0 +1,10 @@
+@import '/src/scss/container_children';
+
+.font-600{
+    font-weight: 1000;
+    color: red;
+}
+
+table, th, td {
+    border: 1px solid rgb(46, 45, 45);
+  }

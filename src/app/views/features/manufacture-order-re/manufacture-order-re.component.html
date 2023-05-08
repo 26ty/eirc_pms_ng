@@ -1,0 +1,120 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard">首頁</a></li>
+                    <li class="breadcrumb-item active">製造資訊管理</li>
+                    <li class="breadcrumb-item active" aria-current="page">製令開啟通知作業</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        製令開啟通知作業(收文)
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!--顯示資料區域-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-0 pb-2">
+                <!--表格-->
+                <mat-card class="card table">
+                    <div class="table-container">
+                        <!-- <h5 class="">製令列表</h5> -->
+                        <!-- <hr> -->
+                        <table mat-table [dataSource]="moDataSource" class="mat-elevation-z8">
+
+                            <!-- status -->
+                            <!-- <ng-container matColumnDef="status">
+                                <th mat-header-cell *matHeaderCellDef> 狀態 </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <mat-icon [ngClass]="{'blue' : (element.status == 'A') ,
+                     'yellow1' : (element.status == 'B') ,'yellow3' : (element.status == 'C') ,
+                     'green1' : (element.status =='G'),'green2' : (element.status =='G'),'green3' : (element.status =='P'),
+                     'red1' : (element.status =='D'),'red3' : (element.status =='F')}">
+                                        circle
+                                    </mat-icon>
+
+                                </td>
+                            </ng-container> -->
+
+                            <!-- code -->
+                            <ng-container matColumnDef="code">
+                                <th mat-header-cell *matHeaderCellDef>單號</th>
+                                <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+                            </ng-container>
+
+                            <!-- project_name(待確認) -->
+                            <!-- <ng-container matColumnDef="project_name">
+                                <th mat-header-cell *matHeaderCellDef>專案代號</th>
+                                <td mat-cell *matCellDef="let element"> {{element.cd_code}}{{element.p_code}} </td>
+                            </ng-container> -->
+
+                            <!-- salesman_name -->
+                            <ng-container matColumnDef="salesman_name">
+                                <th mat-header-cell *matHeaderCellDef>業務負責人</th>
+                                <td mat-cell *matCellDef="let element"> {{element.salesman_name}} </td>
+                            </ng-container>
+                            <!-- order_name -->
+                            <ng-container matColumnDef="order_name">
+                                <th mat-header-cell *matHeaderCellDef> 主件品號 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.order_name}} </td>
+                            </ng-container>
+                            <!-- creater_name -->
+                            <ng-container matColumnDef="creater_name">
+                                <th mat-header-cell *matHeaderCellDef> 發文者 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.creater_name}} </td>
+                            </ng-container>
+                            <!-- recipient_name -->
+                            <ng-container matColumnDef="recipient_name">
+                                <th mat-header-cell *matHeaderCellDef> 收文者 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.recipient_name}} </td>
+                            </ng-container>
+                            <!-- date_for_open -->
+                            <ng-container matColumnDef="date_for_open">
+                                <th mat-header-cell *matHeaderCellDef> 製令開啟期限 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.date_for_open| date: 'yyyy/MM/dd'}}
+                                </td>
+                            </ng-container>
+                            <!-- date_for_close -->
+                            <ng-container matColumnDef="date_for_close">
+                                <th mat-header-cell *matHeaderCellDef> 製令關閉期限 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.date_for_close | date: 'yyyy/MM/dd'}}
+                                </td>
+                            </ng-container>
+                            <!-- action_edit -->
+                            <ng-container matColumnDef="action_edit">
+                                <th mat-header-cell *matHeaderCellDef class="text-center">
+                                    編輯 </th>
+                                <td mat-cell *matCellDef="let element;let index = index" class="text-center">
+                                    <button mat-mini-fab color="basic" class="table-btn-none"
+                                        [routerLink]="['/main/manufacture-order-re-edit/' + element.m_id + '/' + element.bonita_task_id]">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                            <!-- Row shown when there is no matching data. -->
+                        </table>
+                    </div>
+                    <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5"
+                        [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true">
+                    </mat-paginator>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<!-- <ngx-gantt #gantt [groups]="groups" [items]="items">
+    <ngx-gantt-table>
+      <ngx-gantt-column name="标题" width="300px">
+        <ng-template #cell let-item="item"> {{ item.title }} </ng-template>
+      </ngx-gantt-column>
+    </ngx-gantt-table>
+  </ngx-gantt> -->
+
+<div style="height:400px">
+
+  <ngx-gantt #gantt [items]="items" [disabledLoadOnScroll]=false>
+    <ngx-gantt-table>
+      <ngx-gantt-column name="任務名稱" width="180px">
+
+        <ng-template #cell let-item="item"> {{ item.title }} </ng-template>
+
+      </ngx-gantt-column>
+    </ngx-gantt-table>
+
+    <ng-template let-item="item" #bar >
+      <!-- <span style="color: white;" pTooltip="{{ item.start | date: 'YYYY/MM/dd'}}-{{item.end | date: 'YYYY/MM/dd' }}"> </span> -->
+      <!-- <span style="color: white;" tooltipPosition="right" pTooltip="{{ item.start | date: 'YYYY/MM/dd'}}-{{item.end | date: 'YYYY/MM/dd' }}">{{ item.start | date: 'YYYY/MM/dd'}}　　　　　　　　-　　　　　　　　{{item.end | date: 'YYYY/MM/dd' }} </span> -->
+      <span style="color: #348FE4" pTooltip="{{ item.start | date: 'YYYY/MM/dd'}}-{{item.end | date: 'YYYY/MM/dd' }}">{{ item.start | date: 'YYYY/MM/dd'}}　　　　　　　　-　　　　　　　　{{item.end | date: 'YYYY/MM/dd' }}</span>
+    </ng-template>
+  </ngx-gantt>
+</div>
+  

@@ -1,0 +1,43 @@
+<div class="container" class="detail-container">
+    <div class="offcanvas-header">
+        <h2 class="offcanvas-title" id="offcanvasLabel">會議細項</h2>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+            mat-dialog-close></button>
+    </div>
+    <mat-dialog-content>
+        <div class="row">
+            <div class="col" *ngIf="meetDatas">
+                <mat-list>
+                    <mat-list-item>
+                        <h4><b>會議名稱:</b></h4>
+                        <h4>{{meetDatas.message.name}}</h4>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4><b>會議主席:</b></h4>
+                        <h4>{{meetDatas.message.chairman}}</h4>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4><b>會議開始時間:</b></h4>
+                        <h4>{{meetDatas.message.start_date}}</h4>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4><b>會議結束時間:</b></h4>
+                        <h4>{{meetDatas.message.end_date}}</h4>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4><b>會議地點:</b></h4>
+                        <h4>{{meetDatas.message.room}}</h4>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4><b>備註說明:</b></h4>
+                        <h4>{{meetDatas.message.attendees}}</h4>
+                    </mat-list-item>
+
+                </mat-list>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button class="btn-normal-none reset" type="reset" mat-dialog-close>關閉</button>
+    </mat-dialog-actions>
+</div>

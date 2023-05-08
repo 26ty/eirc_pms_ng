@@ -1,0 +1,11 @@
+@import '/src/scss/container_children';
+
+.detail-container {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.text-context {
+    color: #FF3D57;
+}

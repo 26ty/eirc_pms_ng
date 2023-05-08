@@ -1,0 +1,296 @@
+@import '/src/scss/container_children';
+:host ::ng-deep {
+  .mat-form-field-outline {
+    background-color: rgb(255, 255, 255);
+  }
+}
+
+
+.record-table{
+  width: 80%;
+}
+
+.table-all-btn {
+  background-color:rgb(196, 193, 191);
+  width:50px;
+}
+
+.left-card {
+  //width:278px;
+  
+  mat-form-field {
+    margin-top: 10px;
+  }
+}
+.tab-button {
+  color:rgb(161, 161, 90);
+  margin-left: 10px;
+}
+.tab-button {
+  cursor: pointer;
+  transition: background-color .2s, color .2s;
+  background-color: #6fd8f8;
+  margin-left: 15px;//間隔
+    &:hover {
+      background-color: rgba(216, 111, 111, 0.678);
+
+    }
+    &:active {
+        //color: rgb(233, 243, 92);
+        background-color: rgba(230, 255, 139, 0.918);
+    }
+}
+.btn-link {
+  overflow: hidden;
+  background-color: #ffffff;
+  color: blue;
+  border: rgb(47, 79, 184);
+  text-decoration: underline;
+  margin-left: 10px;//間隔
+}
+//不需間隔按鈕
+.btn-link-none{
+  overflow: hidden;
+  background-color: #ffffff;
+  color: blue;
+  border: rgb(47, 79, 184);
+}
+.btn-delete {
+  overflow: hidden;
+  color: #fff;
+  background-color: #FF5151 ;
+  box-shadow: rgb(194 202 211) 0px 0px 0px 1px, rgb(28 32 43 / 10%) 0px 1px 0px 0px;
+  width: 101px;
+  border: black;
+}
+.btn-termination {
+  overflow: hidden;
+  color: #fff;
+  background-color: #a7a7a7 ;
+  box-shadow: rgb(194 202 211) 0px 0px 0px 1px, rgb(28 32 43 / 10%) 0px 1px 0px 0px;
+  width: 101px;
+  border: black;
+  margin-left: 10px;//間隔
+}
+.btn-save {
+  overflow: hidden;
+  color: #fff;
+  background-color: $main-color;
+  box-shadow: rgb(194 202 211) 0px 0px 0px 1px, rgb(28 32 43 / 10%) 0px 1px 0px 0px;
+  border: black;
+  width: 101px;
+  
+}
+.btn-start {
+  overflow: hidden;
+  color: #fff;
+  background-color: $main-color;
+  box-shadow: rgb(194 202 211) 0px 0px 0px 1px, rgb(28 32 43 / 10%) 0px 1px 0px 0px;
+  border: black;
+  width: 101px;
+  margin-left: 10px;//間隔
+}
+
+.right-card {
+  padding :0px;
+  padding-top :8px;
+}
+
+.basic-card {
+  width:250px;
+  border:none;
+  box-shadow:none;
+}
+
+.mat-column-user {
+  width: 100px;
+}
+
+//項目
+.table-taskname-header {
+  //font-size: 8px;
+  max-width: 115px;
+  text-align: center;
+}
+.table-taskname {
+  //font-size: 8px;
+  max-width: 115px;
+  text-align: left;
+}
+.table-taskname-header_4 {
+  //font-size: 8px;
+  max-width: 50px;
+  text-align: center;
+  padding-right: 0px;
+}
+.table-taskname_4 {
+  //font-size: 8px;
+  max-width: 50px;
+  text-align: left;
+  padding-right: 0px;
+}
+//預計起始
+.table-date_for_estimated_start {
+  font-size: 8px;
+  max-width: 75px;
+  text-align: center;
+}
+//預計完成
+.table-date_for_estimated_completion {
+  font-size: 8px;
+  max-width: 75px;
+  text-align: center;
+}
+//實際完成
+.table-date_for_actual_completion {
+  font-size: 8px;
+  max-width: 70px;
+  text-align: center;
+}
+//數量
+.table-quantity {
+  font-size: 8px;
+  max-width: 5px;
+  text-align: center;
+  padding-right: 0px;
+}
+.table-quantity-input{
+  font-size: 8px;
+  width: 18px;
+  padding: 0;
+  margin: 0;
+}
+//負責人
+.table-principal {
+  font-size: 8px;
+  max-width: 85px;
+  text-align: center;
+}
+//附件負責人
+.table-appendix-principal {
+  font-size: 8px;
+  max-width: 10px;
+  text-align: center;
+}
+//備註
+.table-remark {
+  font-size: 8px;
+  max-width: 160px;
+  text-align: center;
+}
+
+//
+.table-quantity {
+  font-size: 8px;
+  max-width: 70px;
+}
+//
+.table-test-machine {
+  font-size: 8px;
+  max-width: 60px;
+}
+
+.form-group-edit {
+  padding: 40px 0;
+
+  .mat-form-field {
+    margin-right: 5px;
+    width: 200px;
+  }
+
+  .dateInpt {
+    width: 200px;
+  }
+}
+
+td.mat-column-item_number {
+  text-align: center;
+  max-width: 90px;
+  border-right: 1px solid #e0e0e0;
+}
+td.mat-column-product_name {
+  text-align: center;
+  max-width: 150px;
+  border-right: 1px solid #e0e0e0;
+}
+td.mat-column-specification {
+  text-align: center;
+  max-width: 600px;
+  border-right: 1px solid #e0e0e0;
+}
+td.mat-column-quantity_7 {
+  text-align: center;
+  max-width: 70px;
+}
+
+td.mat-column-requisiton_number {
+  text-align: center;
+  max-width: 85px;
+  border-right: 1px solid #e0e0e0;
+}
+td.mat-column-application_date {
+  text-align: center;
+  max-width: 95px;
+  border-right: 1px solid #e0e0e0;
+}
+td.mat-column-applicant {
+  text-align: center;
+  max-width: 70px;
+  border-right: 1px solid #e0e0e0;
+}
+td.mat-column-file_creator {
+  text-align: center;
+  max-width: 70px;
+  border-right: 1px solid #e0e0e0;
+}
+td.mat-column-customer {
+  text-align: center;
+  max-width: 70px;
+  border-right: 1px solid #e0e0e0;
+}
+td.mat-column-project_code_7 {
+  text-align: center;
+  max-width: 130px;
+  border-right: 1px solid #e0e0e0;
+}
+td.mat-column-requisition {
+  text-align: center;
+  max-width: 105px;
+  border-right: 1px solid #e0e0e0;
+}
+td.mat-column-apply {
+  text-align: center;
+  max-width: 70px;
+  border-right: 1px solid #e0e0e0;
+}
+td.mat-column-purchase {
+  text-align: center;
+  max-width: 70px;
+  border-right: 1px solid #e0e0e0;
+}
+td.mat-column-state {
+  text-align: center;
+  max-width: 75px;
+}
+
+.mat-column-transaction_department {
+  max-width: 100px;
+}
+.mat-column-transaction_man {
+  max-width: 50px;
+}
+.mat-column-transaction_date {
+  max-width: 120px;
+}
+.mat-column-transaction_detail {
+  max-width: 300px;
+}
+
+.disabledtaskname {
+  display:none;
+}
+
+h3{
+  font-weight: 600;
+  color: #6EA7FC;
+}

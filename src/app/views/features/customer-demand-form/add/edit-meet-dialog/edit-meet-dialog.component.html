@@ -1,0 +1,77 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">編輯會議</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+<!--任務代號、任務名稱、任務描述、比較基準、任務時程-->
+
+<form [formGroup]="editMeetForm" *ngIf="meetDatas">
+    <mat-dialog-content>
+        <mat-form-field appearance="outline" class="w-100p">
+            <mat-label>會議主題</mat-label>
+            <input matInput type="text" placeholder="請輸入會議主題" type="text" [(ngModel)]="meetDatas.message.name"
+                formControlName="name" name="name" ngDefaultControl>
+        </mat-form-field>
+        <table>
+            <tr>
+                <td>
+                    <mat-form-field appearance="outline" class="dateIpt-w">
+                        <mat-label>會議日期</mat-label>
+                        <input matInput [matDatepicker]="picker" placeholder="請輸入任務名稱" type="text"
+                            [(ngModel)]="meetDatas.message.start_date" formControlName="start_date" name="start_date"
+                            ngDefaultControl>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field appearance="outline">
+                        <mat-label>會議地點</mat-label>
+                        <mat-select disableRipple placeholder="請輸入任務名稱" type="text"
+                            [(ngModel)]="meetDatas.message.end_date" formControlName="end_date" name="end_date"
+                            ngDefaultControl>
+                            <mat-option class="option-30" value="1">會客室</mat-option>
+                            <mat-option class="option-30" value="2">小會議室</mat-option>
+                            <mat-option class="option-30" value="3">VIP室</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </td>
+            </tr>
+        </table>
+
+
+        <mat-form-field appearance="outline">
+            <mat-label>會議主席</mat-label>
+            <mat-select disableRipple placeholder="請選取會議主席" type="text" [(ngModel)]="meetDatas.message.chairman"
+                formControlName="chairman" name="chairman" ngDefaultControl>
+                <mat-option class="option-30" value="1">1</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>參與人員</mat-label>
+            <mat-select [formControl]="toppings" multiple>
+                <mat-select-trigger>
+                    {{toppings.value ? toppings.value[0] : ''}}
+                    <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">
+                        (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+                    </span>
+                </mat-select-trigger>
+                <mat-option class="option-30" *ngFor="let topping of toppingList" [value]="topping">{{topping}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-list>
+            <mat-list-item>
+                <h4>此時段所選地點使用狀態:(此功能暫保留)</h4>
+            </mat-list-item>
+        </mat-list>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button class="btn" (click)="updateMeetRequest()">儲存</button>
+        <!-- <button mat-button class="btn-normal-none reset" type="reset">清除</button> -->
+    </mat-dialog-actions>
+</form>

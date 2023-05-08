@@ -1,0 +1,20 @@
+@import '/src/scss/container_children';
+:host ::ng-deep {
+  .mat-form-field-outline {
+    background-color: rgb(255, 255, 255);
+  }
+}
+
+form {
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+//不需間隔按鈕
+.btn-normal-none-notop {
+  overflow: hidden;
+  background-color: #F4F5F8;
+  box-shadow: rgb(194 202 211) 0px 0px 0px 1px, rgb(28 32 43 / 10%) 0px 1px 0px 0px;
+  border: black;
+}

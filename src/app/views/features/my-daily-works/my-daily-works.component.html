@@ -1,0 +1,103 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard">首頁</a></li>
+                    <li class="breadcrumb-item active">專案工時管理</li>
+                    <li class="breadcrumb-item active" aria-current="page">個人工作時數表</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>search</mat-icon>
+                    <span class="text-left">
+                        個人工作時數表
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!--查詢區域-->
+    <div class="row">
+        <div class="col-md-3 text-center">
+            <div class="form-group pt-3 pb-0">
+                <mat-card class="card search-group" style="height: 103px; padding-top: 30px;">
+                    <button mat-icon-button (click)="reduceMonth()" *ngIf="this.newMonth>1">
+                        <mat-icon>arrow_back_ios</mat-icon>
+                    </button>
+                    <span style="font-size: 1.5em" class=" border-radius-10 py-2px px-2 bg-other">
+                        {{newYear}}/{{this.newMonth}}
+                    </span>
+                    <button mat-icon-button (click)="addMonth()" *ngIf="this.newMonth<12">
+                        <mat-icon>arrow_forward_ios</mat-icon>
+                    </button>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-0 pb-0">
+                <mat-card class="card search-group">
+                    <table class="table table-hover">
+
+                        <tbody>
+                            <tr>
+                                <td rowspan="2">工作內容</td>
+                                <td *ngFor="let element of testDay">{{element.day}}</td>
+                                <!-- <tr>
+                                    <td *ngFor="let element of test_day">{{element}}</td>
+                                </tr> -->
+                                
+                                <td rowspan="2">總計</td>
+                            </tr>
+                            <tr>
+                                <td *ngFor="let element of test_day">{{element}}</td>
+                            </tr>
+                            <ng-container *ngFor="let element of test_workItem">
+                                <tr>
+                                    
+                                    <th *ngIf="element.p_id != undefined">
+                                        <u>
+                                            {{element.items}}
+                                        </u>
+                                    </th>
+                                    <th *ngIf="element.p_id == undefined">
+                                        {{element.items}}
+                                    </th>
+
+                                    <td (click)="doPostWorkSubmit(index,element.items,element.id,element.category)"
+                                        *ngFor="let i of element.labor_hour;let index = index"
+                                        [ngClass]="{'font-600' : (i.laborhour != 0 || i.laborhour != '0')}">
+                                        {{i.laborhour}}
+                                    </td>
+                                </tr>
+                            </ng-container>
+                            <tr>
+                                <th>審核資訊</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #worksubmitDialog>
+    <app-work-submit-dialog title=""></app-work-submit-dialog>
+</ng-template>
+
+<ng-template #workdetailDialog>
+    <app-work-detail-dialog title=""></app-work-detail-dialog>
+</ng-template>
+
+<ng-template #workrecordDialog>
+    <app-work-record-dialog title=""></app-work-record-dialog>
+</ng-template>

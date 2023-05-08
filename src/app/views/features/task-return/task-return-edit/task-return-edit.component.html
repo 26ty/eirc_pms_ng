@@ -1,0 +1,375 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- <h3>
+                <mat-icon>keyboard_arrow_left</mat-icon>
+                <span>返回</span>
+            </h3> -->
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard" class="a-blue">首頁</a></li>
+                    <li class="breadcrumb-item active"><a href="/main/task-return" class="a-blue">列表</a></li>
+                    <li class="breadcrumb-item active"><a>專案任務待回報 - 編輯</a></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <!-- <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        待回報專案任務
+                    </span>
+                </h1>
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </div>
+            <div class="right">
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" (click)="cancelItem()"></button>
+            </div>
+        </div>
+    </div> -->
+    <!--顯示資料區域-->
+    <!--查詢區域-->
+    <div class="row">
+        <div class="col-md-6 " style="height:100%">
+            <div class="form-group pt-0 pb-0">
+                <mat-card class="card search-group" style="height:460px" *ngIf="this.oneTMtaskData">
+                    <mat-card-content>
+                        <mat-list>
+                            <mat-list-item>
+                                <div class="col-2 text-right">
+                                    <h4 class="">專案代號:</h4>
+                                </div>
+                                <div class="col-10">
+                                    <a (click)="projectLink()">
+                                        <h4 class="">
+                                            <u class="text-context">{{this.oneTMtaskData[0].p_code}}</u>
+                                        </h4>
+                                    </a>
+                                </div>
+
+                            </mat-list-item>
+                            <mat-list-item>
+                                <div class="col-2 text-right">
+                                    <h4 class="">專案:</h4>
+                                </div>
+                                <div class="col-10">
+                                    <h4 class="text-context">{{this.oneTMtaskData[0].p_name}}</h4>
+                                </div>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <div class="col-2 text-right">
+                                    <h4 class="">機台總成:</h4>
+                                </div>
+                                <div class="col-10">
+                                    <h4 class="text-context">{{this.oneTMtaskData[0].machine_finished_number}}</h4>
+                                </div>
+                            </mat-list-item>
+                            <!-- <mat-list-item>
+                                <h4>機台英文名稱:</h4>
+                            </mat-list-item> -->
+                            <mat-list-item>
+                                <div class="col-2 text-right">
+                                    <h4>負責人: </h4>
+                                </div>
+                                <div class="col-10">
+                                    <h4 class="text-context">{{this.oneTMtaskData[0].projectman_name}}</h4>
+                                </div>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <div class="col-2 text-right">
+                                    <h4>客服: </h4>
+                                </div>
+                                <div class="col-10">
+                                    <h4 class="text-context">{{this.oneTMtaskData[0].serviceman_name}}</h4>
+                                </div>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <div class="col-2 text-right">
+                                    <h4>起始: </h4>
+                                </div>
+                                <div class="col-10">
+                                    <h4 class="text-context">{{this.oneTMtaskData[0].date_for_start | date:
+                                        'yyyy/MM/dd'}}</h4>
+                                </div>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <div class="col-2 text-right">
+                                    <h4>結束: </h4>
+                                </div>
+                                <div class="col-10">
+                                    <h4 class="text-context">{{this.oneTMtaskData[0].date_for_end | date: 'yyyy/MM/dd'}}
+                                    </h4>
+                                </div>
+                            </mat-list-item>
+                        </mat-list>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <div class="col-md-6 px-0">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group pt-0 pb-0">
+                        <mat-card class="card search-group" style="height:100%" *ngIf="this.oneTMtaskData">
+                            <mat-card-content>
+                                <mat-list>
+                                    <mat-list-item *ngIf="this.oneTMtaskData[0].last_task_code">
+                                        <div class="col-2 text-right">
+                                            <h4>上一階任務:</h4>
+                                        </div>
+                                        <div class="col-10">
+                                            <h4 class="text-context">
+                                                {{this.oneTMtaskData[0].last_task_code}}　{{this.oneTMtaskData[0].last_task_name}}
+                                            </h4>
+                                        </div>
+
+
+                                    </mat-list-item>
+                                    <div class="bg-import">
+                                        <mat-list-item>
+                                            <div class="col-2 text-right">
+                                                <h4>本階任務:</h4>
+                                            </div>
+                                            <div class="col-10">
+                                                <h4 class="text-context">
+                                                    {{this.oneTMtaskData[0].code}}　{{this.oneTMtaskData[0].t_name}}</h4>
+                                            </div>
+                                        </mat-list-item>
+                                    </div>
+                                    <mat-list-item *ngIf="this.oneTMtaskData[0].next_task_code">
+                                        <div class="col-2 text-right">
+                                            <h4>下一階任務:</h4>
+                                        </div>
+                                        <div class="col-10">
+                                            <h4 class="text-context">{{this.oneTMtaskData[0].next_task_code}}</h4>
+                                        </div>
+                                    </mat-list-item>
+                                    <mat-list-item
+                                        *ngIf="this.oneTMtaskData[0].last_date_for_estimated_start !='0001-01-01T00:00:00Z' || this.oneTMtaskData[0].last_date_for_estimated_completion!='0001-01-01T00:00:00Z'  ">
+                                        <div class="col-2 text-right">
+                                            <h4>比較基準:</h4>
+                                        </div>
+                                        <div class="col-10">
+                                            <h4 class="text-context">
+                                                {{this.oneTMtaskData[0].last_date_for_estimated_start | date:
+                                                'yyyy/MM/dd'}} ~
+                                                {{this.oneTMtaskData[0].last_date_for_estimated_completion | date:
+                                                'yyyy/MM/dd'}}
+                                            </h4>
+                                        </div>
+
+
+                                    </mat-list-item>
+                                    <mat-list-item
+                                        *ngIf="this.oneTMtaskData[0].date_for_estimated_start || this.oneTMtaskData[0].date_for_estimated_completion ">
+                                        <div class="col-2 text-right">
+                                            <h4>任務起迄:</h4>
+                                        </div>
+                                        <div class="col-10">
+                                            <h4 class="text-context">{{this.oneTMtaskData[0].date_for_estimated_start |
+                                                date:
+                                                'yyyy/MM/dd'}} ~
+                                                {{this.oneTMtaskData[0].date_for_estimated_completion | date:
+                                                'yyyy/MM/dd'}}
+                                            </h4>
+                                        </div>
+                                    </mat-list-item>
+                                    <mat-list-item *ngIf="this.oneTMtaskData[0].name">
+                                        <div class="col-2 text-right">
+                                            <h4>任務負責人:</h4>
+                                        </div>
+                                        <div class="col-10">
+                                            <span class="text-context">{{this.oneTMtaskData[0].name}}</span>
+                                            <button mat-mini-fab color="basic" class="table-btn-none ml-5"
+                                                (click)="doPostFile()">
+                                                <mat-icon>attach_file</mat-icon>
+                                            </button>
+
+                                            <button mat-mini-fab color="basic" class="table-btn-none ml-5"
+                                                (click)="doPostWorkSubmit()">
+                                                <mat-icon>query_builder</mat-icon>
+                                            </button>
+                                        </div>
+                                    </mat-list-item>
+                                    <div class="bg-import" *ngIf="this.DepManagerReturnData[0] != null">
+                                        <mat-list-item>
+                                            <div class="col-2 text-right">
+                                                <h4>退回意見: </h4>
+                                            </div>
+                                            <div class="col-10">
+                                                <h4 class="text-context">
+                                                    {{this.DepManagerReturnData[0]}}
+                                                    <span class="test-span" *ngIf="DepManagerReturnData[0]">
+                                                        　-單位主管
+                                                    </span>
+                                                </h4>
+                                            </div>
+
+
+                                        </mat-list-item>
+                                    </div>
+
+                                </mat-list>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group pt-0 pb-0">
+                        <mat-card class="card search-group" style="height:100%">
+                            <mat-card-content>
+                                <form [formGroup]="editTaskForm">
+                                    <div>
+                                        <!--預計完成日-->
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>預計完成日</mat-label>
+                                            <input matInput [matDatepicker]="picker1"
+                                                [(ngModel)]="this.oneTMtaskData[0].date_for_estimated_completion"
+                                                formControlName="date_for_estimated_completion"
+                                                name="date_for_estimated_completion" ngDefaultControl type="text">
+                                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker1></mat-datepicker>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>實際完成日</mat-label>
+                                            <input matInput [matDatepicker]="picker"
+                                                [(ngModel)]="this.oneTMtaskData[0].date_for_actual_completion"
+                                                formControlName="date_for_actual_completion"
+                                                name="date_for_actual_completion" ngDefaultControl required>
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker></mat-datepicker>
+                                        </mat-form-field>
+
+                                        <!-- <mat-form-field appearance="outline" *ngIf="this.oneTMtaskData[0].t_name =='機台出機'">
+                                            <mat-label>銷貨單號</mat-label>
+                                            <input matInput type="text">
+                                        </mat-form-field> -->
+
+                                        <mat-form-field appearance="outline" *ngIf="this.oneTMtaskData[0].t_name =='機台出機' && this.oneTMtaskData[0].order_number == undefined">
+                                            <mat-label>銷貨單號</mat-label>
+                                            <input matInput type="text" [(ngModel)]="order_number"
+                                            formControlName="order_number"
+                                            name="order_number" ngDefaultControl required>
+                                        </mat-form-field>
+                                        
+                                        <mat-form-field appearance="outline" *ngIf="this.oneTMtaskData[0].t_name =='機台出機' && this.oneTMtaskData[0].order_number != undefined">
+                                            <mat-label>銷貨單號</mat-label>
+                                            <input matInput type="text" [(ngModel)]="this.oneTMtaskData[0].order_number"
+                                            formControlName="order_number"
+                                            name="order_number" ngDefaultControl required>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" *ngIf="this.oneTMtaskData[0].t_name =='機台內部訂單' && this.oneTMtaskData[0].inner_id == undefined">
+                                            <mat-label>內部訂單</mat-label>
+                                            <input matInput type="text" [(ngModel)]="inner_id"
+                                            formControlName="inner_id"
+                                            name="inner_id" ngDefaultControl required>
+                                        </mat-form-field>
+                                        
+                                        <mat-form-field appearance="outline" *ngIf="this.oneTMtaskData[0].t_name =='機台內部訂單' && this.oneTMtaskData[0].inner_id != undefined">
+                                            <mat-label>內部訂單</mat-label>
+                                            <input matInput type="text" [(ngModel)]="this.oneTMtaskData[0].inner_id"
+                                            formControlName="inner_id"
+                                            name="inner_id" ngDefaultControl required>
+                                        </mat-form-field>
+
+                                        <!-- <mat-form-field appearance="outline" style="width: 470px;">
+                                            <mat-label>意見回覆</mat-label>
+                                            <textarea matInput [(ngModel)]="this.oneTMtaskData[0].t_name"
+                                                formControlName="remark" name="remark" ngDefaultControl
+                                                type="text"></textarea>
+                                        </mat-form-field> -->
+                                        <form [formGroup]="editTrForm">
+                                            <mat-form-field appearance="outline" class="textareaInput"
+                                                style="width: 90%;">
+                                                <mat-label>進度回覆</mat-label>
+                                                <textarea matInput class="textareaInput" [(ngModel)]="tr_remark"
+                                                    formControlName="tr_remark" name="tr_remark" ngDefaultControl
+                                                    required></textarea>
+                                            </mat-form-field>
+                                        </form>
+
+                                    </div>
+                                </form>
+
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--查詢區域-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="form-group pt-0 pb-0">
+                <mat-card class="card search-group">
+                    <button mat-button id="" class="btn-normal-none" (click)="updateTaskRequest();updateProject()">儲存</button>
+                    <!-- <button mat-button id="" class="btn-normal" (click)="cancelItem()">離開</button> -->
+                    <!-- <button mat-button id="" class="btn-normal"
+                        [routerLink]="['/main/projectinfo/project-manager-edit/' + documents_id]">瀏覽</button> -->
+                    <!-- <button mat-button id="" class="btn-normal" (click)="doPostAddMeet(t_index)">會議</button> -->
+                    <!-- <button mat-button id="" class="btn-normal" (click)="doPostWorkSubmit()">工時</button> -->
+                    <!-- <button mat-button id="" class="btn-normal" (click)="doPostFile()">附件</button> -->
+                    <button mat-button id="" class="btn-normal" (click)="doPostInterview(tu_id)">紀錄</button>
+                    <button mat-button id="" class="btn-green" (click)="submitPmCase();updateProject()">送審</button>
+                    <!-- <button mat-button id="" class="btn-delete" (click)="test()">test</button> -->
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <!--查詢區域-->
+    <div class="row" *ngIf="interBtn!=false">
+        <div class="col-md-12 ">
+            <div class="form-group pt-0 pb-0">
+                <mat-card class="card search-group">
+                    <div class="table-container">
+                        <div class="table">
+                            <table mat-table [dataSource]="interviewDataSource" class="mat-elevation-z8">
+
+                                <ng-container matColumnDef="actor">
+                                    <th mat-header-cell *matHeaderCellDef> 動作 </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.actor}}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="content">
+                                    <th mat-header-cell *matHeaderCellDef> 事項 </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.content}}
+                                    </td>
+                                </ng-container>
+
+                                <!-- name Column -->
+                                <ng-container matColumnDef="creater_name">
+                                    <th mat-header-cell *matHeaderCellDef> 人員 </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.creater_name}}
+                                    </td>
+                                </ng-container>
+
+                                <!-- creatTime Column -->
+                                <ng-container matColumnDef="create_time">
+                                    <th mat-header-cell *matHeaderCellDef> 創建時間 </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.create_time | date: 'yyyy/MM/dd
+                                        hh:mm'}}
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="interviewcol"></tr>
+                                <tr mat-row *matRowDef="let row; columns: interviewcol;"></tr>
+                            </table>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

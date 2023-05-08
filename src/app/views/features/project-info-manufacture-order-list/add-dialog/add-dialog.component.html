@@ -1,0 +1,96 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">製令-新增</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+<form [formGroup]="addForm">
+    <mat-dialog-content>
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field appearance="outline" style="width: 300px;">
+                            <mat-label>單號來源</mat-label>
+                            <mat-select [(ngModel)]="origin_id" (ngModelChange)="selectedValue()"
+                                formControlName="origin_id" name="origin_id" ngDefaultControl>
+                                <mat-option class="option-30" *ngFor="let item of workType_option" [value]="item.value">
+                                    {{item.key}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="width100">
+                            <mat-label></mat-label>
+                            <mat-select [(ngModel)]="project_id" formControlName="project_id" name="project_id"
+                                ngDefaultControl>
+                                <mat-option class="option-30" *ngFor="let cr of codeList" [value]="cr.id">
+                                    {{cr.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>
+                                必填
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col mt-3">
+                        <button mat-button class="btn-none" matTooltip="查詢" (click)="serchInfo()">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <!-- 製令查詢資料 -->
+                <div class="row" *ngFor="let item of Info">
+                    <div class="col">
+                        <table class="example-full-width" cellspacing="0">
+                            <tr>
+                                <td>
+                                    <mat-list-item>
+                                        <h4 class="text-head">客戶： </h4>
+                                    </mat-list-item>
+                                </td>
+                                <td>
+                                    <mat-list-item>
+                                        <h4>{{item.customer_name}}</h4>
+                                    </mat-list-item>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <mat-list-item>
+                                        <h4 class="text-head">預計開工日期： </h4>
+                                    </mat-list-item>
+                                </td>
+                                <td>
+                                    <mat-list-item>
+                                        <h4>{{item.date_for_estimated_start | date: 'yyyy/MM/dd'}}</h4>
+                                    </mat-list-item>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <mat-list-item>
+                                        <h4 class="text-head">預計完工日期： </h4>
+                                    </mat-list-item>
+                                </td>
+                                <td>
+                                    <mat-list-item>
+                                        <h4>{{item.date_for_estimated_end | date: 'yyyy/MM/dd'}}</h4>
+                                    </mat-list-item>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions class="text-center">
+        <div class="">
+            <button mat-button class="btn-normal-none reset" type="reset" (click)="reset()">回復重填</button>
+            <button mat-button class="btn" (click)="uploadProjectInfoManufacture()">確認送出</button>
+        </div>
+    </mat-dialog-actions>
+</form>

@@ -1,0 +1,32 @@
+<div class="offcanvas-header card-h">
+    <h2 class="offcanvas-title" id="offcanvasLabel">職稱-編輯</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+<form [formGroup]="editForm" class="form-h">
+    <mat-dialog-content class="mat-typography">
+        <table>
+                <mat-form-field appearance="outline" class="input_1">
+                    <mat-label>職稱</mat-label>
+                    <input matInput placeholder="" type="text" [(ngModel)]="name" formControlName="name" name="name"
+                        ngDefaultControl required>
+                </mat-form-field>
+                <mat-checkbox class="example-margin" [(ngModel)]="bonita_role_id" formControlName="bonita_role_id"
+                        name="bonita_role_id">管理員</mat-checkbox>
+            
+        </table>
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="text-center">
+        <div class="">
+            <!-- <button mat-button class="btn" (click)="test()">儲存</button> -->
+            <button mat-button class="btn" (click)="editJobtitlement()">儲存</button>
+        </div>
+    </mat-dialog-actions>
+
+</form>
+
+<!-- <mat-dialog-actions align="end">
+      <button mat-raised-button mat-dialog-close>離開</button>
+      <button mat-raised-button [mat-dialog-close]="true" style="background-color: #6ea7fc;color:white;" >資料儲存</button>
+    </mat-dialog-actions> -->

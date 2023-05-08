@@ -1,0 +1,301 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard">首頁</a></li>
+                    <li class="breadcrumb-item active">專案計畫管理</li>
+                    <!-- <li class="breadcrumb-item active" aria-current="page">專案產銷會議</li> -->
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        專案產銷會議
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!-- 查詢區域 -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-3 pb-0">
+                <mat-card class="card search-group">
+                    <!-- <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>客需單號</mat-label>
+                        <input type="text" (keyup)="applyFilter($event)" placeholder="客需單號" aria-label="客需單號" matInput
+                            [matAutocomplete]="auto1">
+                        <mat-autocomplete #auto1="matAutocomplete">
+                            <mat-option *ngFor="let item of customer_code_option" [value]="item">
+                                {{item}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field> -->
+
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>客需單號</mat-label>
+                        <input type="text" (keyup)="applyFilter($event)" placeholder="客需單號" aria-label="客需單號" matInput
+                            [matAutocomplete]="auto1">
+                        <mat-autocomplete #auto1="matAutocomplete">
+                            <mat-option *ngFor="let item of customer_code_option" [value]="item">
+                                {{item}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>專案代號</mat-label>
+                        <input type="text" (keyup)="applyFilter($event)" placeholder="專案代號" aria-label="專案代號" matInput
+                            [matAutocomplete]="auto2">
+                        <mat-autocomplete #auto2="matAutocomplete">
+                            <mat-option *ngFor="let item of code_option" [value]="item">
+                                {{item}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>狀態</mat-label>
+                        <input type="text" (keyup)="applyFilter($event)" placeholder="狀態" aria-label="狀態" matInput
+                            [formControl]="myControl" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let option of status" [value]="option">
+                                {{option}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+                    <!-- <button mat-button class="btn-normal-none">
+                        <mat-icon>search</mat-icon>
+                    </button> -->
+                    <button mat-button [matMenuTriggerFor]="menu" class="btn">
+                        新增<!-- <mat-icon>add</mat-icon> -->
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="addItem('A')">A. HTA研發案/客戶訂單(新機型)</button>
+                        <button mat-menu-item (click)="addItem('B')">B. 客戶訂單Repeat Order(舊機型)</button>
+                        <button mat-menu-item (click)="addItem('C')">C. 開立正式專案(無客需單)</button>
+                        <button mat-menu-item (click)="addItem('D')">D. 範本新增</button>
+                    </mat-menu>
+
+                    <!-- <mat-form-field appearance="outline" style="white-space:pre-wrap">
+                        <textarea matInput></textarea>
+                    </mat-form-field>
+                     -->
+                    <!-- <button mat-button class="btn" (click)="testemail()">
+                        test
+                    </button> -->
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <!--顯示資料區域-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-0 pb-2">
+                <mat-card class="card table">
+                    <mat-form-field appearance="outline">
+                        <mat-label>請選擇顯示項目</mat-label>
+                        <mat-select [(ngModel)]="selectedValue" [formControl]="toppings" multiple>
+                            <mat-select-trigger>
+                                <span *ngIf="toppings.value?.length > 1" class="choose-tips">
+                                    已選擇 {{toppings.value.length - 0}} 項
+                                </span>
+                            </mat-select-trigger>
+                            <mat-option *ngFor="let list of toppingList" [value]="list.value">
+                                {{list.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <!--表格-->
+                    <div class="table-container">
+                        <table matSort mat-table [dataSource]="dataSource_1" class="mat-elevation-z8 demo-table">
+                            <!-- 狀態 -->
+                            <ng-container matColumnDef="status">
+                                <th mat-header-cell *matHeaderCellDef></th>
+                                <td mat-cell *matCellDef="let element">
+                                    <!-- <small  [ngClass]="{'bg-success' : (element.status == '執行中') , 'bg-danger' : (element.status == '已中止') , 'bg-warning' : (element.status =='審核中')}" 
+                                            class=" border-radius-5 hight-light-color py-2px px-2">
+                                        {{element.status}}
+                                    </small> -->
+                                    <!-- {{element.status}} -->
+                                    <mat-icon class="none" matTooltip={{element.status}} [ngClass]="{'blue3' : (element.status == '產銷建檔中') , 'green' : (element.status == '專案已啟動') , 'red' : (element.status == '已中止')}">
+                                        circle
+                                    </mat-icon>
+                                </td>
+                            </ng-container>
+                            <!-- customer_code -->
+                            <ng-container matColumnDef="customer_code">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>客需單號</th>
+                                <td mat-cell *matCellDef="let element"> {{element.customer_code}} </td>
+                            </ng-container>
+                            <!-- p_code -->
+                            <ng-container matColumnDef="code">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>專案代號 - 機台數量</th>
+                                <!-- <td mat-cell *matCellDef="let element"> {{element.customer_code}}-{{element.code}}</td> -->
+                                <td mat-cell *matCellDef="let element"> {{element.code}} - {{element.machine_quantity}}</td>
+                            </ng-container>
+                            <!-- project_principal -->
+                            <ng-container matColumnDef="projectman_name">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> 負責人 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectman_name}} </td>
+                            </ng-container>
+                            <!-- serviceman_name -->
+                            <ng-container matColumnDef="serviceman_name">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> 客服 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.serviceman_name}} </td>
+                            </ng-container>
+                            <!-- customer_name -->
+                            <ng-container matColumnDef="customer_name">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> 客戶 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.customer_name}} </td>
+                            </ng-container>
+                            <!-- date_for_start -->
+                            <ng-container matColumnDef="date_for_start">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> 起始日 </th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{element.date_for_start | date: 'yyyy/MM/dd'}} </td>
+                            </ng-container>
+                            <!-- date_for_end -->
+                            <ng-container matColumnDef="date_for_end">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> 結束日 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.date_for_end | date:
+                                    'yyyy/MM/dd'}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="action_edit">
+                                <th mat-header-cell *matHeaderCellDef> 編輯 </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button mat-mini-fab color="basic" class="table-btn-none"
+                                        [routerLink]="['/main/projectinfo/produce-sales-meeting-edit/' + element.p_id]">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="is_template">
+                                <th mat-header-cell *matHeaderCellDef class="text-center"> 範本 </th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    <!-- <button mat-mini-fab color="basic" class="table-btn-none"
+                                            *ngIf="element.is_template == true">
+                                        <mat-icon>done</mat-icon>
+                                    </button> -->
+                                    <section class="example-section">
+                                        <mat-checkbox [(ngModel)]="element.is_template" (ngModelChange)="test(element.p_id,element.is_template)"></mat-checkbox>
+                                    </section>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="copy">
+                                <th mat-header-cell *matHeaderCellDef class="text-center"> 複製轉新增 </th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    <button mat-mini-fab color="basic" class="table-btn-none"
+                                            *ngIf="element.status == '專案已啟動' && business == true" (click)="copytoadd(element)">
+                                        <mat-icon>library_add</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <!-- project_name -->
+                            <ng-container matColumnDef="p_name">
+                                <th mat-header-cell *matHeaderCellDef>專案名稱</th>
+                                <td mat-cell *matCellDef="let element"> {{element.p_name}} </td>
+                            </ng-container>
+                            <!-- ship_date -->
+                            <ng-container matColumnDef="date_for_expected">
+                                <th mat-header-cell *matHeaderCellDef> 出機日 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.date_for_expected}} </td>
+                            </ng-container>
+                            <!-- act_complete_date -->
+                            <ng-container matColumnDef="date_for_done">
+                                <th mat-header-cell *matHeaderCellDef> 實際完成日 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.date_for_done}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="p_type">
+                                <th mat-header-cell *matHeaderCellDef> p_type </th>
+                                <td mat-cell *matCellDef="let element"> {{element.p_type}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="salesman_name">
+                                <th mat-header-cell *matHeaderCellDef> salesman_name </th>
+                                <td mat-cell *matCellDef="let element"> {{element.salesman_name}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="create_time">
+                                <th mat-header-cell *matHeaderCellDef> create_time </th>
+                                <td mat-cell *matCellDef="let element"> {{element.create_time}} </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="selectedValue"></tr>
+                            <tr mat-row *matRowDef="let row; columns: selectedValue"></tr>
+                        </table>
+                    </div>
+                    <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5"
+                        [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true">
+                    </mat-paginator>
+                    <!-- 比較基準 -->
+                    <h6>
+                        比較基準:
+                        <mat-icon class="blue3">circle</mat-icon>
+                        產銷建檔中
+                        <mat-icon class="green">circle</mat-icon>
+                        專案已啟動
+                        <mat-icon class="red">circle</mat-icon>
+                        已中止
+                    </h6>
+                </mat-card>
+                <!-- <mat-card>
+                    <mat-form-field class="dateIpt-w" appearance="outline">
+                        <mat-label>專案起始日</mat-label>
+                        <input matInput [matDatepicker]="picker1" [(ngModel)]="date_for_start"
+                            formControlName="date_for_start" name="date_for_start" [min]="textdate"
+                            ngDefaultControl>
+                        <mat-hint>MM/DD</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="people-form-field">
+                        <mat-label>業務負責人</mat-label>
+                        <mat-select [(ngModel)]="salesman_id" name="salesman_id"
+                            ngDefaultControl required>
+                            <mat-optgroup *ngIf="accountgroup[1]" [label]="accountgroup[1].dep_name">
+                                <mat-option *ngFor="let account of accountgroup[1].account"
+                                    [value]="account.account_id">
+                                    {{account.name}}
+                                </mat-option>
+                            </mat-optgroup>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="people-form-field">
+                        <mat-label>業務負責人</mat-label>
+                        <mat-select [(ngModel)]="salesman_id" name="salesman_id"
+                            ngDefaultControl required>
+                            <mat-optgroup *ngFor="let group of accountgroup" [label]="group.dep_name">
+                                <mat-option *ngFor="let account of group.account"
+                                    [value]="account.account_id">
+                                    {{account.name}}
+                                </mat-option>
+                            </mat-optgroup>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-card> -->
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<ng-template #addDialog>
+    <app-produce-add-dialog title=""></app-produce-add-dialog>
+</ng-template>

@@ -1,0 +1,38 @@
+@import '/src/scss/container_children';
+
+.textareaInput{
+    width: 1000px;
+}
+
+.btn-delete {
+    overflow: hidden;
+    color: #fff;
+    background-color: #FF5151 ;
+    box-shadow: rgb(194 202 211) 0px 0px 0px 1px, rgb(28 32 43 / 10%) 0px 1px 0px 0px;
+    border: black;
+    margin-left: 10px;
+  }
+
+  .text-context{
+    color: #8b8689;
+    line-height: 24px;
+  }
+
+  .text-import{
+    color: #FF3D57;
+    line-height: 24px;
+  }
+
+  .bg-import{
+    display: block;
+    background: rgb(225, 225, 225);
+    border-radius: 10px;
+    padding: 2px;
+    padding-bottom: 0;
+
+    
+  }
+
+  h4{
+    margin-bottom: 0;
+  }

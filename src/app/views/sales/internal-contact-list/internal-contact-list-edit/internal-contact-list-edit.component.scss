@@ -1,0 +1,40 @@
+@import '/src/scss/container_children';
+
+.edit-form-group {
+    padding: 40px 0;
+
+    .mat-form-field {
+        margin-right: 10px;
+        width: 200px;
+        margin-top: 10px;
+    }
+
+}
+    
+.text-context{
+color: #FF3D57;
+}
+
+.mat-tab {
+    min-width: 25px !important;
+    padding: 5px;
+    background-color: transparent;
+    color: red;
+    font-weight: 700;
+}
+
+/* Styles for the active tab label */
+.mat-tab-label.mat-tab-label-active {
+    min-width: 25px !important;
+    padding: 5px;
+    background-color: transparent;
+    color: red;
+    font-weight: 700;
+}
+
+
+/*h3標題*/
+ h3 {
+   color: #1a73e8;
+   font-weight: bold;
+ }

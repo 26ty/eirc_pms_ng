@@ -1,0 +1,24 @@
+@import '/src/scss/custom';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.working-img {
+  max-width: 100%;
+  width: 800px;
+}
+
+h1 {
+  margin: 30px 0;
+  color: $main-color;
+  font-weight: bold;
+}
+
+.btn {
+  color: #fff;
+  background-color: $main-color;
+  overflow: hidden;
+}

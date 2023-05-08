@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard" class="a-blue">首頁</a></li>
+                    <li class="breadcrumb-item"><a href="/main/dashboard">首頁</a></li>
+                    <li class="breadcrumb-item active">客需單審核</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <!-- <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        客需單審核(結案簽核)
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div> -->
+    <!--顯示資料區域-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-0 pb-3">
+                <!--表格-->
+                <mat-card class="card table">
+                    <div class="table-container">
+                        <!-- <h5 class="">客需單待審核列表</h5> -->
+                        <!-- <hr> -->
+                        <table mat-table [dataSource]="crDataSource" class="mat-elevation-z8">
+                            <!-- create_time -->
+                            <ng-container matColumnDef="create_time">
+                                <th mat-header-cell *matHeaderCellDef>創建時間</th>
+                                <td mat-cell *matCellDef="let element"> {{element.create_time| date:
+                                    'yyyy/MM/dd'}} </td>
+                            </ng-container>
+                            <!-- p_code -->
+                            <ng-container matColumnDef="code">
+                                <th mat-header-cell *matHeaderCellDef>單號</th>
+                                <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+                            </ng-container>
+                            <!-- demand_content -->
+                            <ng-container matColumnDef="demand_content">
+                                <th mat-header-cell *matHeaderCellDef>主旨</th>
+                                <td mat-cell *matCellDef="let element"> {{element.demand_content}} </td>
+                            </ng-container>
+                            <!-- customer_name -->
+                            <ng-container matColumnDef="department">
+                                <th mat-header-cell *matHeaderCellDef> 發文單位 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.salesman_dep[0].department_name}}</td>
+                            </ng-container>
+                            <!-- date_for_start -->
+                            <ng-container matColumnDef="salesman_name">
+                                <th mat-header-cell *matHeaderCellDef> 發文者 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.salesman_name}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="action_edit">
+                                <th mat-header-cell *matHeaderCellDef>審核</th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button matTooltip="審核" mat-mini-fab color="basic" class="table-btn-none"
+                                        [routerLink]="['/main/cr-close-edit/' + element.cd_id+ '/'+ element.bonita_task_id]">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                            <!-- Row shown when there is no matching data. -->
+                        </table>
+                    </div>
+                    <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5"
+                        [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true">
+                    </mat-paginator>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

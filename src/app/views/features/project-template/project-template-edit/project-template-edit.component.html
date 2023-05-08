@@ -1,0 +1,215 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard" class="a-blue">首頁</a></li>
+                    <li class="breadcrumb-item active"><a href="/main/projectinfo/project-template" class="a-blue">列表</a></li>
+                    <li class="breadcrumb-item active"><a>專案範本管理 - 編輯</a></li>
+
+                    <!-- <li class="breadcrumb-item"><a href="/main/dashboard">首頁</a></li>
+                    <li class="breadcrumb-item active">PM待完工專案</li> -->
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>edit</mat-icon>
+                    <span class="text-left">
+                        專案範本管理-修改
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!--查詢區域-->
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="form-group pt-3 pb-0">
+                <mat-card class="card search-group" *ngIf="projectTemplateDatas">
+                    <form [formGroup]="editProjectTemplateForm">
+                        <mat-form-field appearance="outline">
+                            <mat-label>代號</mat-label>
+                            <input matInput type="text" [(ngModel)]="projectTemplateDatas.body.code" formControlName="pt_code"  name="pt_code" ngDefaultControl>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>名稱</mat-label>
+                            <input matInput type="text" [(ngModel)]="projectTemplateDatas.body.p_name" formControlName="pt_name"  name="pt_name" ngDefaultControl>
+                        </mat-form-field>
+                        <!-- <mat-form-field appearance="outline">
+                            <mat-label>備註說明</mat-label>
+                            <input matInput type="text" [(ngModel)]="projectTemplateDatas.body.remark" formControlName="pt_remark"  name="pt_remark" ngDefaultControl>
+                        </mat-form-field> -->
+
+                        <button mat-button id="" class="btn-none"
+                            matTooltip="儲存" (click)="updateProjectTemplateRequest()">
+                            儲存
+                            <!-- <mat-icon>save_alt</mat-icon> -->
+                        </button>
+                        <button mat-button id="" class="btn-danger"
+                                matTooltip="刪除" (click)="deleteDatas(pt_id)">刪除
+                            <!-- <mat-icon>delete</mat-icon> -->
+                        </button>
+                        <button mat-button id="" class="btn-normal"
+                                matTooltip="甘特圖">甘特圖
+                            <!-- <mat-icon>multiline_chart</mat-icon> -->
+                        </button>
+
+                        <!-- <button mat-button id="" class="btn-normal"
+                                matTooltip="離開" (click)="cancelEdit()">離開
+                        </button> -->
+                    </form>
+                    
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <!--查詢區域2 未命名-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-0 pb-0">
+                <mat-card class="card search-group">
+                    <!-- <mat-form-field appearance="outline">
+                        <mat-label>任務代號</mat-label>
+                        <input matInput type="text" name="">
+                    </mat-form-field> -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>名稱</mat-label>
+                        <input matInput type="text" [(ngModel)]="t_name" name="t_name" required >
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>前項</mat-label>
+                        <mat-select disableRipple  [(ngModel)]="last_task" name="last_task" required >
+                            <mat-option *ngFor="let i of taskDatas" [value]="i.t_id">{{i.t_name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" style="width: 80px;">
+                        <mat-label>天數(D)</mat-label>
+                        <input matInput type="text" [(ngModel)]="default_date" name="default_date" required >
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" style="width: 80px;">
+                        <mat-label>工時(H)</mat-label>
+                        <input matInput type="text"  [(ngModel)]="default_labor_hour" name="default_labor_hour" required >
+                    </mat-form-field>
+                    <mat-checkbox class="checkbox-10" [(ngModel)]="landmark" name="landmark">里程碑</mat-checkbox>
+                    <!-- <br> -->
+                    <!-- <mat-form-field appearance="outline">
+                        <mat-label>Sto S</mat-label>
+                        <mat-select disableRipple>
+                            <mat-option value="1">1</mat-option>
+                            <mat-option value="2">2</mat-option>
+                            <mat-option value="3">3</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Fto S</mat-label>
+                        <mat-select disableRipple>
+                            <mat-option value="1">1</mat-option>
+                            <mat-option value="2">2</mat-option>
+                            <mat-option value="3">3</mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+                    <button mat-button class="btn"  *ngIf="btnStatus==false"
+                            matTooltip="加入列表" (click)="addTaskRequest()">加入
+                        <!-- <mat-icon>add</mat-icon> -->
+                    </button>
+                    <button mat-button class="btn-normal" *ngIf="btnStatus==true"
+                            matTooltip="確認更新" (click)="updateTaskTemplateRequest(this.edit_t_id)">更新
+                        <!-- <mat-icon>check</mat-icon> -->
+                    </button>
+                    <button mat-button class="btn-normal"
+                            matTooltip="清除" (click)="btnResetClick()">清除
+                        <!-- <mat-icon>replay</mat-icon> -->
+                    </button>
+                    <!-- <button mat-button class="btn-normal"
+                            matTooltip="恢復重填">
+                        <mat-icon>replay</mat-icon>
+                    </button> -->
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <!--顯示資料區域-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-0 pb-2">
+                <mat-card class="card table">
+                    <div class="table-container">
+                        <table mat-table [dataSource]="dataSource">
+                            
+                            <ng-container matColumnDef="code" >
+                                <th mat-header-cell *matHeaderCellDef>代號</th>
+                                <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="t_name">
+                                <th mat-header-cell *matHeaderCellDef>名稱</th>
+                                <td mat-cell *matCellDef="let element"> {{element.t_name}} </td>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="date_for_estimated_start">
+                                <th mat-header-cell *matHeaderCellDef> 預計開始 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.date_for_estimated_start | date: 'yyyy/MM/dd'}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="date_for_estimated_completion">
+                                <th mat-header-cell *matHeaderCellDef> 預計完成 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.date_for_estimated_completion | date: 'yyyy/MM/dd'}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="last_task_name">
+                                <th mat-header-cell *matHeaderCellDef> 前項 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.last_task_name}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="default_date">
+                                <th mat-header-cell *matHeaderCellDef> 天數 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.default_date}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="default_labor_hour">
+                                <th mat-header-cell *matHeaderCellDef> 工時 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.default_labor_hour}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="landmark">
+                                <th mat-header-cell *matHeaderCellDef class="text-center"> 里程碑 </th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    <mat-icon *ngIf="element.landmark == true">done</mat-icon>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="action_edit">
+                                <th mat-header-cell *matHeaderCellDef class="text-center"></th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    <button mat-mini-fab color="basic" class="table-btn-none" (click)="doPostTaskTemplateEdit(element.t_id)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="action_delete">
+                                <th mat-header-cell *matHeaderCellDef class="text-center"></th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    <button mat-mini-fab color="basic" class="table-btn-none" (click)="deleteTaskTemplateRequest(element.t_id,element.code)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+                    <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true">
+                    </mat-paginator>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

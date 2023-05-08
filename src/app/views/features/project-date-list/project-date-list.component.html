@@ -1,0 +1,205 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard">首頁</a></li>
+                    <li class="breadcrumb-item active">專案驗收進度一覽表</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        專案驗收進度一覽表
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!--查詢區域-->
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="form-group pt-3 pb-0">
+                <mat-card class="card search-group">
+                    <!-- <mat-form-field appearance="outline">
+                        <mat-label>專案代號</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="輸入專案代號或名稱" [(ngModel)]="value" type="text">
+                    </mat-form-field> -->
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>專案代號</mat-label>
+                        <input type="text" (keyup)="applyFilter($event)" placeholder="專案代號" aria-label="專案代號" matInput
+                            matTooltip="請按ENTER!" [matAutocomplete]="auto3">
+                        <mat-autocomplete #auto3="matAutocomplete">
+                            <mat-option *ngFor="let item of projectCode_option" [value]="item">
+                                {{item}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                    <!-- <mat-form-field appearance="outline">
+                        <mat-label>客戶代號</mat-label>
+                        <input matInput type="text" name="project-id">
+                    </mat-form-field> -->
+                    <!-- <button mat-button id="" class="btn-normal-none">查詢</button> -->
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <!--顯示資料區域-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-0 pb-3">
+                <mat-card class="card table">
+                    <div class="table-container">
+                        <table mat-table [dataSource]="projectManagerDataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="status">
+                                <th mat-header-cell *matHeaderCellDef> </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <!-- <small  [ngClass]="{'bg-success' : (element.status == '執行中') , 'bg-danger' : (element.status == '已中止') , 'bg-warning' : (element.status =='審核中')}" 
+                                            class=" border-radius-5 hight-light-color py-2px px-2">
+                                        {{element.status}}
+                                    </small> -->
+                                    <!-- {{element.status}} -->
+                                    <mat-icon class="none" matTooltip={{element.status}} [ngClass]="{'blue3' : (element.status == '建檔中') , 'green3' : (element.status == '執行中') ,
+                                     'yellow3' : (element.status == '已中止') , 'red3' : (element.status == '待完工'), 'big' : (element.status == '已完工'), 'pause' : (element.status == '已暫停'), 'end' : (element.status == '已結案')}">
+                                        circle
+                                    </mat-icon>
+                                </td>
+                            </ng-container>
+                            <!-- p_code -->
+                            <ng-container matColumnDef="code">
+                                <th mat-header-cell *matHeaderCellDef>代號</th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button mat-button class="table-btn-none">
+                                        <a class="text-black" href=""
+                                            [routerLink]="['/main/projectinfo/project-manager-edit/' + element.p_id]">
+                                            <u class="text-link">{{element.code}}</u>
+                                        </a>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <!-- project_name -->
+                            <ng-container matColumnDef="p_name">
+                                <th mat-header-cell *matHeaderCellDef>名稱</th>
+                                <td mat-cell *matCellDef="let element"> {{element.p_name}} </td>
+                            </ng-container>
+                            <!-- customer_name -->
+                            <ng-container matColumnDef="customer_name">
+                                <th mat-header-cell *matHeaderCellDef> 客戶 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.customer_name}} </td>
+                            </ng-container>
+                            <!-- project_principal -->
+                            <ng-container matColumnDef="projectman_name">
+                                <th mat-header-cell *matHeaderCellDef> 負責人 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectman_name}} </td>
+                            </ng-container>
+                            <!-- serviceman_id -->
+                            <!-- <ng-container matColumnDef="serviceman_name">
+                              <th mat-header-cell *matHeaderCellDef> 客服負責人 </th>
+                              <td mat-cell *matCellDef="let element"> {{element.serviceman_name}} </td>
+                            </ng-container> -->
+                            <!-- date_for_start -->
+                            <ng-container matColumnDef="date_for_start">
+                                <th mat-header-cell *matHeaderCellDef> 起始日 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.date_for_start | date: 'yyyy/MM/dd'}}
+                                </td>
+                            </ng-container>
+                            <!-- date_for_end -->
+                            <ng-container matColumnDef="date_for_end">
+                                <th mat-header-cell *matHeaderCellDef> 結束日 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.date_for_end | date: 'MM/dd'}}
+                                </td>
+                            </ng-container>
+                            <!-- 客戶單號 -->
+                            <!-- <ng-container matColumnDef="customer_id">
+                                <th mat-header-cell *matHeaderCellDef> 客戶單號 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.customer_id}} </td>
+                            </ng-container> -->
+                            <!-- 內部單號 -->
+                            <ng-container matColumnDef="inner_id">
+                                <th mat-header-cell *matHeaderCellDef> 內部單號 </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button mat-button class="table-btn-none" (click)="openSchedule(element.p_id)"
+                                        *ngIf="element.inner_id == undefined">
+                                        <a class="text-black">
+                                            <u class="text-link">*</u>
+                                        </a>
+                                    </button>
+                                    <button mat-button class="table-btn-none" (click)="openSchedule(element.p_id)"
+                                        *ngIf="element.inner_id != undefined">
+                                        <a class="text-black">
+                                            <u class="text-link">{{element.inner_id}}</u>
+                                        </a>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <!-- 收款日 -->
+                            <ng-container matColumnDef="date_for_pay">
+                                <th mat-header-cell *matHeaderCellDef> 收款日 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.date_for_pay | date: 'yyyy/MM/dd'}}
+                                </td>
+                            </ng-container>
+                            <!-- 出機日 -->
+                            <ng-container matColumnDef="date_for_delivery">
+                                <th mat-header-cell *matHeaderCellDef> 出機日 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.date_for_delivery | date:
+                                    'yyyy/MM/dd'}} </td>
+                            </ng-container>
+                            <!-- <ng-container matColumnDef="action_edit">
+                                <th mat-header-cell *matHeaderCellDef> 編輯 </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button mat-mini-fab color="basic" class="table-btn-none" [routerLink]="['/main/projectinfo/project-manager-edit/' + element.p_id]">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container> -->
+
+                            <!-- inner_id -->
+                            <!-- <ng-container matColumnDef="inner_id">
+                                <th mat-header-cell *matHeaderCellDef> 內部單號 </th>
+                                <td mat-cell *matCellDef="let element">
+                                  <button mat-button class="table-btn-none" (click)="openSchedule()">
+                                      <u class="text-link">{{element.inner_id}}</u>
+                                  </button>
+                                </td>
+                              </ng-container> -->
+                            <tr mat-header-row *matHeaderRowDef="projectManagerCol"></tr>
+                            <tr mat-row *matRowDef="let row; columns: projectManagerCol;"></tr>
+
+                            <!-- Row shown when there is no matching data. -->
+                        </table>
+                    </div>
+                    <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5"
+                        [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true">
+                    </mat-paginator>
+                    <h6>
+                        比較基準:
+                        <mat-icon class="blue3">circle</mat-icon>
+                        建檔中
+                        <mat-icon class="green3">circle</mat-icon>
+                        執行中
+                        <mat-icon class="red3">circle</mat-icon>
+                        待完工
+                        <mat-icon class="yellow3">circle</mat-icon>
+                        已完工/已中止/已暫停/已結案
+                        <!-- <mat-icon class="yellow3">circle</mat-icon>
+                        
+                        <mat-icon class="yellow3">circle</mat-icon>
+                        已暫停
+                        <mat-icon class="yellow3">circle</mat-icon>
+                        已結案 -->
+                    </h6>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #scheduleDialog>
+    <app-schedule-dialog title=""></app-schedule-dialog>
+</ng-template>

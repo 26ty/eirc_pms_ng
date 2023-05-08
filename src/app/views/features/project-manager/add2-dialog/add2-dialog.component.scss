@@ -1,0 +1,8 @@
+@import '/src/scss/custom';
+@import '../project-manager.component.scss';
+
+form {
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,76 @@
+
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">個人類別管理</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" (click)="closeDialog()" mat-dialog-close></button>
+</div>
+<form>
+    <mat-dialog-content>
+        <div class="row mt-3">
+            <div class="col">
+                <form  [formGroup]="addForm">
+                    <mat-form-field appearance="outline" class="people-form-field">
+                        <mat-label>類別名稱</mat-label>
+                        <input matInput placeholder="請輸入類別名稱" type="text" [(ngModel)]="type_name"
+                        formControlName="type_name" name="type_name" ngDefaultControl>
+                    </mat-form-field>
+                </form>
+            </div>
+            <div class="col">
+                <button mat-mini-fab color="basic" style="" matTooltip="新增" class="mt-2 table-btn-none"
+                (click)="addUserType()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="">
+            <div class="row">
+                <div class="col">
+                    <b>
+                        <h4>
+                            類別列表:
+                        </h4>
+                        <mat-list>
+                            <mat-list-item *ngFor="let item of userTypeList;let index = index">
+                                <span class="mr-2">{{index + 1}}.</span>
+                                <span class="mr-2">{{item.name}}</span>
+                                <mat-divider></mat-divider>
+                                <!-- <button mat-mini-fab color="basic" style="" matTooltip="刪除" class="table-btn-none"
+                                (click)="deleteUserType(item.tt_id)">
+                                    <mat-icon>delete</mat-icon>
+                                </button> -->
+                                <button mat-button matTooltip="刪除" (click)="deleteUserType(item.tt_id)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </mat-list-item>
+                            
+                            
+                        </mat-list>
+                    </b>
+                </div>
+            </div>
+            <!-- <div class="row">
+                <div class="col mt-2 ml-2">
+                    <span>
+                        {{index+1}}
+                        <b>
+                            {{i.dep}}
+                        </b>
+                        :{{i.name}}
+                    </span>
+                    <button mat-button>
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div> -->
+        </div>
+        
+    </mat-dialog-content>
+    <mat-dialog-actions class="text-center ">
+        <div class="">
+            <!-- <button mat-button class="btn-normal-none reset" type="reset">清除</button> -->
+            <button mat-button class="btn-none" (click)="closeDialog()">關閉</button>
+        </div>
+    </mat-dialog-actions>
+
+    
+</form>

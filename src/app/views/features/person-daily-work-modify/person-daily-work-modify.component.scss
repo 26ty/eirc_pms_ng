@@ -1,0 +1,33 @@
+@import '/src/scss/container_children';
+
+// .edit-form-group {
+//     padding: 10px 0;
+  
+//       .mat-form-field {
+//           margin-right: 10px;
+//           width: 200px;
+//           margin-top: 10px;
+//     }
+  
+//   }
+
+.col{
+  margin-top: 5px;
+  padding: 5px;
+}
+
+mat-card{
+  width: 100%;
+  height: 100%;
+}
+mat-form-field{
+  //margin-right: 10%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  //margin-top: 10%;
+}
+
+.row{
+  width: 100%;
+}

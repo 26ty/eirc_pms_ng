@@ -1,0 +1,203 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard" class="a-blue">首頁</a></li>
+                    <li class="breadcrumb-item active"><a href="/main/laborhour-direct-audit" class="a-blue">列表</a></li>
+                    <li class="breadcrumb-item active"><a>待審核異動工時 - 編輯</a></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <div class="form-group pt-0 pb-0" *ngIf="onelaborData">
+                <mat-card class="card search-group" style="height:425px">
+                    <mat-card-content>
+                        <mat-list>
+                            <mat-list-item>
+                                <h4>專案代號: </h4>
+                                <h4 class="text-context">{{onelaborData[0].project_code}}</h4>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <h4>專案: </h4>
+                                <h4 class="text-context">{{onelaborData[0].p_name}}</h4>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <h4>任務代號: </h4>
+                                <h4 class="text-context">{{onelaborData[0].t_code}}</h4>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <h4>任務: </h4>
+                                <h4 class="text-context">{{onelaborData[0].t_name}}</h4>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <h4>專案負責人: </h4>
+                                <h4 class="text-context">{{onelaborData[0].projectman_name}}</h4>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <h4>任務負責人: </h4>
+                                <h4 class="text-context">{{onelaborData[0].task_user_name}}</h4>
+                            </mat-list-item>
+                            <div class="bg-import" *ngIf="this.TopManagerReturnData.length !=0">
+                                <mat-list-item >
+                                    <h4>退回意見: </h4>
+                                    <h4 class="text-context">
+                                        {{this.TopManagerReturnData[0].remark}}
+                                        <span class="test-span" *ngIf="TopManagerReturnData[0]">
+                                            {{this.TopManagerReturnData[0].creater_name}}
+                                        </span>
+                                    </h4>
+                                </mat-list-item>
+                            </div>
+                            <!-- <mat-list-item>
+                                <h4>原提報日: </h4>
+                                <h4 class="text-context">{{onelaborData[0].m_date_for_start| date: 'yyyy/MM/dd'}}</h4>
+                            </mat-list-item> -->
+                        </mat-list>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <div class="col-md-6 text-center">
+            <form [formGroup]="addForm">
+                <mat-card class="card search-group">
+        
+                    <div class="row">
+                        <div class="col" >
+                            <mat-form-field appearance="outline" class="w-100p">
+                                <mat-label>*主題</mat-label>
+                                <input matInput placeholder="請輸入任務描述" type="text" formControlName="title"
+                                    [(ngModel)]="onelaborData[0].title" name="title" ngDefaultControl>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="w-100p">
+                                <mat-label>*性質</mat-label>
+                                <mat-select formControlName="nature" [(ngModel)]="onelaborData[0].nature" name="nature"
+                                    ngDefaultControl>
+                                    <mat-option *ngFor="let item of workNature_option" [value]="item" matInput>
+                                        {{item}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="w-100p">
+                                <mat-label>*機台序號</mat-label>
+                                <input matInput placeholder="請輸入機台序號" type="text">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="dateIpt-w" appearance="outline" class="w-100p">
+                                <mat-label>*日期</mat-label>
+                                <input matInput [matDatepicker]="picker1" formControlName="date_for_start"
+                                    [(ngModel)]="onelaborData[0].date_for_start" name="date_for_start" ngDefaultControl readonly>
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field class="timeIpt-w" appearance="outline" class="w-100p">
+                                <mat-label>*起始時間</mat-label>
+                                <input type="number" placeholder="起始時間" aria-label="起始時間" matInput
+                                    [matAutocomplete]="auto2" formControlName="time_for_start"
+                                    [(ngModel)]="onelaborData[0].time_for_start" name="time_for_start" ngDefaultControl>
+                                <mat-autocomplete #auto2="matAutocomplete">
+                                    <mat-option *ngFor="let item of workTime_option" [value]="item">
+                                        {{item}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="timeIpt-w ml-2" appearance="outline" class="w-100p">
+                                <mat-label>*結束時間</mat-label>
+                                <input type="number" placeholder="結束時間" aria-label="結束時間" matInput
+                                    [matAutocomplete]="auto3" formControlName="time_for_end" [(ngModel)]="onelaborData[0].time_for_end"
+                                    name="time_for_end" ngDefaultControl>
+                                <mat-autocomplete #auto3="matAutocomplete">
+                                    <mat-option *ngFor="let item of workTime_option" [value]="item">
+                                        {{item}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="w-100p">
+                                <mat-label>*工時</mat-label>
+                                <input type="number" placeholder="工時" aria-label="工時" matInput [matAutocomplete]="auto4"
+                                    formControlName="laborhour" [(ngModel)]="onelaborData[0].laborhour" name="laborhour"
+                                    ngDefaultControl>
+                                <mat-autocomplete #auto4="matAutocomplete">
+                                    <mat-option *ngFor="let item of laborHour_option" [value]="item">
+                                        {{item}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="ml-2" class="w-100p">
+                                <mat-label>*內容</mat-label>
+                                <textarea matInput id="" formControlName="content" [(ngModel)]="onelaborData[0].content" name="content"
+                                    ngDefaultControl></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                </mat-card>
+            </form>
+
+        </div>
+        <!-- <div class="col-md-6 px-0">
+            <div class="form-group pt-0 pb-0" *ngIf="onelaborData">
+                <mat-card class="card search-group">
+                    <mat-card-content>
+                        <mat-list>
+                            <mat-list-item>
+                                <h4>異動日期: </h4>
+                                <h4 class="text-context">{{onelaborData[0].create_time| date: 'yyyy/MM/dd'}}</h4>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <h4>主題: </h4>
+                                <h4 class="text-context">[{{onelaborData[0].nature}}]{{onelaborData[0].title}}</h4>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <h4>內容: </h4>
+                                <h4 class="text-context">{{onelaborData[0].content}}</h4>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <h4>異動工時: </h4>
+                                <h4 class="text-context" style="color:red">{{onelaborData[0].time_for_start}}~{{onelaborData[0].time_for_end}} [{{onelaborData[0].laborhour}}]</h4>
+                            </mat-list-item>
+                            
+                        </mat-list>
+                       
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div> -->
+    </div>
+    <!--按鈕區域-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="form-group pt-0 pb-0">
+                <mat-card class="card search-group">
+                    <!-- <button mat-button id="" class="btn-delete" >退回</button> -->
+                    <button mat-button id="" class="btn-normal">取消</button>
+                    <button mat-button id="" class="btn-green" (click)="updateLaborHourModifyRequest(onelaborData[0].hm_id)">送審</button>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

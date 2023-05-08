@@ -1,0 +1,87 @@
+@import '/src/scss/custom';
+
+body{
+  color: rgba(52, 49, 76, 1);
+}
+
+.layout-sidebar{
+  width: 7rem;
+  overflow: visible;
+  z-index: 999;
+  background: transparent;
+  display: flex;
+  position: fixed;
+  left: 0;
+  user-select: none;
+  transform: translate(0.2);
+}
+
+.sidenav-group {
+
+  .mat-list {
+    position: relative;
+    width: 250px;
+    background-image: linear-gradient(147.38deg, #FFFFFF 0%, #86A8C0 180%);
+    
+    &.child-list {
+      padding-top: 0;
+      background-color: #fff;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .5s;
+
+      .mat-list-item {
+        padding-left: 32px;
+      }
+
+      &.open {
+        max-height: 500px;
+      }
+    }
+  }
+
+  .mat-list-item {
+    cursor: pointer;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 400;
+    transition: background-color .2s, color .2s;
+    //background:#fff;
+    //background-image: linear-gradient(147.38deg, #FFFFFF 0%, #86A8C0 120%);
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.08);
+
+      .mat-list-icon {
+        color: #6e6e6e;
+      }
+    }
+
+    &.active {
+      color: #000;
+      background-color: rgba(0, 0, 0, 0.09);
+      .mat-list-icon {
+        color: #000;
+      }
+    }
+  }
+
+  .arrow {
+    color: #929292;
+    transition: all .3s;
+
+    &.open {
+      transform: rotate(90deg);
+    }
+  }
+}
+
+// ::ng-deep {
+//   .mat-list-base .mat-list-item {
+//     cursor: pointer;
+
+//     .mat-list-icon {
+//       font-size: 24px;
+//       color: #929292;
+//     }
+//   }
+// }

@@ -1,0 +1,228 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard">首頁</a></li>
+                    <li class="breadcrumb-item active">會議資訊服務</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        會議資訊服務
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!-- 查詢區域 -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-3 pb-0">
+                <mat-card class="card search-group">
+                    <mat-form-field appearance="outline">
+                        <mat-label>主席群組</mat-label>
+                        <input type="text" (keyup)="applyFilter($event)" placeholder="主席群組" aria-label="主席群組" matInput
+                            [matAutocomplete]="auto1">
+                        <mat-autocomplete #auto1="matAutocomplete">
+                            <mat-option *ngFor="let item of principal_option" [value]="item">
+                                {{item}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>會議室</mat-label>
+                        <input type="text" (keyup)="applyFilter($event)" placeholder="會議室" aria-label="會議室" matInput
+                            [matAutocomplete]="auto2">
+                        <mat-autocomplete #auto2="matAutocomplete">
+                            <mat-option *ngFor="let item of place_option" [value]="item">
+                                {{item}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                    <!-- <mat-form-field appearance="outline">
+                        <mat-label>日期</mat-label>
+                        <input matInput [matDatepicker]="picker" (keyup)="applyFilter($event)" placeholder="日期" aria-label="日期" matInput
+                            [matAutocomplete]="auto3">
+                        <mat-autocomplete #auto3="matAutocomplete">
+                            <mat-option *ngFor="let item of time_option" [value]="item">
+                                {{item}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field> -->
+
+                    <!-- <button mat-button class="btn-normal-none">
+                        <mat-icon>search</mat-icon>
+                    </button> -->
+                    <button mat-button class="btn" (click)="doPostMeetAdd(totalmeet)">
+                        新增<!-- <mat-icon>add</mat-icon> -->
+
+                    </button>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <!--顯示資料區域-->
+    <!-- <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-0 pb-2">
+                <mat-card class="card table" *ngIf="meetingDataSource">
+                    <div class="table-container">
+                        <table matSort mat-table [dataSource]="meetingDataSource" class="mat-elevation-z8 demo-table">
+                            <ng-container matColumnDef="m_name">
+                                <th mat-header-cell *matHeaderCellDef> 名稱 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.m_name}} </td>
+                            </ng-container>
+
+                            
+                            <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef> 主席 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                            </ng-container>
+
+                            
+                            <ng-container matColumnDef="time_for_start">
+                                <th mat-header-cell *matHeaderCellDef> 開始 - 結束 </th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{element.time_for_start}}:00 - {{element.time_for_end}}:00
+                                </td>
+                            </ng-container>
+
+                            
+                            <ng-container matColumnDef="date_for_start">
+                                <th mat-header-cell *matHeaderCellDef> 日期 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.date_for_start
+                                    | date: 'yyyy/MM/dd'}}
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="room">
+                                <th mat-header-cell *matHeaderCellDef> 地點 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.room}} </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="meetingDataname"></tr>
+                            <tr mat-row *matRowDef="let row; columns: meetingDataname"></tr>
+                        </table>
+                    </div>
+                    <mat-paginator #MatPaginator="matPaginator" [length]="meetingDataSort" [pageIndex]="0" [pageSize]="5"
+                        [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true">
+                    </mat-paginator>
+                </mat-card>
+            </div>
+        </div>
+    </div> -->
+    <!--顯示資料區域-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-0 pb-2">
+                <mat-card class="card table" *ngIf="meetDataSource">
+                    <!-- <mat-form-field appearance="outline">
+                        <mat-label>請選擇顯示項目</mat-label>
+                        <mat-select [(ngModel)]="selectedValue" [formControl]="toppings" multiple>
+                            <mat-select-trigger>
+                                <span *ngIf="toppings.value?.length > 1" class="choose-tips">
+                                    已選擇 {{toppings.value.length - 0}} 項
+                                </span>
+                            </mat-select-trigger>
+                            <mat-option *ngFor="let list of toppingList" [value]="list.value">
+                                {{list.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+                    <!--表格-->
+                    <div class="table-container">
+                        <table matSort mat-table [dataSource]="meetDataSource" class="mat-elevation-z8 demo-table">
+                            <ng-container matColumnDef="m_name">
+                                <th mat-header-cell *matHeaderCellDef> 名稱 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.m_name}} </td>
+                            </ng-container>
+
+                            <!-- Position Column -->
+                            <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef> 主席 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                            </ng-container>
+
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="time_for_start">
+                                <th mat-header-cell *matHeaderCellDef> 開始 - 結束 </th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{element.time_for_start}} - {{element.time_for_end}}
+                                </td>
+                            </ng-container>
+
+                            <!-- Symbol Column -->
+                            <ng-container matColumnDef="date_for_start">
+                                <th mat-header-cell *matHeaderCellDef> 日期 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.date_for_start
+                                    | date: 'yyyy/MM/dd'}}
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="room">
+                                <th mat-header-cell *matHeaderCellDef> 地點 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.room}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="action_edit">
+                                <th mat-header-cell *matHeaderCellDef>編輯</th>
+                                <td mat-cell *matCellDef="let element">
+                                    <!-- <button mat-button class="" (click)="doPostMeetEdit(element.m_id,p_id)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button> -->
+                                    <button mat-mini-fab color="basic" class="table-btn-none"
+                                        (click)="doPostMeetEdit(element)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="action_delete">
+                                <th mat-header-cell *matHeaderCellDef>刪除</th>
+                                <td mat-cell *matCellDef="let element">
+                                    <!-- <button mat-button class="" (click)="doPostMeetEdit(element.m_id,p_id)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button> -->
+                                    <button mat-mini-fab color="basic" class="table-btn-none"
+                                        (click)="deleteMeet(element.m_id)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+
+
+                            <tr mat-header-row *matHeaderRowDef="display_meet"></tr>
+                            <tr mat-row *matRowDef="let row; columns: display_meet"></tr>
+                        </table>
+                    </div>
+                    <mat-paginator #paginator="matPaginator" [length]="meet_total" [pageIndex]="0" [pageSize]="5"
+                        [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true">
+                    </mat-paginator>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+
+    <!--顯示區域-->
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="form-group pt-3 pb-0">
+                <mat-card class="card search-group">
+                    <full-calendar [options]="options"></full-calendar>
+                    <!-- <full-calendar [options]="calendarOptions"></full-calendar> -->
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

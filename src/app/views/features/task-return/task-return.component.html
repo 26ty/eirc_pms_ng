@@ -1,0 +1,108 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard" class="a-blue">首頁</a></li>
+                    <li class="breadcrumb-item active">專案任務待回報</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        專案任務待回報
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!--顯示資料區域-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-0 pb-3">
+                <!--表格-->
+                <mat-card class="card table">
+                    <div class="table-container">
+                        <table mat-table [dataSource]="projectDataSource" class="mat-elevation-z8">
+                            <!-- code -->
+                            <ng-container matColumnDef="p_code">
+                                <th mat-header-cell *matHeaderCellDef style="display: none;">專案</th>
+                                <td mat-cell *matCellDef="let element;let index = index" style="display: none;">
+                                    {{element.p_code}}
+                                </td>
+                            </ng-container>
+                            <!-- p_name -->
+                            <ng-container matColumnDef="p_name">
+                                <th mat-header-cell *matHeaderCellDef>專案</th>
+                                <td mat-cell *matCellDef="let element;let index = index">
+                                    {{element.p_code}}-{{element.p_name}}
+                                </td>
+                            </ng-container>
+                            <!-- code -->
+                            <ng-container matColumnDef="code">
+                                <th mat-header-cell *matHeaderCellDef>任務代號</th>
+                                <td mat-cell *matCellDef="let element;let index = index">
+                                    {{element.code}}
+                                </td>
+                            </ng-container>
+                            <!-- task_name -->
+                            <ng-container matColumnDef="t_name">
+                                <th mat-header-cell *matHeaderCellDef>任務</th>
+                                <td mat-cell *matCellDef="let element;let index = index">
+                                    {{element.t_name}}
+                                </td>
+                            </ng-container>
+                            <!-- name -->
+                            <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef>負責人</th>
+                                <td mat-cell *matCellDef="let element;let index = index">
+                                    {{element.name}}
+                                </td>
+                            </ng-container>
+                            <!-- date_for_estimated_start -->
+                            <ng-container matColumnDef="date_for_estimated_start">
+                                <th mat-header-cell *matHeaderCellDef> 開始～結束 </th>
+                                <td mat-cell *matCellDef="let element;let index = index">
+                                    {{element.date_for_estimated_start  | date: 'yyyy/MM/dd'}} - {{element.date_for_estimated_completion  | date: 'yyyy/MM/dd'}} </td>
+                            </ng-container>
+                            <!-- date_for_estimated_completion -->
+                            <ng-container matColumnDef="date_for_estimated_completion">
+                                <th mat-header-cell *matHeaderCellDef style="display: none;"> 結束 </th>
+                                <td mat-cell *matCellDef="let element;let index = index" style="display: none;">
+                                    {{element.date_for_estimated_completion  | date: 'yyyy/MM/dd'}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="bonita_task_id">
+                                <th mat-header-cell *matHeaderCellDef class="text-center">
+                                    回報
+                                </th>
+                                <td mat-cell *matCellDef="let element;let index = index"
+                                    class="text-center">
+                                    <button mat-mini-fab color="basic"
+                                        class="table-btn-none"
+                                        matTooltip="回報"
+                                        [routerLink]="['/main/task-return-edit/' + element.documents_id + '/' + element.t_id + '/'+ element.tu_id + '/' + element.bonita_task_id]">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                            <!-- Row shown when there is no matching data. -->
+                        </table>
+                    </div>
+                    <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5"
+                        [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true">
+                    </mat-paginator>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

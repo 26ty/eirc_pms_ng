@@ -1,0 +1,49 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">專案管理 - 新增(客需單新增)</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+<form [formGroup]="addForm">
+    <mat-dialog-content>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" style="width: 300px;">
+                    <mat-label>客需單號</mat-label>
+                    <input type="text" aria-label="Number" matInput [formControl]="myControl"
+                        [matAutocomplete]="auto" [(ngModel)]="customer_code" name="customer_code">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </div>
+            <div class="col mt-3">
+                <button mat-button class="btn-normal-none-notop" matTooltip="查詢" (click)="search()">
+                    查詢<!-- <mat-icon>search</mat-icon> -->
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" style="width: 300px;" *ngIf="newproject">
+                    <mat-label>專案代號</mat-label>
+                    <input matInput disabled value={{project_code}}>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" style="width: 300px;" *ngIf="newproject">
+                    <mat-label>名稱</mat-label>
+                    <input matInput disabled value={{demand_content}}>
+                </mat-form-field>
+            </div>
+            <div class="col mt-3">
+                <button mat-button class="btn-none" (click)="sweetalert()" matTooltip="新增" *ngIf="newproject">
+                    新增<!-- <mat-icon>add</mat-icon> -->
+                </button>
+            </div>
+        </div>
+    </mat-dialog-content>
+</form>

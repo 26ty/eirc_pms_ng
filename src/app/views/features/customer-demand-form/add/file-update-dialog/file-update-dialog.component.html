@@ -1,0 +1,30 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">檔案上傳管理</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+<form style="width: 400px;">
+    <mat-dialog-content>
+        <div class="row">
+            <div class="col">
+                <form enctype="multipart/form-data">
+                    <input mat-button type="file" name="file" #fileUpload (change)="handleFileInput($event)"
+                        style="width: 250px;">
+                    <button mat-button class="btn" (click)="Upload()">
+                        上傳
+                    </button>
+                    <!-- <button mat-button class="btn" (click)="addTaskRequest()">儲存</button> -->
+                </form>
+
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <input type="text" [(ngModel)]="fileName">
+                <button mat-button class="btn" (click)="download()">下載檔案</button>
+            </div>
+        </div>
+    </mat-dialog-content>
+</form>

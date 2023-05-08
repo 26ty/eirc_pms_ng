@@ -1,0 +1,63 @@
+<app-title-bar title="table範本"></app-title-bar>
+<div class="container">
+    <div class="form-group">
+
+        <div class="search-group">
+
+            <div class="dateInput-group">
+                <mat-form-field appearance="outline">
+                    <mat-label>請選擇日期</mat-label>
+                    <input matInput [matDatepicker]="fromDatePicker" readonly type="text" [(ngModel)]="year" min="2005" [max]="nowDate">
+                    <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker startView="multi-year" (yearSelected)="closeDatePicker(fromDatePicker, $event)" #fromDatePicker>
+                    </mat-datepicker>
+                </mat-form-field>
+
+                <div class="download-btn-group">
+                    <button mat-raised-button class="btn" matRipple [matRippleUnbounded]="false" disabled>下載</button>
+                </div>
+            </div>
+
+            <div class="search-input-group">
+                <mat-form-field appearance="outline">
+                    <mat-label>搜尋</mat-label>
+                    <input matInput type="text" #filter placeholder="請輸入關鍵字" (keyup)="keyupSearch($event.target)">
+                </mat-form-field>
+
+                <div class="download-btn-group">
+                    <button mat-raised-button class="btn" matRipple [matRippleUnbounded]="false" (click)="addItem()">新增</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="table">
+            <div class="table-container">
+
+                <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+
+                    <ng-container [matColumnDef]="str.en" *ngFor="let str of displayedColumnsObj">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{str.cn}} </th>
+                        <td mat-cell *matCellDef="let element" (click)="editItem(element)"> {{element[str.en]}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+            </div>
+            <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true">
+            </mat-paginator>
+
+        </div>
+    </div>
+</div>
+
+
+<ng-template #addDialog>
+    <app-add-dialog title=""></app-add-dialog>
+</ng-template>
+
+<ng-template #editDialog>
+    <app-edit-dialog title="" [selectedItem]="selectedItem"></app-edit-dialog>
+</ng-template>

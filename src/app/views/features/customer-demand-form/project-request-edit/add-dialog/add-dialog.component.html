@@ -1,0 +1,107 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">新建任務</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+<form [formGroup]="addForm">
+    <mat-dialog-content>
+        <!--新增任務資料區-->
+        <table class="" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field appearance="outline" disabled>
+                        <mat-label>任務代號 </mat-label>
+                        <input matInput placeholder="請輸入任務代號" type="text" disabled>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field appearance="outline">
+                        <mat-label>名稱</mat-label>
+                        <input matInput placeholder="請輸入任務名稱" type="text" [(ngModel)]="t_name" formControlName="t_name"
+                            name="t_name" ngDefaultControl required>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+
+        <table class="" cellspacing="0">
+            <td>
+                <tr>
+                    <mat-form-field appearance="outline" style="width:405px">
+                        <mat-label>任務描述</mat-label>
+                        <input matInput placeholder="請輸入任務描述" type="text" [(ngModel)]="remark" formControlName="remark"
+                            name="remark" ngDefaultControl required>
+                    </mat-form-field>
+                </tr>
+                <tr>
+                    <mat-form-field appearance="outline" style="width:405px">
+                        <mat-label>任務時程</mat-label>
+                        <mat-date-range-input [formGroup]="campaignOne" [rangePicker]="campaignOnePicker" required>
+                            <input matStartDate placeholder="Start date" formControlName="start"
+                                [(ngModel)]="date_for_estimated_start">
+                            <input matEndDate placeholder="End date" formControlName="end"
+                                [(ngModel)]="date_for_estimated_completion">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+                    </mat-form-field>
+                </tr>
+            </td>
+        </table>
+
+        <table class="" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field appearance="outline">
+                        <mat-label>前一個任務</mat-label>
+                        <mat-select [(ngModel)]="last_task" formControlName="last_task" name="last_task"
+                            ngDefaultControl required>
+                            <mat-option class="option-30" *ngFor="let task of taskList" [value]="task.id">
+                                {{task.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field appearance="outline" style="width: 100%">
+                        <mat-label>主要負責人</mat-label>
+                        <mat-select [(ngModel)]="principal_id" formControlName="principal_id" name="principal_id"
+                            ngDefaultControl required>
+                            <mat-optgroup class="option-30" *ngFor="let group of accountgroup" [label]="group.name"
+                                [disabled]="group.disabled">
+                                <mat-option class="option-30" *ngFor="let account of group.account"
+                                    [value]="account.account_id">
+                                    {{account.name}}
+                                </mat-option>
+                            </mat-optgroup>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <td>
+                    <mat-form-field appearance="outline">
+                        <mat-label>預計成本</mat-label>
+                        <input matInput placeholder="請輸入預計成本" type="text" required>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-checkbox class="ml-10" [(ngModel)]="landmark" formControlName="landmark" name="landmark"
+                        ngDefaultControl>里程碑</mat-checkbox>
+                </td>
+            </tr>
+        </table>
+
+    </mat-dialog-content>
+    <mat-dialog-actions class="text-center">
+        <div class="">
+            <button mat-button class="btn-normal reset" type="reset">清除</button>
+            <button mat-button class="btn" (click)="addTaskRequest()">確認</button>
+        </div>
+    </mat-dialog-actions>
+
+
+</form>

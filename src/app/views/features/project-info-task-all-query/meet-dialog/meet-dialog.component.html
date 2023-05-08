@@ -1,0 +1,40 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">會議資料瀏覽</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+<mat-dialog-content>
+    <div class="row">
+        <div class="col" *ngIf="meetDatas">
+            <mat-list>
+                <mat-list-item>
+                    <h4 class="text-head">會議名稱:</h4>
+                    <h4>{{meetDatas.body.m_name}}</h4>
+                </mat-list-item>
+                <mat-list-item>
+                    <h4 class="text-head">會議日期:</h4>
+                    <h4>{{meetDatas.body.date_for_start | date: 'yyyy/MM/dd'}} {{meetDatas.body.time_for_start}}:00 ~
+                        {{meetDatas.body.time_for_end}}:00</h4>
+                </mat-list-item>
+                <mat-list-item>
+                    <h4 class="text-head">會議地點:</h4>
+                    <h4>{{meetDatas.body.room}}</h4>
+                </mat-list-item>
+                <mat-list-item>
+                    <h4 class="text-head">會議主席:</h4>
+                    <h4>{{meetDatas.body.name}}</h4>
+                </mat-list-item>
+                <mat-list-item>
+                    <h4 class="text-head">會議參與人員:</h4>
+                    <h4 *ngFor="let i of userList">{{i.name}}　</h4>
+                </mat-list-item>
+                <!-- <mat-list-item *ngFor="let item of attendeeUserNameList">
+                    {{item}}
+                </mat-list-item> -->
+            </mat-list>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button class="btn-normal reset" type="reset" mat-dialog-close>關閉</button>
+</mat-dialog-actions>

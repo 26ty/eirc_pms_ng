@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>{{title}}</h2>
+<mat-dialog-content class="mat-typography">
+<ng-content></ng-content>
+</mat-dialog-content>
+<mat-dialog-actions align="end" *ngIf="closeStatus">
+  <button mat-button mat-dialog-close >關閉</button>
+  <!-- <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button> -->
+</mat-dialog-actions>

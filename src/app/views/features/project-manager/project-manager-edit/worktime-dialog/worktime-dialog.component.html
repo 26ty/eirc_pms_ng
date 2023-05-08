@@ -1,0 +1,28 @@
+<div class="container" class="detail-container">
+    <div class="offcanvas-header">
+        <h2 class="offcanvas-title text-center" id="offcanvasLabel">工時細項</h2>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" mat-dialog-close></button>
+    </div>
+    
+    <div class="row pt-0" *ngFor="let item of editTaskDatas;let i =index;">
+        <div class="col" *ngIf="i==editTaskDatasIndex">
+            <mat-list>
+                <mat-list-item>
+                    <h4><b>任務名稱:</b></h4>
+                    <h4>{{editTaskDatas[i].name}}</h4>
+                </mat-list-item>
+                <mat-list-item>
+                    <h4><b>備註說明:</b></h4>
+                    <h4>{{editTaskDatas[i].remark}}</h4>
+                </mat-list-item>
+                <mat-list-item>
+                    <h4><b>已報工時:</b></h4>
+                    <h4>{{editTaskDatas[i].labor_hour}}</h4>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+    <mat-dialog-actions>
+        <button mat-button class="btn-normal-none reset" type="reset" mat-dialog-close>關閉</button>
+    </mat-dialog-actions>
+</div>

@@ -1,0 +1,150 @@
+<div class="container">
+    <!--標題-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>edit</mat-icon>
+                    <span class="text-left">
+                        任務延伸範本管理 - 修改
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!--查詢區域-->
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="form-group pt-3 pb-0">
+                <mat-card class="card search-group">
+                    <mat-form-field appearance="outline">
+                        <mat-label>專案任務名稱</mat-label>
+                        <input matInput type="text" name="">
+                    </mat-form-field>
+                    <button mat-button id="" class="btn-none" matTooltip="儲存">
+                        <mat-icon>save_alt</mat-icon>
+                    </button>
+                    <button mat-button id="" class="btn-normal" matTooltip="刪除">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <!-- <button mat-button id="" class="btn-normal" matTooltip="重整">
+                        <mat-icon>replay</mat-icon>
+                    </button> -->
+                    <button mat-button id="" class="btn-normal" matTooltip="離開" (click)="cancelEdit()">
+                        <mat-icon>undo</mat-icon>
+                    </button>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <!--查詢區域2 未命名-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-0 pb-0">
+                <mat-card class="card search-group">
+                    <mat-form-field appearance="outline">
+                        <mat-label>任務代號</mat-label>
+                        <input matInput type="text" name="">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>任務名稱</mat-label>
+                        <input matInput type="text" name="">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>預設天數(D)</mat-label>
+                        <input matInput type="text" name="">
+                    </mat-form-field>
+                    <mat-checkbox class="checkbox-10">里程碑</mat-checkbox>
+                    <mat-checkbox class="checkbox-10">內容要求</mat-checkbox>
+                    <mat-checkbox class="checkbox-10">附件要求</mat-checkbox>
+                    
+                    <button mat-button class="btn"
+                            matTooltip="加入任務列表">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                    <!-- <button mat-button class="btn-normal"
+                            matTooltip="取消">
+                        <mat-icon>replay</mat-icon>
+                    </button> -->
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <!--顯示資料區域-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-0 pb-2">
+                <mat-card class="card table">
+                    <div class="table-container">
+                        <table mat-table [dataSource]="dataSource">
+                            
+                            <ng-container matColumnDef="task_code" >
+                                <th mat-header-cell *matHeaderCellDef>任務代號</th>
+                                <td mat-cell *matCellDef="let element"> {{element.task_code}} </td>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="task_name">
+                                <th mat-header-cell *matHeaderCellDef>任務名稱</th>
+                                <td mat-cell *matCellDef="let element"> {{element.task_name}} </td>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="pre_date">
+                                <th mat-header-cell *matHeaderCellDef> 預計天數 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.pre_date}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="milestone">
+                                <th mat-header-cell *matHeaderCellDef class="text-center"> 里程碑 </th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    <button mat-mini-fab color="basic" class="table-btn-none">
+                                        <mat-icon>done</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="content">
+                                <th mat-header-cell *matHeaderCellDef class="text-center"> 內容要求 </th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    <button mat-mini-fab color="basic" class="table-btn-none">
+                                        <mat-icon>done</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="appendix">
+                                <th mat-header-cell *matHeaderCellDef class="text-center"> 附件要求 </th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    <button mat-mini-fab color="basic" class="table-btn-none">
+                                        <mat-icon>done</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="edit_btn">
+                                <th mat-header-cell *matHeaderCellDef class="text-center"> 編輯管理 </th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    <button mat-mini-fab color="basic" class="table-btn-none">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="delete_btn">
+                                <th mat-header-cell *matHeaderCellDef class="text-center"> 刪除管理 </th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    <button mat-mini-fab color="basic" class="table-btn-none">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+                    
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

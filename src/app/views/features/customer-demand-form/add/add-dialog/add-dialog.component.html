@@ -1,0 +1,111 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">新建任務</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+<form [formGroup]="addForm">
+    <mat-dialog-content>
+        <!--填寫任務資料區-->
+        <table class="" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field appearance="outline" disabled>
+                        <mat-label>任務代號 </mat-label>
+                        <input matInput placeholder="請輸入任務代號" type="text">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field appearance="outline">
+                        <mat-label>任務名稱</mat-label>
+                        <input matInput placeholder="請輸入任務名稱" type="text" [(ngModel)]="name" formControlName="name"
+                            name="name" ngDefaultControl>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+
+        <table class="" cellspacing="0">
+            <td>
+                <tr>
+                    <mat-form-field appearance="outline" style="width:405px">
+                        <mat-label>任務描述</mat-label>
+                        <input matInput placeholder="請輸入任務描述" type="text" [(ngModel)]="description"
+                            formControlName="description" name="description" ngDefaultControl>
+                    </mat-form-field>
+                </tr>
+                <tr>
+                    <mat-form-field appearance="outline" style="width:405px">
+                        <mat-label>任務時程</mat-label>
+                        <mat-date-range-input [formGroup]="campaignOne" [rangePicker]="campaignOnePicker">
+                            <input matStartDate placeholder="Start date" formControlName="start">
+                            <input matEndDate placeholder="End date" formControlName="end">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+                    </mat-form-field>
+                </tr>
+            </td>
+        </table>
+
+        <table class="" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>前一任務</mat-label>
+                        <input type="text" placeholder="前一任務" aria-label="前一任務" matInput [formControl]="myControl"
+                            [matAutocomplete]="auto" [(ngModel)]="last_task" formControlName="last_task"
+                            name="last_task" ngDefaultControl>
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option class="option-30" *ngFor="let option of taskname" [value]="option">
+                                {{option}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field appearance="outline">
+                        <mat-label>主要負責人</mat-label>
+                        <mat-select>
+                            <mat-option class="option-30" *ngFor="let select of ['Rita','Peggy','Ted','Brian','Louis']"
+                                [value]="select" title="{{select}}">
+                                {{select}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+
+        <mat-form-field appearance="outline" class="w-100p">
+            <mat-label>比較基準</mat-label>
+            <mat-date-range-input>
+                <input matStartDate placeholder="起始日" formControlName="start">
+                <input matEndDate placeholder="結束日" formControlName="end">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+        </mat-form-field>
+        <table>
+            <tr>
+                <td>
+                    <mat-form-field appearance="outline">
+                        <mat-label>預計成本</mat-label>
+                        <input matInput placeholder="請輸入預計成本" type="text">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-checkbox class="ml-10">里程碑</mat-checkbox>
+                </td>
+            </tr>
+        </table>
+
+    </mat-dialog-content>
+    <mat-dialog-actions class="text-center">
+        <div class="">
+            <button mat-button class="btn-normal reset" type="reset">回復重填</button>
+            <button mat-button class="btn" mat-dialog-close (click)="addAllRequests()">確認修改</button>
+        </div>
+    </mat-dialog-actions>
+
+
+</form>

@@ -1,0 +1,14 @@
+@import '/src/scss/container_children';
+
+.bg-import{
+display: block;
+background: rgb(225, 225, 225);
+border-radius: 10px;
+padding: 2px;
+padding-bottom: 0;
+}
+
+
+mat-list-item{
+ font-weight: 400;
+}

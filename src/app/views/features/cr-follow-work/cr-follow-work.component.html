@@ -1,0 +1,192 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard" class="a-blue">首頁</a></li>
+                    <li class="breadcrumb-item active">專案計劃管理</li>
+                    <li class="breadcrumb-item active" aria-current="page">客需單事項追蹤作業</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <!-- <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        客需單事項追蹤作業
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div> -->
+
+    <!--查詢區域 未命名-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-3 pb-0">
+                <form [formGroup]="stateForm">
+                    <mat-card class="card search-group">
+                        <mat-form-field appearance="outline">
+                            <mat-label>負責部門</mat-label>
+                            <mat-select>
+                                <mat-option class="option-30"
+                                    *ngFor="let select of ['總公司','行政管理','機械研發','軟體研發Mosion','軟體研發Vision']"
+                                    [value]="select" title="{{select}}">
+                                    {{select}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <!-- <mat-form-field appearance="outline">
+                        <mat-label>任務負責人</mat-label>
+                        <mat-select>
+                            <mat-option class="option-30"
+                                *ngFor="let select of ['Rita','Peggy','Ted','Brian','Louis','Ken']" [value]="select"
+                                title="{{select}}">
+                                {{select}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>任務負責人</mat-label>
+                            <input type="text" matInput formControlName="stateGroup" [matAutocomplete]="autoGroup"
+                                [(ngModel)]="account_name" name="stateGroup" ngDefaultControl
+                                (ngModelChange)="changeaccount($event)">
+                            <mat-autocomplete #autoGroup="matAutocomplete">
+                                <mat-optgroup *ngFor="let group of stateGroupOptions | async" [label]="group.name"
+                                    class="test">
+                                    <mat-option *ngFor="let account of group.account" [value]="account.name">
+                                        {{account.name}}
+                                    </mat-option>
+                                </mat-optgroup>
+                            </mat-autocomplete>
+                        </mat-form-field>
+
+
+                        <!-- <mat-form-field class="example-form-field" appearance="outline">
+                        <mat-label>時間起迄</mat-label>
+                        <mat-date-range-input [formGroup]="campaignOne" [rangePicker]="campaignOnePicker"
+                            [comparisonStart]="campaignTwo.value.start" [comparisonEnd]="campaignTwo.value.end">
+                            <input matStartDate placeholder="Start date" formControlName="start">
+                            <input matEndDate placeholder="End date" formControlName="end">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+                    </mat-form-field> -->
+
+                        <mat-form-field appearance="outline" style="width: 210px;">
+                            <mat-label>時間起迄</mat-label>
+                            <mat-date-range-input [rangePicker]="picker">
+                                <input matStartDate matInput name="date_for_start">
+                                <input matEndDate matInput name="date_for_done">
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>案件代號</mat-label>
+                            <input matInput type="text" #filter placeholder="請輸入案件代號">
+                        </mat-form-field>
+
+                        <button mat-raised-button class="btn">查詢</button>
+                    </mat-card>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--顯示資料區域-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-0 pb-0">
+                <!--表格-->
+                <mat-card class="card table">
+
+                    <div class="table-container">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                            <!-- code -->
+                            <ng-container matColumnDef="code">
+                                <th mat-header-cell *matHeaderCellDef>案件代號</th>
+                                <td mat-cell *matCellDef="let element"> {{element.cd_code}} </td>
+                            </ng-container>
+                            <!-- date_for_recive -->
+                            <ng-container matColumnDef="date_for_recive">
+                                <th mat-header-cell *matHeaderCellDef>收件日期</th>
+                                <td mat-cell *matCellDef="let element"> {{element.create_time | date: 'yyyy/MM/dd
+                                    hh:mm'}}
+                                </td>
+                            </ng-container>
+                            <!-- salesman_name -->
+                            <ng-container matColumnDef="salesman_name">
+                                <th mat-header-cell *matHeaderCellDef> 業務負責人 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.salesman_name}} </td>
+                            </ng-container>
+                            <!-- demand_content -->
+                            <ng-container matColumnDef="demand_content">
+                                <th mat-header-cell *matHeaderCellDef> 問題描述 </th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{element.demand_content}}
+                                    <br>
+                                    {{element.suitable_content}}
+                                </td>
+                            </ng-container>
+                            <!-- serviceman_id -->
+                            <ng-container matColumnDef="project_represent">
+                                <th mat-header-cell *matHeaderCellDef> 任務負責人 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.task_user_name}} </td>
+                            </ng-container>
+                            <!-- ship_date -->
+                            <ng-container matColumnDef="process">
+                                <th mat-header-cell *matHeaderCellDef> 處理情形 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.remark}} </td>
+                            </ng-container>
+                            <!-- act_complete_date -->
+                            <ng-container matColumnDef="man_hour_detail">
+                                <th mat-header-cell *matHeaderCellDef> 工時明細 </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button mat-mini-fab color="basic" class="table-btn-none"
+                                        (click)="customerLHView(element.t_id)">
+                                        <mat-icon>task</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <!-- status -->
+                            <ng-container matColumnDef="attachment">
+                                <th mat-header-cell *matHeaderCellDef style="width: 30px;"> 附件 </th>
+                                <td mat-cell *matCellDef="let element" class="attachment">
+                                    <button mat-mini-fab color="basic" class="table-btn-none" (click)="fileItem()">
+                                        <mat-icon>attach_file</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <!-- record -->
+                            <ng-container matColumnDef="record">
+                                <th mat-header-cell *matHeaderCellDef> 表單紀錄 </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button mat-mini-fab color="basic" class="table-btn-none"
+                                        (click)="customerInterView(element.cd_id)">
+                                        <mat-icon>receipt_long</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef=" displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+                    <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true">
+                    </mat-paginator>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+
+</div>

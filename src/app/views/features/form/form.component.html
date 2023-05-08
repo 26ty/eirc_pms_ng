@@ -1,0 +1,94 @@
+<app-title-bar title="form表範本"></app-title-bar>
+<div class="container">
+  <div class="card-box">
+    <mat-card>
+      <!-- <mat-card-header>
+              <mat-card-title>title</mat-card-title>
+              <mat-card-subtitle>subtitle</mat-card-subtitle>
+            </mat-card-header> -->
+      <mat-card-content>
+        <div class="form-group">
+          <div class="form-box">
+            <form [formGroup]="accountForm">
+
+              <h3>帳號</h3>
+              <mat-form-field appearance="outline">
+                <mat-label>登錄帳號</mat-label>
+                <input matInput formControlName="account" placeholder="" type="text">
+                <mat-error *ngIf="accountForm.controls['account'].hasError('required')">
+                  必填
+                </mat-error>
+                <mat-error *ngIf="accountForm.controls['account'].hasError('minlength')">
+                  請輸入多於6個字元
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>舊密碼</mat-label>
+                <input matInput formControlName="password" placeholder="請輸入舊的密碼" type="password">
+                <mat-error *ngIf="accountForm.controls['password'].hasError('minlength')">
+                  請輸入多於6個字元
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>新密碼</mat-label>
+                <input matInput formControlName="new_password" placeholder="請輸入新的密碼" type="password">
+                <mat-error *ngIf="accountForm.controls['new_password'].hasError('minlength')">
+                  請輸入多於6個字元
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>確認密碼</mat-label>
+                <input matInput formControlName="confirm_password" placeholder="再次確認密碼" type="password"
+                  (change)="comparePassword()">
+                <mat-error *ngIf="accountForm.controls['confirm_password'].hasError('minlength')">
+                  請輸入多於6個字元
+                </mat-error>
+                <mat-error *ngIf="accountForm.controls['confirm_password'].hasError('compare')">
+                  與新密碼不同
+                </mat-error>
+              </mat-form-field>
+
+              <h3>資料</h3>
+              <mat-form-field appearance="outline">
+                <mat-label>名稱</mat-label>
+                <input matInput formControlName="company_name" placeholder="" type="text">
+                <mat-error *ngIf="accountForm.controls['company_name'].hasError('required')">
+                  必填
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>編號</mat-label>
+                <input matInput formControlName="company_number" placeholder="" type="text">
+                <mat-error *ngIf="accountForm.controls['company_number'].hasError('required')">
+                  必填
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>統一編號</mat-label>
+                <input matInput formControlName="tax_id_number" placeholder="" type="text">
+                <mat-error *ngIf="accountForm.controls['tax_id_number'].hasError('required')">
+                  必填
+                </mat-error>
+              </mat-form-field>
+
+              <div class="btn-group">
+                <button mat-raised-button class="btn reset" (click)="backData()">回復重填</button>
+                <button mat-raised-button class="btn" (click)="submit(accountForm.value)">確認修改</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+      </mat-card-content>
+      <!-- <mat-card-actions>
+              <button mat-button></button>
+            </mat-card-actions> -->
+    </mat-card>
+  </div>
+</div>

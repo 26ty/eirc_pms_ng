@@ -1,0 +1,156 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">客需單</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+<mat-dialog-content>
+    <div class="row" style="width: 500px;">
+        <div class="col-md-12">
+            <mat-card class="card search-group">
+                <div class="edit-form-group pb-0">
+                    <div class="row">
+                        <div class="col" *ngIf="crDatas">
+                            <mat-list>
+
+                                <table class="example-full-width" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <mat-list-item>
+                                                <h4 class="text-head">單號:</h4>
+                                                <h4 class="text-context">{{crDatas.body.code}}</h4>
+                                            </mat-list-item>
+                                        </td>
+                                        <td>
+                                            <mat-list-item>
+                                                <h4 class="text-head">日期:</h4>
+                                                <h4 class="text-context">{{crDatas.body.date_for_recive | date:
+                                                    'yyyy/MM/dd'}}
+                                                </h4>
+                                            </mat-list-item>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <mat-list-item>
+                                    <h4 class="text-head">客戶:</h4>
+                                    <h4 class="text-context">{{crDatas.body.customer_name}}</h4>
+                                </mat-list-item>
+
+                                <table class="example-full-width" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <mat-list-item>
+                                                <h4 class="text-head">客戶聯絡人:</h4>
+                                                <h4 class="text-context">{{crDatas.body.salesman_name}}</h4>
+                                            </mat-list-item>
+                                        </td>
+                                        <td>
+                                            <mat-list-item>
+                                                <h4 class="text-head">電話:</h4>
+                                                <h4></h4>
+                                            </mat-list-item>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <mat-list-item>
+                                    <h4 class="text-head">電子郵件:</h4>
+                                    <h4></h4>
+                                </mat-list-item>
+
+                                <mat-list-item>
+                                    <h4 class="text-head">需求說明:</h4>
+                                    <h4 class="text-context">{{crDatas.body.demand_content}}</h4>
+                                </mat-list-item>
+
+                                <mat-list-item>
+                                    <h4 class="text-head">適用製程說明:</h4>
+                                    <h4 class="text-context">{{crDatas.body.suitable_content}}</h4>
+                                </mat-list-item>
+
+                                <mat-list-item>
+                                    <h4 class="text-head">其他:</h4>
+                                    <h4 class="text-context">{{crDatas.body.other_content}}</h4>
+                                </mat-list-item>
+
+                                <mat-list-item>
+                                    <h4 class="text-head">客戶預算:</h4>
+                                    <h4 class="text-context">{{crDatas.body.budget}}</h4>
+                                </mat-list-item>
+
+                                <mat-list-item>
+                                    <h4 class="text-head">客戶預估時程:</h4>
+                                    <h4>
+                                        {{crDatas.body.date_for_estimated_start | date:
+                                        'yyyy/MM/dd'}}~{{crDatas.body.date_for_estimated_end | date: 'yyyy/MM/dd'}}
+                                    </h4>
+                                </mat-list-item>
+
+
+                                <!--舊機型衍生/新機型-->
+                                <mat-radio-group aria-label="Select an option" class="example-radio-group"
+                                    [(ngModel)]="crDatas.body.machine_status_id" ngDefaultControl>
+
+                                    <mat-list-item>
+                                        <mat-radio-button value="e3a5c393-bd97-4cb3-830d-6a59bb4fcd60">不承接此案
+                                        </mat-radio-button>
+                                    </mat-list-item>
+
+                                    <mat-list-item>
+                                        <mat-radio-button value="b996906d-d38b-42ea-b3ea-002c2a6f41e4">舊機型衍生
+                                        </mat-radio-button>
+                                        <h4 class="text-context">{{crDatas.body.extend_rem}}</h4>
+                                    </mat-list-item>
+
+                                    <mat-list-item>
+                                        <mat-radio-button value="0707d4db-30fa-4053-85de-d8b837a3e22e">新機型
+                                        </mat-radio-button>
+                                    </mat-list-item>
+
+                                </mat-radio-group>
+
+                                <mat-list-item>
+                                    <h4 class="text-head">技術可行性評估報告，預計送審時間:</h4>
+                                    <h4 class="text-context">{{crDatas.body.date_for_devlop | date:
+                                        'yyyy/MM/dd'}}</h4>
+                                </mat-list-item>
+
+                                <mat-list-item>
+                                    <h4 class="text-head">未來三年預估數量:</h4>
+                                    <h4 class="text-context">{{crDatas.body.est_quantity }}
+                                    </h4>
+                                </mat-list-item>
+
+                                <!--不須提出技術可行性報告-->
+                                <section class="example-section">
+                                    <mat-list>
+                                        <mat-list-item>
+                                            <mat-checkbox [(ngModel)]="crDatas.body.eva_report" ngDefaultControl>
+                                                不須提出技術可行性評估報告
+                                            </mat-checkbox>
+                                        </mat-list-item>
+                                    </mat-list>
+                                </section>
+
+
+                                <mat-list-item>
+                                    <h4 class="text-head">預定完成日:</h4>
+                                </mat-list-item>
+
+                                <mat-form-field appearance="outline" style="width: 100%;">
+                                    <mat-label>意見回覆</mat-label>
+                                    <textarea matInput></textarea>
+                                </mat-form-field>
+
+                            </mat-list>
+                        </div>
+
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button class="btn-normal reset" type="reset" mat-dialog-close>關閉</button>
+</mat-dialog-actions>

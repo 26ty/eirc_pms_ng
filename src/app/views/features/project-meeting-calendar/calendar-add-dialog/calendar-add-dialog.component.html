@@ -1,0 +1,180 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">新建會議</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" mat-dialog-close></button>
+</div>
+<!--任務代號、任務名稱、任務描述、比較基準、任務時程-->
+
+<form [formGroup]="addMeetForm" style="width: 800px;">
+    <mat-dialog-content>
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="outline" class="input-400">
+                    <mat-label>會議主題</mat-label>
+                    <input matInput type="text" placeholder="請輸入會議主題" type="text" [(ngModel)]="m_name" formControlName="m_name"  name="m_name" ngDefaultControlrequired required>
+                </mat-form-field>
+                <table>
+                    <tr>
+                        <td>
+                            <mat-form-field appearance="outline" class="dateIpt-w">
+                                <mat-label>會議日期</mat-label>
+                                <input matInput [matDatepicker]="picker" placeholder="請輸入會議日期" type="text" [(ngModel)]="date_for_start" formControlName="date_for_start"  name="date_for_start" ngDefaultControl required>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>重複幾週</mat-label>
+                                <input matInput placeholder="請輸入任務名稱" type="number" min="0" [(ngModel)]="repeattime"
+                                    formControlName="repeattime" name="repeattime"
+                                    ngDefaultControl required >
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>開始時間</mat-label>
+                                <mat-select [(ngModel)]="time_for_start" formControlName="time_for_start"  name="time_for_start" ngDefaultControl required>
+                                    <mat-option *ngFor="let time of time_option" [value]="time">
+                                      {{time}}
+                                    </mat-option>
+                                  </mat-select>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>結束時間</mat-label>
+                                <mat-select [(ngModel)]="time_for_end" formControlName="time_for_end"  name="time_for_end" ngDefaultControl required>
+                                    <mat-option *ngFor="let time of time_option" [value]="time">
+                                      {{time}}
+                                    </mat-option>
+                                  </mat-select>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+        
+                <table>
+                    <tr>
+                        <td>
+                            <!-- <mat-form-field appearance="outline" class="input-400">
+                                <mat-label>會議主席</mat-label>
+                                <mat-select [(ngModel)]="chairman_id" formControlName="chairman_id"  name="chairman_id" ngDefaultControl required>
+                                  <mat-option *ngFor="let user of userList" [value]="user.id">
+                                    {{user.name}}
+                                  </mat-option>
+                                </mat-select>
+                            </mat-form-field> -->
+                            <mat-form-field appearance="outline" class="people-form-field">
+                                <mat-label>會議主席</mat-label>
+                                <mat-select [(ngModel)]="chairman_id" formControlName="chairman_id"  name="chairman_id" ngDefaultControl required>
+                                    <mat-optgroup *ngFor="let group of accountgroup" [label]="group.name"
+                                        [disabled]="group.disabled">
+                                        <mat-option *ngFor="let account of group.account"
+                                            [value]="account.account_id">
+                                            {{account.name}}
+                                        </mat-option>
+                                    </mat-optgroup>
+                                </mat-select>
+                            </mat-form-field>
+                            
+                        </td>
+                        <td>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>會議地點</mat-label>
+                                <input type="text"
+                                       placeholder="會議地點"
+                                       aria-label="會議地點"
+                                       matInput
+                                       [matAutocomplete]="auto"
+                                       [(ngModel)]="room" formControlName="room"  name="room" ngDefaultControl required>
+                                <mat-autocomplete #auto="matAutocomplete">
+                                  <mat-option *ngFor="let item of room_option" [value]="item">
+                                    {{item}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                            
+                        </td>
+                    </tr>
+                </table>
+        
+                <table>
+                    <tr>
+                        <td>
+                            <!-- <mat-form-field appearance="outline">
+                                <mat-label>會議參與人員</mat-label>
+                                <mat-select [(value)]="userid" [(ngModel)]="user_id" formControlName="user_id"  name="user_id" ngDefaultControl required>
+                                  <mat-option *ngFor="let user of userList" [value]="user.id">
+                                    {{user.name}}
+                                  </mat-option>
+                                </mat-select>
+                            </mat-form-field> -->
+                            <mat-form-field appearance="outline" class="people-form-field">
+                                <mat-label>會議參與人員</mat-label>
+                                <mat-select [(value)]="user_id" [(ngModel)]="user_id" formControlName="user_id"  name="user_id" ngDefaultControl>
+                                    <mat-optgroup *ngFor="let group of accountgroup" [label]="group.name"
+                                        [disabled]="group.disabled">
+                                        <mat-option *ngFor="let account of group.account"
+                                            [value]="account.account_id">
+                                            {{account.name}}
+                                        </mat-option>
+                                    </mat-optgroup>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <button mat-button class="btn-normal-none ml-10" (click)="addSelectedUserList()">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-5" style="height:400px;margin: auto;">
+                <mat-card class="card bg-import" style="min-height: 400px;display: block;">
+                    <div class="row">
+                        <div class="col">
+                            <b>
+                                <h4>
+                                    參與人員列表:({{num}})
+                                </h4>
+                            </b>
+                        </div>
+                    </div>
+                    <div class="row"  *ngFor="let i of result_selectedList;let index=index" >
+                        <div class="col mt-2 ml-2">
+                            <span>
+                                {{index+1}}
+                                <b>
+                                    {{i.dep}}
+                                </b>
+                                :{{i.name}}
+                            </span>
+                            <button mat-button (click)="deleteSelectedUserList(index)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+        
+
+        <mat-list>
+            <mat-list-item>
+                <h4>此時段所選地點使用狀態:(此功能暫保留)</h4>
+            </mat-list-item>
+        </mat-list>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button class="btn-normal-none reset" type="reset" (click)="reset()">清除</button>
+        <button mat-button class="btn" (click)="foolproofmeeting()">儲存</button>
+        <!-- <button mat-button class="btn-danger" (click)="sendemail()">發送</button> -->
+        <!-- <button mat-button class="btn" (click)="test()">test</button> -->
+    </mat-dialog-actions>
+</form>

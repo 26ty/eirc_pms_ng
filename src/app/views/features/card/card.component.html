@@ -1,0 +1,301 @@
+<app-title-bar title="icon範本"></app-title-bar>
+
+<div class="container">
+<mat-tab-group>
+    <mat-tab label="button">
+        <button pButton type="button" label="Click" ></button>
+        <!-- <p-button label="Click" ></p-button>
+        <button pButton type="button" label="Click" ></button>
+        <p-button label="Click" ></p-button> -->
+        <button pButton type="button" class="p-button-info"></button>
+        <button pButton type="button" label="Primary"></button>
+        <button pButton type="button" label="Secondary" class="p-button-secondary"></button>
+        <button pButton type="button" label="Success" class="p-button-success"></button>
+        <button pButton type="button" label="Info" class="p-button-info"></button>
+        <button pButton type="button" label="Warning" class="p-button-warning"></button>
+        <button pButton type="button" label="Help" class="p-button-help"></button>
+        <button pButton type="button" label="Danger" class="p-button-danger"></button>
+        <button pButton type="button" label="Submit" class="p-button-text"></button>
+        <button pButton type="button" icon="pi pi-check" class="p-button-text"></button>
+        <button pButton type="button" label="Cancel" icon="pi pi-times" class="p-button-text"></button>
+        <button pButton type="button" label="Search" icon="pi pi-search" iconPos="right" class="p-button-text p-button-text"></button>
+        <button pButton type="button" class="p-button-raised p-button-rounded"></button>
+        <button pButton type="button" label="Primary" class="p-button-outlined"></button>
+        <button pButton type="button" label="Link" class="p-button-link"></button>
+        <button pButton type="button" label="Emails" badge="8"></button>
+        <button pButton type="button" label="Messages" icon="pi pi-users" class="p-button-warning" badge="8" badgeClass="p-badge-info"></button>
+        <!-- <span class="p-buttonset">
+            <button pButton type="button" label="Save" icon="pi pi-check"></button>
+            <button pButton type="button" label="Delete" icon="pi pi-trash"></button>
+            <button pButton type="button" label="Cancel" icon="pi pi-times"></button>
+        </span>
+        <button pButton type="button" label="Small" icon="pi pi-check" class="p-button-sm"></button>
+        <button pButton type="button" label="Normal" icon="pi pi-check" class="p-button"></button>
+        <button pButton type="button" label="Large" icon="pi pi-check" class="p-button-lg"></button>
+        <button pButton type="button" label="Small" icon="pi pi-check" [loading]="isLoading" ></button>
+        <p-button label="Search" icon="pi pi-search" [loading]="isLoading"></p-button> -->
+    </mat-tab>
+    <mat-tab label="table">
+        <div class="table-container margin-auto">
+            <table mat-table [dataSource]="B1B2DataSource" class="mat-elevation-z8">
+                <!-- account -->
+                <ng-container matColumnDef="account" >
+                    <th mat-header-cell *matHeaderCellDef>員工帳號</th>
+                    <td mat-cell *matCellDef="let element"> {{element.account}} </td>
+                  </ng-container>
+                <!-- name -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef >員工名字</th>
+                  <td mat-cell *matCellDef="let element" > {{element.name}} </td>
+                </ng-container>
+                <!-- role_id -->
+                <ng-container matColumnDef="role_id">
+                  <th mat-header-cell *matHeaderCellDef>權限碼</th>
+                  <td mat-cell *matCellDef="let element"> {{element.role_id}} </td>
+                </ng-container>
+                
+                <!-- <ng-container matColumnDef="action_edit">
+                    <th mat-header-cell *matHeaderCellDef> 編輯 </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-mini-fab color="basic" class="table-btn-none">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </td>
+                </ng-container> -->
+                <tr mat-header-row *matHeaderRowDef="userCol"></tr>
+                <tr mat-row *matRowDef="let row; columns: userCol;"></tr>
+              </table>
+        </div>
+
+    </mat-tab>
+    <mat-tab label="list">
+        <mat-list>
+            <div class="row">
+                <div class="col">
+                    <mat-list-item *ngFor="let item of userData">
+                        {{item.name}}
+                    </mat-list-item>
+                </div>
+                <div class="col">
+                    <mat-list-item *ngFor="let item of userData">
+                        {{item.account}}
+                    </mat-list-item>
+                </div>
+                <div class="col">
+                    <mat-list-item *ngFor="let item of userData">
+                        {{item.role_id}}
+                    </mat-list-item>
+                </div>
+                <div class="col">
+                    <mat-list-item *ngFor="let item of array;let index = index">
+                        {{item.id}}
+                    </mat-list-item>
+                </div>
+                <div class="col">
+                    <mat-list-item *ngFor="let item of array">
+                        {{item.name}}
+                    </mat-list-item>
+                </div>
+                <!-- <div class="col">
+                    <mat-list-item *ngIf="array">
+                        {{array.name}}
+                    </mat-list-item>
+                </div> -->
+            </div>
+            
+        </mat-list>
+    </mat-tab>
+    <mat-tab label="icon">
+      <div class="container">
+          <div class="row">
+              <div class="col-1 text-center">
+                <mat-list >
+                    <mat-list-item>
+                        <mat-icon>home</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>people</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>people_outline</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>person</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>person_add</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>person_outline</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>settings</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>filter_none</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>query_builder</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>description</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon> list_alt</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon> local_phone</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon> edit</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>device_hub</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon> attach_money</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>room_service</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon> multiline_chart</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>visibility</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>download</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>info</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>save_alt</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>
+                            replay
+                        </mat-icon>
+                    </mat-list-item>
+                </mat-list>
+              </div>
+              <div class="col-1">
+                <mat-list>
+                    <mat-list-item>
+                        home
+                    </mat-list-item>
+                    <mat-list-item>
+                        people
+                    </mat-list-item>
+                    <mat-list-item>
+                        people_outline
+                    </mat-list-item>
+                    <mat-list-item>
+                        person
+                    </mat-list-item>
+                    <mat-list-item>
+                        person_add
+                    </mat-list-item>
+                    <mat-list-item>
+                        person_outline
+                    </mat-list-item>
+                    <mat-list-item>
+                        settings
+                    </mat-list-item>
+                    <mat-list-item>
+                        filter_none
+                    </mat-list-item>
+                    <mat-list-item>
+                        query_builder
+                    </mat-list-item>
+                    <mat-list-item>
+                        description
+                    </mat-list-item>
+                    <mat-list-item>
+                        list_alt
+                    </mat-list-item>
+                    <mat-list-item>
+                        local_phone
+                    </mat-list-item>
+                    <mat-list-item>
+                        edit
+                    </mat-list-item>
+                    <mat-list-item>
+                        device_hub
+                    </mat-list-item>
+                    <mat-list-item>
+                        attach_money
+                    </mat-list-item>
+                    <mat-list-item>
+                        room_service
+                    </mat-list-item>
+                    <mat-list-item>
+                        multiline_chart
+                    </mat-list-item>
+                    <mat-list-item>
+                        visibility
+                    </mat-list-item>
+                    <mat-list-item>
+                        download
+                    </mat-list-item>
+                    <mat-list-item>
+                        info
+                    </mat-list-item>
+                    <mat-list-item>
+                        save_alt
+                    </mat-list-item>
+                    <mat-list-item>
+                        replay
+                    </mat-list-item>
+                </mat-list>
+              </div>
+          </div>
+      </div>
+  </mat-tab>
+  <mat-tab label="card">
+    <div class="card-box">
+        <mat-card class="example-card">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>BlackPink</mat-card-title>
+            <mat-card-subtitle>Jennie</mat-card-subtitle>
+            <span class="example-spacer"></span>
+            <div class="header-actions">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                      <mat-icon>dialpad</mat-icon>
+                      <span>Redial</span>
+                    </button>
+                    <button mat-menu-item disabled>
+                      <mat-icon>voicemail</mat-icon>
+                      <span>Check voice mail</span>
+                    </button>
+                    <button mat-menu-item>
+                      <mat-icon>notifications_off</mat-icon>
+                      <span>Disable alerts</span>
+                    </button>
+                  </mat-menu>
+            </div>
+        </mat-card-header>
+            <img mat-card-image src="https://i.pinimg.com/736x/e3/39/32/e33932a7797268ff28451bb6c834bfbc.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+        <p>
+            人間香奈兒
+        </p>
+        </mat-card-content>
+            <mat-card-actions>
+                <button mat-button>LIKE</button>
+                <button mat-button>SHARE</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+  </mat-tab>
+  <mat-tab label="Mamamoo">
+
+  </mat-tab>
+</mat-tab-group>
+</div>

@@ -1,0 +1,305 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard">首頁</a></li>
+                    <li class="breadcrumb-item active">個人待辦事項</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        個人待辦事項
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!--查詢區域-->
+    <!-- <div class="row">
+        <div class="col-md-12 ">
+            <div class="form-group pt-3 pb-0">
+                <form>
+                    <mat-card class="card search-group">
+                        <mat-form-field appearance="outline">
+                            <mat-label>類別</mat-label>
+                            <mat-select>
+                                <mat-option>
+                                    a
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>類別</mat-label>
+                            <mat-select>
+                                <mat-option>
+                                    a
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </mat-card>
+                </form>
+
+            </div>
+        </div>
+    </div> -->
+    <!--新增區域-->
+    <div class="row">
+        <div class="col-md-6">
+            <form [formGroup]="addForm">
+                <mat-card class="card search-group">
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline">
+                                <mat-label>分類</mat-label>
+                                <mat-select [(ngModel)]="todo_type_id" formControlName="todo_type_id" name="todo_type_id" ngDefaultControl>
+                                    <mat-option *ngFor="let item of userTypeList" [value]="item.tt_id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <button mat-mini-fab color="basic" style="margin-top: 8px;" matTooltip="編輯分類" class="table-btn-none" (click)="typeOpen()">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="">
+                                <mat-label>主題</mat-label>
+                                <input matInput placeholder="請輸入主題" type="text" [(ngModel)]="t_name"
+                                formControlName="t_name" name="t_name" ngDefaultControl>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="">
+                                <mat-label>說明</mat-label>
+                                <textarea matInput [(ngModel)]="remark"
+                                formControlName="remark" name="remark" ngDefaultControl></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline">
+                                <mat-label>開始</mat-label>
+                                <input matInput [matDatepicker]="picker1" [(ngModel)]="date_for_estimated_start"
+                                formControlName="date_for_estimated_start" name="date_for_estimated_start"
+                                ngDefaultControl>
+                                <mat-datepicker-toggle matSuffix [for]="picker1">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline">
+                                <mat-label>結束</mat-label>
+                                <input matInput [matDatepicker]="picker2" [(ngModel)]="date_for_estimated_completion"
+                                formControlName="date_for_estimated_completion" name="date_for_estimated_completion"
+                                ngDefaultControl>
+                                <mat-datepicker-toggle matSuffix [for]="picker2">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <span>重要性:</span>
+
+                            <mat-radio-group aria-label="Select an option" [(ngModel)]="landmark" formControlName="landmark" ngDefaultControl name="landmark">
+                                <mat-radio-button *ngFor="let item of important_value" [value]="item.value">{{item.name}}</mat-radio-button>
+                                <!-- <mat-radio-button value="2">重要</mat-radio-button> -->
+                            </mat-radio-group>
+                        </div>
+                        <div class="col">
+                            <span>狀態:</span>
+                            <mat-radio-group aria-label="Select an option" [(ngModel)]="todo_status" name="todo_status" formControlName="todo_status" ngDefaultControl>
+                                <mat-radio-button *ngFor="let item of status_value" [value]="item.value">{{item.name}}</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+
+                        <!-- <span>{{landmark}}</span>
+                        <span>{{t_name}}</span>
+                        <span>{{remark}}</span>
+                        <span>{{date_for_estimated_start}}</span>
+                        <span>{{date_for_estimated_completion}}</span> -->
+                        
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col">
+                            <mat-radio-group aria-label="Select an option">
+                                <mat-radio-button value="1">未完成</mat-radio-button>
+                                <mat-radio-button value="2">已完成</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div> -->
+                    <div class="row">
+                        <div class="col">
+                            <button mat-button *ngIf="btnStatus==1" class="btn" (click)="addTaskRequest()">儲存</button>
+                            <button mat-button *ngIf="btnStatus==2" class="btn" (click)="updateTaskRequest()">更新</button>
+                            <button mat-button *ngIf="btnStatus==3" class="btn" (click)="addTaskRequest()">新增</button>
+                            <button mat-button class="btn-normal reset" type="reset" (click)="reset()">清除</button>
+                        </div>
+                    </div>
+                </mat-card>
+            </form>
+
+        </div>
+        <div class="col-md-6">
+            <mat-card style="height:460px">
+                <div class="table-container">
+                    <div class="table">
+                        <table mat-table [dataSource]="taskDataSource" class="">
+                           
+                            <ng-container matColumnDef="todo_status">
+                                <th mat-header-cell *matHeaderCellDef> </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <!-- <small [ngClass]="{'bg-success' : (element.todo_status == true) , 'bg-danger' : (element.todo_status == false)}" 
+                                            class=" border-radius-5 hight-light-color py-2px px-2">
+                                        {{element.todo_status}}
+                                    </small> -->
+                                    <mat-icon class="none" matTooltip={{element.todo_status}} [ngClass]="{'yellow3' : (element.todo_status == true) , 'green3' : (element.todo_status == false) }">
+                                        circle
+                                    </mat-icon>
+                                    <!-- {{element.status}} -->
+                                    <!-- <mat-icon class="green3" matTooltip="未完成" >
+                                        circle
+                                    </mat-icon> -->
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="t_type">
+                                <th mat-header-cell *matHeaderCellDef>類別</th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{element.t_type}}
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="t_name">
+                                <th mat-header-cell *matHeaderCellDef>標題
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{element.t_name}}
+                                </td>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="remark">
+                                <th mat-header-cell *matHeaderCellDef>說明</th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{element.remark}}
+                                </td>
+                            </ng-container>
+                           
+                            <ng-container matColumnDef="date_for_estimated_start">
+                                <th mat-header-cell *matHeaderCellDef>預計時程</th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{element.date_for_estimated_start | date: 'yyyy/MM/dd'}}-
+                                    {{element.date_for_estimated_completion | date: 'MM/dd'}}
+                                </td>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="date_for_estimated_completion">
+                                <th mat-header-cell *matHeaderCellDef class="display-none">預計完成</th>
+                                <td mat-cell *matCellDef="let element" class="display-none">
+                                    {{element.date_for_estimated_completion | date: 'yyyy/MM/dd'}}
+                                </td>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="landmark">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    重要性
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <mat-icon *ngIf="element.landmark == true">done</mat-icon>
+                                </td>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="action_edit">
+                                <th mat-header-cell *matHeaderCellDef class="text-center"> </th>
+                                <td mat-cell *matCellDef="let element;let index = index" class="text-center">
+                                    <button mat-mini-fab color="basic" matTooltip="編輯" class="table-btn-none"
+                                        (click)="doPostEdit(element.t_id)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="action_copy">
+                                <th mat-header-cell *matHeaderCellDef class="text-center"> </th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    <button mat-mini-fab color="basic" matTooltip="複製轉新增" class="table-btn-none"
+                                        (click)="doPostCopy(element.t_id)">
+                                        <mat-icon>library_add</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="action_delete">
+                                <th mat-header-cell *matHeaderCellDef class="text-center"> </th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    <button mat-mini-fab color="basic" matTooltip="刪除" class="table-btn-none"
+                                        (click)="doPostDelete(element.t_id)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <!-- <ng-container matColumnDef="action_edit">
+                                <th mat-header-cell *matHeaderCellDef class="text-center"> </th>
+                                <td mat-cell *matCellDef="let element;let index = index" class="text-center">
+                                    <button mat-mini-fab color="basic" class="table-btn-none"
+                                        (click)="doPostEdit(element.h_id)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="action_delete">
+                                <th mat-header-cell *matHeaderCellDef class="text-center"> </th>
+                                <td mat-cell *matCellDef="let element;let index = index" class="text-center">
+                                    <button mat-mini-fab color="basic" class="table-btn-none">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container> -->
+                            
+                            
+
+                            <tr mat-header-row *matHeaderRowDef="teskcol"></tr>
+                            <tr mat-row *matRowDef="let row; columns: teskcol;"> </tr>
+                        </table>
+                        <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="6"
+                            [pageSizeOptions]="[6, 12, 18]" [showFirstLastButtons]="true">
+                        </mat-paginator>
+                        <!-- 比較基準 -->
+                        <h6>
+                            比較基準:
+                            <mat-icon class="green3">circle</mat-icon>
+                            未完成
+                            <mat-icon class="yellow3">circle</mat-icon>
+                            已完成
+                            <!-- <mat-icon class="yellow3">circle</mat-icon>
+                            
+                            <mat-icon class="yellow3">circle</mat-icon>
+                            已暫停
+                            <mat-icon class="yellow3">circle</mat-icon>
+                            已結案 -->
+                        </h6>
+                    </div>
+                </div>
+            </mat-card>
+
+        </div>
+    </div>
+</div>

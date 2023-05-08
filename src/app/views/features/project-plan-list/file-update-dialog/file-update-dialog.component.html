@@ -1,0 +1,53 @@
+
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">檔案上傳管理</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" mat-dialog-close></button>
+</div>
+<form [formGroup]="fileUpdateForm" style="width: 300px;">
+    <mat-dialog-content>
+        <!-- <mat-form-field appearance="outline">
+            <input matInput class="w-100p"  type="text" id="filename" name="filename" value="" style="display: none;">
+        </mat-form-field> -->
+
+        <!-- <input id="file" type="file" (change)="fileUpdate($event.target.files)" style="display: none;" class="w-100p">
+        <input type="text" id="filename" value="{{filename}}" disabled> -->
+        <div class="row">
+            <div class="col">
+                <input type="file" class="file-input"
+                (change)="onFileSelected($event)" #fileUpload multiple>
+
+                <div class="file-upload">
+
+                {{fileName || "No file uploaded yet."}}
+
+                    <button mat-mini-fab color="basic" class="table-btn-none" 
+                    (click)="fileUpload.click()">
+                        <mat-icon>attach_file</mat-icon>
+                    </button>
+                </div>
+
+                
+            </div>
+        </div>
+        <!-- <mat-form-field style="width: 100%;">
+			<mat-label>File matInput</mat-label>
+			<button mat-icon-button matPrefix (click)="f_input.click()">
+        <mat-icon>attach_file</mat-icon>
+        </button>
+			<input type="text" readonly matInput [formControl]="display"/>
+			<input
+                    type="file"
+                    multiple
+                    hidden
+                    #f_input
+                    (change)="handleFileInputChange(f_input.files)"
+            />
+			<mat-error>this field is required</mat-error>
+		</mat-form-field> -->
+
+    </mat-dialog-content>
+    <mat-dialog-actions class="text-center">
+        <button mat-button class="btn-none">儲存</button>
+        <button mat-button class="btn-normal" mat-dialog-close>關閉</button>
+    </mat-dialog-actions>
+</form>

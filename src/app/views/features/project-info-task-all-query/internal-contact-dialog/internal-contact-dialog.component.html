@@ -1,0 +1,101 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">治具需求單</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+<mat-dialog-content>
+    <div class="row">
+        <div class="col-md-12">
+            <mat-card class="card search-group">
+                <div class="edit-form-group pb-0">
+                    <div class="row">
+                        <div class="col">
+                            <mat-list>
+
+                                <table class="example-full-width" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>分類</mat-label>
+                                                <mat-select>
+                                                    <mat-option class="option-30" *ngFor="let select of ['客戶需求']"
+                                                        [value]="select" title="{{select}}">
+                                                        {{select}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </td>
+                                        <td>
+                                            <mat-list-item>
+                                                <h4 class="text-head">編號:</h4>
+                                                <h4>20210726</h4>
+                                            </mat-list-item>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table class="example-full-width" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <mat-list-item>
+                                                <h4 class="px-0">待審日期:</h4>
+                                                <h4>2021/07/20~2021/07/22</h4>
+                                            </mat-list-item>
+                                        </td>
+                                        <td>
+                                            <mat-list-item>
+                                                <h4 class="text-head">預定完程日期:</h4>
+                                                <h4>2021/08/03</h4>
+                                            </mat-list-item>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <mat-list-item>
+                                    <h4 class="text-head">標題:</h4>
+                                    <h4>75X60 2UP</h4>
+                                </mat-list-item>
+
+
+                                <table class="example-full-width" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <mat-list-item>
+                                                <h4 class="text-head">機台:</h4>
+                                                <h4>DS3070</h4>
+                                            </mat-list-item>
+                                        </td>
+                                        <td>
+                                            <mat-list-item>
+                                                <h4 class="text-head">專案代號:</h4>
+                                                <h4>DS3030-0000</h4>
+                                            </mat-list-item>
+                                        </td>
+                                    </tr>
+                                </table>
+
+
+                                <mat-list-item>
+                                    <h4 class="text-head">摘要說明:</h4>
+                                    <h4>無</h4>
+                                </mat-list-item>
+
+                                <mat-list-item>
+                                    <h4 class="text-head">處理情形及意見:</h4>
+                                    <h4>無</h4>
+                                </mat-list-item>
+
+
+                            </mat-list>
+
+
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button class="btn-normal reset" type="reset" mat-dialog-close>關閉</button>
+</mat-dialog-actions>

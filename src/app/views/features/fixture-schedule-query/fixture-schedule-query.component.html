@@ -1,0 +1,126 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard">首頁</a></li>                    
+                    <li class="breadcrumb-item active" aria-current="page">治具設計時程表</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        治具設計時程表
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!-- 查詢區域 -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-3 pb-0">
+                <mat-card class="card search-group">
+                    <mat-form-field appearance="outline">
+                        <mat-label>機型</mat-label>
+                        <input matInput type="text" #filter placeholder="請輸入關鍵字">
+                    </mat-form-field>
+                    <button mat-button class="btn-normal-none">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <!--顯示資料區域-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-0 pb-2">
+                <mat-card class="card table">
+                    <!--表格-->
+                    <div class="table-container">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+
+                            <!-- principal Column -->
+                            <ng-container matColumnDef="principal">
+                                <th mat-header-cell class="" *matHeaderCellDef>負責人</th>
+                                <td mat-cell *matCellDef="let element">{{element.principal}}</td>
+                            </ng-container>
+
+                            <!-- source_demand Column -->
+                            <ng-container matColumnDef="source_demand">
+                                <th mat-header-cell class="" *matHeaderCellDef>需求來源</th>
+                                <td mat-cell *matCellDef="let element">{{element.source_demand}}</td>
+                            </ng-container>
+
+                            <!-- model Column -->
+                            <ng-container matColumnDef="model">
+                                <th mat-header-cell class="" *matHeaderCellDef>機型</th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button mat-button class="table-btn-none" (click)="openDetails()">
+                                        <u class='text-link'>{{element.model}}</u>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <!-- fixture_details Column -->
+                            <ng-container matColumnDef="fixture_details">
+                                <th mat-header-cell class="" *matHeaderCellDef>產出治具明細</th>
+                                <td mat-cell *matCellDef="let element">{{element.fixture_details}}</td>
+                            </ng-container>
+
+                            <!-- fixture_specifications Column -->
+                            <ng-container matColumnDef="fixture_specifications">
+                                <th mat-header-cell class="" *matHeaderCellDef>治具規格</th>
+                                <td mat-cell *matCellDef="let element">{{element.fixture_specifications}}</td>
+                            </ng-container>
+
+                            <!-- picture_day Column -->
+                            <ng-container matColumnDef="picture_day">
+                                <th mat-header-cell class="" *matHeaderCellDef>客圖提供日</th>
+                                <td mat-cell *matCellDef="let element">{{element.picture_day}}</td>
+                            </ng-container>
+
+                            <!-- delivery_data Column -->
+                            <ng-container matColumnDef="delivery_data">
+                                <th mat-header-cell class="" *matHeaderCellDef>預定交付日</th>
+                                <td mat-cell *matCellDef="let element">{{element.delivery_data}}</td>
+                            </ng-container>
+
+                            <!-- completion_date Column -->
+                            <ng-container matColumnDef="completion_date">
+                                <th mat-header-cell class="" *matHeaderCellDef>完成日</th>
+                                <td mat-cell *matCellDef="let element">{{element.completion_date}}</td>
+                            </ng-container>
+
+                            <!-- departure_day Column -->
+                            <ng-container matColumnDef="departure_day">
+                                <th mat-header-cell class="" *matHeaderCellDef>出機日</th>
+                                <td mat-cell *matCellDef="let element">{{element.departure_day}}</td>
+                            </ng-container>
+
+                            <!-- current_status Column -->
+                            <ng-container matColumnDef="current_status">
+                                <th mat-header-cell class="" *matHeaderCellDef>目前執行狀況</th>
+                                <td mat-cell *matCellDef="let element">{{element.current_status}}</td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row [class.demo-row-is-clicked]="clickedRows.has(row)"
+                                *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #openDialog>
+    <app-open-detail-dialog title=""></app-open-detail-dialog>
+</ng-template>

@@ -1,0 +1,241 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard">首頁</a></li>
+                    <li class="breadcrumb-item active">製造資訊管理</li>
+                    <li class="breadcrumb-item active" aria-current="page">製令開啟通知作業</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        製令開啟通知作業
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <mat-card class="card search-group" style="height: 100%;">
+                <mat-card-content class="mat-card-content">
+                    <div class="edit-form-group pb-0">
+                        <div class="row">
+
+
+
+                            <div class="col-6 mt-3">
+                                <dl class="row" *ngIf="oneMReturnData">
+                                    <dt class="px-0 col-sm-4" *ngIf="oneMReturnData.code">
+                                        <h4 class="text-head text-right">客需代號:</h4>
+                                    </dt>
+                                    <dd class="col-sm-8" *ngIf="oneMReturnData.code">
+                                        <h4>{{oneMReturnData.code}}</h4>
+                                    </dd>
+                                    <dt class="px-0 col-sm-4" *ngIf="oneMReturnData.project_code">
+                                        <h4 class="text-head text-right">專案代號:</h4>
+                                    </dt>
+                                    <dd class="col-sm-9" *ngIf="oneMReturnData.project_code">
+                                        <h4>{{oneMReturnData.project_code}}</h4>
+                                    </dd>
+
+                                </dl>
+                            </div>
+                            <div class="col-6 mt-3">
+                                <dl class="row" *ngIf="oneMReturnData">
+                                    <dt class="px-0 col-sm-4">
+                                        <h4 class="text-head text-right">單號:</h4>
+                                    </dt>
+                                    <dd class="col-sm-8">
+                                        <h4>{{oneMReturnData.customer_name}}</h4>
+                                    </dd>
+
+                                </dl>
+                            </div>
+
+                            <dl class="row" *ngIf="oneMReturnData">
+                                <dt class="px-0 col-sm-2">
+                                    <h4 class="text-head text-right">專案代號:</h4>
+                                </dt>
+                                <dd class="col-sm-10">
+                                    <h4>{{oneMReturnData.project_detail}}</h4>
+                                </dd>
+
+                            </dl>
+
+
+                            <div class="col-6">
+                                <dl class="row" *ngIf="oneMReturnData">
+
+
+                                    <dt class="px-0 col-sm-4">
+                                        <h4 class="text-head text-right">主件品號:</h4>
+                                    </dt>
+                                    <dd class="col-sm-8">
+                                        <h4>{{oneMReturnData.order_name}}</h4>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="col-6">
+                                <dl class="row" *ngIf="oneMReturnData">
+                                    <dt class="px-0 col-sm-4">
+                                        <h4 class="text-head text-right">需求數量:</h4>
+                                    </dt>
+                                    <dd class="col-sm-8">
+                                        <h4>{{oneMReturnData.amount}}</h4>
+                                    </dd>
+
+                                </dl>
+                            </div>
+
+
+                            <div class="col-md-12 col-sm-12">
+
+                                <dl class="row" *ngIf="oneMReturnData">
+                                    <dt class="px-0 col-sm-2">
+                                        <h4 class="text-head text-right">客戶:</h4>
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        <h4>{{oneMReturnData.customer_name}}</h4>
+                                    </dd>
+                                    <dt class="px-0 col-sm-2">
+                                        <h4 class="text-head text-right">出貨地點:</h4>
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        <h4>{{oneMReturnData.shipment_location}}</h4>
+                                    </dd>
+                                    <dt class="px-0 col-sm-2">
+                                        <h4 class="text-head text-right">製令開啟:</h4>
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        <h4>{{oneMReturnData.date_for_open| date: 'yyyy/MM/dd'}}</h4>
+                                    </dd>
+                                    <dt class="px-0 col-sm-2">
+                                        <h4 class="text-head text-right">製令關閉:</h4>
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        <h4>{{oneMReturnData.date_for_close| date: 'yyyy/MM/dd'}}</h4>
+                                    </dd>
+                                    <dt class="px-0 col-sm-2">
+                                        <h4 class="text-head text-right">預計出貨:</h4>
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        <h4>{{oneMReturnData.date_for_estimated_shipment| date:
+                                            'yyyy/MM/dd'}}</h4>
+                                    </dd>
+                                    <dt class="px-0 col-sm-2">
+                                        <h4 class="text-head text-right">內部訂單:</h4>
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        <h4>{{oneMReturnData.inner_id}}</h4>
+                                    </dd>
+                                    <dt class="px-0 col-sm-2">
+                                        <h4 class="text-head text-right">其他相關單據:</h4>
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        <h4>{{oneMReturnData.other_document_code}}</h4>
+                                    </dd>
+                                    <dt class="px-0 col-sm-2">
+                                        <h4 class="text-head text-right">備註:</h4>
+                                    </dt>
+                                    <dd class="col-sm-10">
+                                        <h4>{{oneMReturnData.remark}}</h4>
+                                    </dd>
+                                </dl>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-6">
+            <mat-card class="card search-group" style="height: 100%;">
+                <mat-card-content class="mat-card-content">
+                    <div class="edit-form-group pb-0">
+                        <div class="row mt-3">
+
+                            <dl class="row" *ngIf="oneMReturnData">
+                                <dt class="px-0 col-sm-2">
+                                    <h4 class="text-head text-right">發文單位:</h4>
+                                </dt>
+                                <dd class="col-sm-10">
+                                    <h4></h4>
+                                </dd>
+                                <dt class="px-0 col-sm-2">
+                                    <h4 class="text-head text-right">發文者:</h4>
+                                </dt>
+                                <dd class="col-sm-10">
+                                    <h4>{{oneMReturnData.creater_name}}</h4>
+                                </dd>
+                                <dt class="px-0 col-sm-2">
+                                    <h4 class="text-head text-right">業務助理:</h4>
+                                </dt>
+                                <dd class="col-sm-10">
+                                    <h4>{{oneMReturnData.sales_assistant_name}}</h4>
+                                </dd>
+                                <dt class="px-0 col-sm-2">
+                                    <h4 class="text-head text-right">收文者:</h4>
+                                </dt>
+                                <dd class="col-sm-10">
+                                    <h4>{{oneMReturnData.recipient_name}}</h4>
+                                </dd>
+                                <dt class="px-0 col-sm-2">
+                                    <h4 class="text-head text-right">業務負責人:</h4>
+                                </dt>
+                                <dd class="col-sm-10">
+                                    <h4>{{oneMReturnData.salesman_name}}</h4>
+                                </dd>
+                            </dl>
+
+                            <div class="col-md-12 col-sm-12">
+                                <mat-list *ngIf="oneMReturnData" class="row">
+
+
+
+                                    <form [formGroup]="editTrForm">
+                                        <mat-form-field appearance="outline" class="width100">
+                                            <mat-label>退回事由</mat-label>
+                                            <textarea matInput [(ngModel)]="tr_remark" formControlName="tr_remark"
+                                                name="tr_remark" ngDefaultControl></textarea>
+                                        </mat-form-field>
+                                    </form>
+                                </mat-list>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="form-group pt-3 pb-0">
+                    <mat-card class="card search-group">
+
+                        <!-- <button mat-button class="btn">
+                            離開
+                        </button> -->
+
+                        <button mat-button class="btn-danger" (click)="returnCase()">
+                            退回
+                        </button>
+                        <button mat-button class="btn-green" (click)="AgreeCase()">
+                            確認
+                        </button>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

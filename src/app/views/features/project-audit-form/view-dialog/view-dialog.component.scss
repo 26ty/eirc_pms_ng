@@ -1,0 +1,63 @@
+td{
+    width: 131px;
+    height: 30px;
+}
+.test{
+    width: 786px;
+    text-align: center;
+}
+
+.top{
+    border-right: solid;
+    border-color: black;
+    border-width: thin;
+}
+.margin-top-0{
+    margin-top: 0;
+}
+
+.allborder{
+    //margin-left: 12px;
+    border: solid;
+    border-color: black;
+    border-width: thin;
+    //background-color: aqua;
+}
+
+.borderbottom{
+    border-bottom: solid;
+    border-color: black;
+    border-bottom-width: thin;
+    // border-bottom: 1rem solid;
+    // border-color: black;
+}
+
+.bordertitle{
+    border-top: solid;
+    border-left: solid;
+    border-right: solid;
+    border-color: black;
+    border-width: thin;
+}
+
+.bordertext{
+    border-bottom: solid;
+    border-left: solid;
+    border-right: solid;
+    text-align: left;
+    border-color: black;
+    border-width: thin;
+}
+
+.tdblock{
+    width: 30px;
+}
+.testbottom{
+    width: 726px;
+    text-align: left;
+}
+
+.logo{
+    justify-content:end;
+
+}

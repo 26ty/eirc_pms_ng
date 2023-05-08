@@ -1,0 +1,13 @@
+@import '/src/scss/custom';
+@import '../project-manager.component.scss';
+
+
+.detail-container {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+h3{
+    color:#1a73e8 ;
+    font-weight: bold;
+  }

@@ -1,0 +1,172 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel" *ngIf="aduitbtn != 'false'">編輯</h2>
+    <h2 class="offcanvas-title" id="offcanvasLabel" *ngIf="aduitbtn == 'false'">編輯 - 總經理已審核</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+<!--任務代號、任務名稱、任務描述、比較基準、任務時程-->
+
+<form [formGroup]="editTaskForm" style="width: 900px;">
+    <mat-dialog-content>
+        <div class="row">
+            <div class="col-5">
+                <table>
+                    <tr>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>專案代號</mat-label>
+                                <input [readonly]="isReadOnly" matInput placeholder="請輸入任務名稱" type="text" [(ngModel)]="code"
+                                    formControlName="code" name="code" ngDefaultControl>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td>
+                            <mat-form-field class="dateIpt-w" appearance="outline">
+                                <mat-label>專案起始日</mat-label>
+                                <input [disabled]="isReadOnly" matInput [matDatepicker]="picker1" [(ngModel)]="date_for_start"
+                                    formControlName="date_for_start" name="date_for_start" ngDefaultControl>
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="dateIpt-w" appearance="outline">
+                                <mat-label>專案預計完成日</mat-label>
+                                <input [disabled]="isReadOnly" matInput [matDatepicker]="picker2" [(ngModel)]="date_for_end"
+                                    formControlName="date_for_end" name="date_for_end" ngDefaultControl>
+                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td>
+                            <mat-form-field appearance="outline" style="height:auto">
+                                <mat-label>專案目標</mat-label>
+                                <textarea [readonly]="isReadOnly" matInput placeholder="請輸入任務名稱" type="text" [(ngModel)]="internal_order"
+                                    formControlName="internal_order" name="internal_order">
+                                </textarea>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field appearance="outline" style="height:auto">
+                                <mat-label>專案重點</mat-label>
+                                <textarea [readonly]="isReadOnly" matInput placeholder="請輸入任務名稱" type="text" [(ngModel)]="external_order"
+                                    formControlName="external_order" name="external_order">
+                                </textarea>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>專案機構</mat-label>
+                                <input [readonly]="isReadOnly" matInput placeholder="請輸入任務名稱" type="text" [(ngModel)]="machine_finished_number"
+                                    formControlName="machine_finished_number" name="machine_finished_number"
+                                    ngDefaultControl>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>專案軟體</mat-label>
+                                <input [readonly]="isReadOnly" matInput placeholder="請輸入任務名稱" type="text" [(ngModel)]="machine_english"
+                                    formControlName="machine_english" name="machine_english" ngDefaultControl>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <!-- <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>專案負責人</mat-label>
+                                <mat-select [disabled]="isReadOnly" [(ngModel)]="projectman_id" formControlName="projectman_id"
+                                    name="projectman_id" ngDefaultControl>
+                                    <mat-optgroup *ngFor="let group of accountgroup" [label]="group.name"
+                                        [disabled]="group.disabled">
+                                        <mat-option *ngFor="let account of group.account" [value]="account.account_id">
+                                            {{account.name}}
+                                        </mat-option>
+                                    </mat-optgroup>
+                                </mat-select>
+                            </mat-form-field>
+                        </td> -->
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>專案經理</mat-label>
+                                <mat-select [disabled]="isReadOnly" [(ngModel)]="salesman_id" formControlName="salesman_id" name="salesman_id"
+                                    ngDefaultControl>
+                                    <mat-optgroup *ngFor="let group of accountgroup" [label]="group.name"
+                                        [disabled]="group.disabled">
+                                        <mat-option *ngFor="let account of group.account" [value]="account.account_id">
+                                            {{account.name}}
+                                        </mat-option>
+                                    </mat-optgroup>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-5" style="height:auto;margin: auto;">
+                <table>
+                    <tr>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>任務參與人員</mat-label>
+                                <mat-select [disabled]="isReadOnly" [(value)]="userid" [(ngModel)]="user_id" formControlName="user_id"
+                                    name="user_id" ngDefaultControl>
+                                    <mat-optgroup *ngFor="let group of accountgroup" [label]="group.name"
+                                        [disabled]="group.disabled">
+                                        <mat-option *ngFor="let account of group.account" [value]="account.account_id">
+                                            {{account.name}}
+                                        </mat-option>
+                                    </mat-optgroup>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <button [disabled]="isReadOnly" mat-button class="btn-normal-none ml-10" (click)="addSelectUser()">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+                <mat-card class="card bg-import" style="min-height: 400px;display: block;">
+                    <div class="row">
+                        <div class="col">
+                            <b>
+                                <h4>
+                                    參與人員列表:({{num}})
+                                </h4>
+                            </b>
+                        </div>
+                    </div>
+                    <div class="row" *ngFor="let i of taskUserNameDatas;let index=index">
+                        <div class="col mt-2 ml-2">
+                            <span>
+                                {{index+1}}:{{i}}
+                            </span>
+                            <button [disabled]="isReadOnly" mat-button (click)="deleteSelectUser(index)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <!-- <button mat-button class="btn-normal-none reset" type="reset" (click)="reset()" *ngIf="aduitbtn != 'false'">清除</button> -->
+        <button mat-button class="btn" (click)="updateProjectRequest('未審核')" *ngIf="aduitbtn != 'false'">儲存</button>
+        <button mat-button class="btn-green" (click)="aduit()" *ngIf="aduitbtn == 'true'">審核</button>
+        <!-- <button mat-button class="btn-green" (click)="sendemail()">寄信</button> -->
+    </mat-dialog-actions>
+</form>

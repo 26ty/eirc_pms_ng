@@ -1,0 +1,26 @@
+@import '/src/scss/custom';
+@import '../user.component.scss';
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+.card-h{
+  width: 425px;
+}
+.offcanvas-title{
+  margin-left: -18px;
+}
+.form-h{
+  width: 420px;
+}
+.mat-typography{
+  padding-top: 10px;
+}
+.input_1{
+    width:410px;
+    margin-right: 10px;
+  }
+.select_1{
+  width:200px;
+  margin-right: 10px;
+}

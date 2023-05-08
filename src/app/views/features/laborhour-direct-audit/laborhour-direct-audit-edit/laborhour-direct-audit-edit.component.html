@@ -1,0 +1,99 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard" class="a-blue">首頁</a></li>
+                    <li class="breadcrumb-item active"><a href="/main/laborhour-direct-audit" class="a-blue">列表</a></li>
+                    <li class="breadcrumb-item active"><a>待審核異動工時 - 編輯</a></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <div class="form-group pt-0 pb-0" *ngIf="onelaborData">
+                <mat-card class="card search-group" style="height:370px">
+                    <mat-card-content>
+                        <mat-list>
+                            <mat-list-item>
+                                <h4>專案: </h4>
+                                <h4 class="text-context">{{onelaborData[0].p_code}}-{{onelaborData[0].p_name}}</h4>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <h4>任務: </h4>
+                                <h4 class="text-context">{{onelaborData[0].t_code}}-{{onelaborData[0].t_name}}</h4>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <h4>專案負責人: </h4>
+                                <h4 class="text-context">{{onelaborData[0].projectman_name}}</h4>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <h4>任務負責人: </h4>
+                                <h4 class="text-context">{{onelaborData[0].creater_name}}</h4>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <h4>原提報日: </h4>
+                                <h4 class="text-context">{{onelaborData[0].m_date_for_start| date: 'yyyy/MM/dd'}}</h4>
+                            </mat-list-item>
+                        </mat-list>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <div class="col-md-6 px-0">
+            <div class="form-group pt-0 pb-0" *ngIf="onelaborData">
+                <mat-card class="card search-group">
+                    <mat-card-content>
+                        <mat-list>
+                            <mat-list-item>
+                                <h4>異動日期: </h4>
+                                <h4 class="text-context">{{onelaborData[0].create_time| date: 'yyyy/MM/dd'}}</h4>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <h4>主題: </h4>
+                                <h4 class="text-context">[{{onelaborData[0].m_nature}}]{{onelaborData[0].m_title}}</h4>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <h4>內容: </h4>
+                                <h4 class="text-context">{{onelaborData[0].m_content}}</h4>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <h4>原工時: </h4>
+                                <h4 class="text-context">{{onelaborData[0].time_for_start}}~{{onelaborData[0].time_for_end}} [{{onelaborData[0].laborhour}}]</h4>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <h4>異動工時: </h4>
+                                <h4 class="text-context" style="color:red">{{onelaborData[0].m_time_for_start}}~{{onelaborData[0].m_time_for_end}} [{{onelaborData[0].m_laborhour}}]</h4>
+                            </mat-list-item>
+                            
+                        </mat-list>
+                        <form [formGroup]="editProjectForm">
+                            <mat-form-field appearance="outline" style="width: 100%;">
+                                <mat-label>意見回覆</mat-label>
+                                <textarea matInput [(ngModel)]="remark" formControlName="remark" name="remark"
+                                    ngDefaultControl required></textarea>
+                                
+                            </mat-form-field>
+
+                        </form>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <!--按鈕區域-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="form-group pt-0 pb-0">
+                <mat-card class="card search-group">
+                    <!-- <button mat-button id="" class="btn-delete" >退回</button>
+                    <button mat-button id="" class="btn-green">完工</button> -->
+                    <button mat-button id="" class="btn-delete" (click)="sendBackPmCase(onelaborData[0].hm_id)">退回</button>
+                    <button mat-button id="" class="btn-green" (click)="submitPmCase(onelaborData[0].hm_id)">同意</button>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

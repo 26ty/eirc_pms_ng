@@ -1,0 +1,112 @@
+<div class="container" style="overflow:scroll;height:600px; width: 820px;">
+    <div #content id="content" style="padding-top: 5px;">
+        <table style="margin: 5px;">
+            <table class="bordertitle"> 
+                <tr>
+                    <td><img alt="" src="assets/img/logo/hta-mbg.png" class="app-logo" style="width: 200px;"></td>
+                    <td class="test">專案授權書</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <table class="allborder">
+                <tr class="borderbottom">
+                    <td style="padding-left:20px">發文日：</td>
+                    <td><u>{{projectdata.create_time | date:'yyyy/MM/dd'}}</u></td>
+                </tr>
+                <tr>
+                    <td style="padding-left:20px">主旨：</td>
+                    <td>正式授權予</td>
+                    <td><u>{{projectdata.projectman_id}}</u></td>
+                    <td>擔任</td>
+                    <td><u>{{projectdata.code}}</u></td>
+                    <td>專案負責人</td>
+                </tr>
+                <tr>
+                    <td style="padding-left:20px">專案經理：</td>
+                    <td><u>{{projectdata.salesman_id}}</u></td>
+                </tr>
+                <tr class="borderbottom">
+                    <td style="padding-left:20px">專案代號(名稱)</td>
+                    <td><u>{{projectdata.code}}</u></td>
+                </tr>
+                <tr class="borderbottom">
+                    <td style="padding-top:5px;padding-left:20px;vertical-align: text-top;height: 60px">研發目標：</td>
+                    <td style="padding-top:5px;vertical-align: text-top;"><u>{{projectdata.internal_order}}</u></td>
+                </tr>
+                <tr>
+                    <td rowspan="2" style="padding-top:5px;padding-left:20px;vertical-align: text-top;">研發時程：</td>
+                    <td>起始日：</td>
+                    <td><u>{{projectdata.date_for_start | date:'yyyy/MM/dd'}}</u></td>
+    
+                </tr>
+                <tr class="borderbottom">
+                    <td>預計完成日：</td>
+                    <td><u>{{projectdata.date_for_end | date:'yyyy/MM/dd'}}</u></td>
+                </tr>
+                <tr class="borderbottom">
+                    <td style="padding-top:5px;padding-left:20px;vertical-align: text-top;height: 60px">研發重點(規格)：</td>
+                    <td style="padding-top:5px;vertical-align: text-top;">{{projectdata.external_order}}</td>
+                </tr>
+                <tr class="borderbottom">
+                    <td style="padding-top:5px;padding-left:20px;vertical-align: text-top;height: 95px;">機構：</td>
+                    <td style="padding-top:5px;vertical-align: text-top;">{{projectdata.machine_finished_number}}</td>
+                </tr>
+                <tr class="borderbottom">
+                    <td style="padding-top:5px;padding-left:20px;vertical-align: text-top;height: 95px;">軟體：</td>
+                    <td style="padding-top:5px;vertical-align: text-top;">{{projectdata.machine_english}}</td>
+                </tr>
+                <tr>
+                    <td style="padding-left:20px">總經理：</td>
+                    <td *ngIf="projectdata.serviceman_id=='00000000-0000-0000-0000-000000000000'"><u></u></td>
+                    <td *ngIf="projectdata.serviceman_id=='徐嘉新'"><u>{{projectdata.serviceman_id}}</u></td>
+                    <td>授權生效日：</td>
+                    <td *ngIf="projectdata.date_for_check == '0001-01-01T00:00:00Z'"><u></u></td>
+                    <td *ngIf="projectdata.serviceman_id=='徐嘉新'"><u>{{projectdata.date_for_check | date:'yyyy/MM/dd'}}</u></td>
+                </tr>
+            </table>
+            <table class="bordertext">
+                <tr>
+                    <td class="tdblock"></td>
+                    <td class="testbottom" style="padding-top:20px">
+                        職責(Responsibility):<br />
+                        <div style="padding-left:20px">
+                            專案負責人在此專案職責中，針對關鍵里程碑時程、專案成本及範圍條件等，需符合既定計畫實施，同時遵守適<br />
+                            當的品質管理標準。專案負責人須與功能性經理保持聯絡，以確保所有被分配的資源能有效地和高效率地被使用<br />
+                            及被完全接受。<br />
+                            另外，專案負責人需負起以下職責：<br />
+                            <ol>
+                                <li>在團隊成員、顧客、供應商、公司管理階層之間，建立及維持必要的溝通管道。</li>
+                                <li>設定實際的專案計畫，並且能得到客户及供應商的認同及接受。</li>
+                                <li>建立和維護專業組織，授予成員明確的角色及權責，並參與專案團隊成員的續效衡量。</li>
+                                <li>擬訂專案計畫，與專案成員規劃所有的專案細節，設定專案里程碑及查核點，並獲得發起人的認同及接受。</li>
+                                <li>管理及控制專業成本、時程、技術範園、人力及物料資源及品質。</li>
+                                <li>即時發掘品質、規格、成本或進度的潛在問題，並執行矯正。</li>
+                                <li>持續利用週報告(細節)、月報告(綱要)等，以向上或對下說明管理情形及進行協調溝通。</li>
+                                <li>將成本及成果，以實際成效與預定成效做比較，必要時，需即時採取合適的解決方式。</li>
+                                <li>隨時維護專案計畫，以使其能持續地呈現實際時程、費用、及由功能性經理所允諾的資源表現情形。</li>
+                            </ol>
+                        </div>
+                        職權(Authority):<br />
+                        <div style="padding-left:20px">
+                            為確保專案能符合原訂的宗旨，專案負責人被授權依據公司的專案管理政策及規章來管理專案及發佈指示。<br />
+                            另外，專案負責人同時具有以下權限：<br />
+                            <ol>
+                                <li>直接與顧客聯繫所有與專案有關的事宜。</li>
+                                <li>直接執行與專案有關的事宜。</li>
+                                <li>必要時可更新專案計畫，同時亦需得到發起人允許。</li>
+                                <li>可向專案成員們或其他專案關係人提出週期性狀況報告之要求。</li>
+                                <li>可要求相關功能性部門協助提供與此專案有關的資源。</li>
+                                <li>為使能符合專案需求，必要時不必局限於呈報流程，可與所有管理階層進行協調。</li>
+                                <li>可向功能性部門提出指派/調換成員之要求。</li>
+                                <li>經功能性部門主管所同意指派的人員，必須盡全力協助專案負責人以達成專案目標。</li>
+                            </ol>
+                        </div>
+                    </td>
+                    <td class="tdblock"></td>
+                </tr>
+            </table>
+        </table>
+    </div>
+</div>

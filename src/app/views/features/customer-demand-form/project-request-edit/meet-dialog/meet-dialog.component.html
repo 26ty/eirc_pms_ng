@@ -1,0 +1,70 @@
+<div class="container" class="detail-container" style="width: 60%;">
+    <div class="offcanvas-header" style="width: 700px;">
+        <h2 class="offcanvas-title" id="offcanvasLabel">會議細項</h2>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+            mat-dialog-close></button>
+    </div>
+    <mat-dialog-content style="width: 700px;">
+        <div class="row">
+            <div class="col" *ngIf="meetDatas">
+                <mat-list>
+                    <mat-list-item>
+                        <h4><b>會議名稱:</b></h4>
+                        <h4>{{meetDatas.body.m_name}}</h4>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4><b>會議日期:</b></h4>
+                        <h4>{{meetDatas.body.date_for_start | date: 'yyyy/MM/dd'}}</h4>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4><b>會議開始時間:</b></h4>
+                        <h4>{{meetDatas.body.time_for_start}}:00</h4>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4><b>會議結束時間:</b></h4>
+                        <h4>{{meetDatas.body.time_for_end}}:00</h4>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4><b>會議地點:</b></h4>
+                        <h4>{{meetDatas.body.room}}</h4>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4><b>會議主席:</b></h4>
+                        <h4>{{meetDatas.body.name}}</h4>
+                    </mat-list-item>
+                    <!-- <mat-list-item >
+                        <h4><b>會議參與人員:</b></h4>
+                        <h4 *ngFor="let i of userList" >{{i.name}}　</h4>
+                    </mat-list-item> -->
+                    <!-- <mat-list-item *ngFor="let item of attendeeUserNameList">
+                        {{item}}
+                    </mat-list-item> -->
+                </mat-list>
+            </div>
+            <div class="col">
+                <mat-card class="card bg-import" style="min-height: 400px;display: block;">
+                    <div class="row">
+                        <div class="col">
+                            <b>
+                                <h4>
+                                    參與人員列表:
+                                </h4>
+                            </b>
+                        </div>
+                    </div>
+                    <div class="row" *ngFor="let i of userList;let index=index">
+                        <div class="col mt-2 ml-2">
+                            <span class="pt-2">
+                                {{index+1}}
+                                :{{i.name}}
+                            </span>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button class="btn-normal-none reset" type="reset" mat-dialog-close>關閉</button>
+    </mat-dialog-actions>
+</div>

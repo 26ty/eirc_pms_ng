@@ -1,0 +1,54 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">表單紀錄</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+<mat-dialog-content>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-container">
+                    <div class="table">
+                        <table #interviewSortSort='matSort' matSort mat-table [dataSource]="interviewDataSource"
+                            class="mat-elevation-z8">
+
+                            <ng-container matColumnDef="content">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> 動作 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.actor}}{{element.content}}
+                                </td>
+                            </ng-container>
+
+                            <!-- remark Column -->
+                            <ng-container matColumnDef="remark">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> 備註 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.remark}}
+                                </td>
+                            </ng-container>
+
+                            <!-- name Column -->
+                            <ng-container matColumnDef="creater_name">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> 人員 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.creater_name}}
+                                </td>
+                            </ng-container>
+
+                            <!-- creatTime Column -->
+                            <ng-container matColumnDef="create_time">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> 創建時間 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.create_time | date:
+                                    'yyyy/MM/dd hh:mm'}}
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="interviewcol"></tr>
+                            <tr mat-row *matRowDef="let row; columns: interviewcol;"></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button class="btn-normal reset" type="reset" mat-dialog-close>關閉</button>
+</mat-dialog-actions>

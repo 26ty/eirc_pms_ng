@@ -1,0 +1,172 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard">首頁</a></li>
+                    <li class="breadcrumb-item active">業務</li>
+                    <li class="breadcrumb-item active" aria-current="page">治具需求單作業</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        治具需求單作業
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!--查詢區域-->
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="form-group pt-3 pb-0">
+                <mat-card class="card search-group">
+                    <mat-form-field appearance="outline">
+                        <mat-label>主旨、關鍵字</mat-label>
+                        <input matInput type="text" name="client-name">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>客戶單號</mat-label>
+                        <mat-select disableRipple name="projet-type">
+                            <mat-option value="1">1</mat-option>
+                            <mat-option value="2">2</mat-option>
+                            <mat-option value="3">3</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" style="width:100px">
+                        <mat-label>分類</mat-label>
+                        <mat-select disableRipple name="project-principal">
+                            <mat-option value="-">-</mat-option>
+                            <mat-option value="內部需求">內部需求</mat-option>
+                            <mat-option value="外部需求">外部需求</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" style="width:80px">
+                        <mat-label>類別</mat-label>
+                        <mat-select disableRipple name="status">
+                            <mat-option value="-">-</mat-option>
+                            <mat-option value="評估">評估</mat-option>
+                            <mat-option value="製圖">製圖</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>狀態</mat-label>
+                        <mat-select disableRipple>
+                            <mat-option value="1">已暫停</mat-option>
+                            <mat-option value="2">已完成</mat-option>
+                            <mat-option value="3">待審核</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>客戶需求日</mat-label>
+                        <mat-select disableRipple>
+                            <mat-option value="1">上週</mat-option>
+                            <mat-option value="2">當週</mat-option>
+                            <mat-option value="3">上週</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button mat-button id="" class="btn-normal-none">查詢</button>
+                    <button mat-button id="" class="btn-normal">進度</button>
+                    <button mat-button id="" class="btn-normal">匯出</button>
+                    <button mat-button id="" class="btn" (click)="addItem()">新增</button>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <!--顯示資料區域-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-0 pb-3">
+                <!--表格-->
+                <mat-card class="card table">
+                    <div class="table-container">
+                        <h5 class="">治具需求單列表</h5>
+                        <hr>
+                        <table mat-table [dataSource]="datasSource" class="">
+                            <!-- j_id -->
+                            <ng-container matColumnDef="j_id">
+                                <th mat-header-cell *matHeaderCellDef> 單據流水號 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.j_id}} </td>
+                            </ng-container>
+                            <!-- summary -->
+                            <ng-container matColumnDef="summary">
+                                <th mat-header-cell *matHeaderCellDef> 主旨 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.summary}} </td>
+                            </ng-container>
+                            <!-- c_name -->
+                            <ng-container matColumnDef="c_name">
+                                <th mat-header-cell *matHeaderCellDef> 客戶 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.c_name}} </td>
+                            </ng-container>
+                            <!-- liaison_phone -->
+                            <ng-container matColumnDef="liaison_phone">
+                                <th mat-header-cell *matHeaderCellDef> 電話 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.liaison_phone}} </td>
+                            </ng-container>
+                            <!-- creater -->
+                            <ng-container matColumnDef="creater">
+                                <th mat-header-cell *matHeaderCellDef> 發文者 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.creater}} </td>
+                            </ng-container>
+                            <!-- date_for_respond -->
+                            <ng-container matColumnDef="date_for_respond">
+                                <th mat-header-cell *matHeaderCellDef> 待覆日期 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.date_for_respond}} </td>
+                            </ng-container>
+                            <!-- date_for_demand -->
+                            <ng-container matColumnDef="date_for_demand">
+                                <th mat-header-cell *matHeaderCellDef> 客戶需求日 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.date_for_demand}} </td>
+                            </ng-container>
+                            <!-- c_id -->
+                            <ng-container matColumnDef="c_id">
+                                <th mat-header-cell *matHeaderCellDef> 客需單號 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.c_id}} </td>
+                            </ng-container>
+                            <!-- p_id -->
+                            <ng-container matColumnDef="p_id">
+                                <th mat-header-cell *matHeaderCellDef> 專案待號 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.p_id}} </td>
+                            </ng-container>
+                            <!-- status -->
+                            <ng-container matColumnDef="status">
+                                <th mat-header-cell *matHeaderCellDef> 狀態 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="action_edit">
+                                <th mat-header-cell *matHeaderCellDef> 編輯 </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button mat-mini-fab color="basic" class="table-btn-none" (click)="editItem()">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="action_manufactrue">
+                                <th mat-header-cell *matHeaderCellDef> 製令 </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button mat-mini-fab color="basic" class="table-btn-none">
+                                        <mat-icon>list_alt</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumn;"></tr>
+                        </table>
+                        <mat-paginator #paginator [length]="" [pageIndex]="0" [pageSize]="5"
+                            [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true">
+                        </mat-paginator>
+                    </div>
+
+                </mat-card>
+            </div>
+        </div>
+    </div>
+
+</div>

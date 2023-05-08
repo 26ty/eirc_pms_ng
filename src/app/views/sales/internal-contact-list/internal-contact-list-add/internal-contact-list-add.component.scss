@@ -1,0 +1,15 @@
+@import '/src/scss/container_children';
+.edit-form-group {
+padding: 40px 0;
+
+    .mat-form-field {
+        margin-right: 10px;
+        width: 250px;
+        margin-top: 10px;
+    }
+
+}
+
+.text-context{
+color: #FF3D57;
+}

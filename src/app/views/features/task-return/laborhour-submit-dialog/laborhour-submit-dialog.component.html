@@ -1,0 +1,102 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">專案任務工時回報</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+<form [formGroup]="addForm" *ngIf="LHDatas" style="width: 750px;">
+    <mat-dialog-content>
+        <div class="container">
+            <div class="row">
+                <div class="col-7">
+                    <table class="" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>*工時類別 </mat-label>
+                                    <input matInput type="text" ngDefaultControl>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>*類別項目</mat-label>
+                                    <input matInput placeholder="請輸入類別項目" type="text"
+                                        [(ngModel)]="LHDatas.message.category" formControlName="category"
+                                        name="category">
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                    </table>
+                    <mat-form-field appearance="outline" class="" style="width: 405px;">
+                        <mat-label>*主題</mat-label>
+                        <input matInput placeholder="請輸入主題" type="text" [(ngModel)]="LHDatas.message.title"
+                            formControlName="title" name="title">
+                    </mat-form-field>
+
+                    <table class="" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>*性質</mat-label>
+                                    <mat-select>
+                                        <mat-option *ngFor="let select of ['A','B','C','D','E','F']" [value]="select"
+                                            title="{{select}}">
+                                            {{select}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>*機台序號</mat-label>
+                                    <input matInput placeholder="請輸入機台序號" type="text">
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table class="" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-form-field class="dateIpt-w" appearance="outline">
+                                    <mat-label>*日期</mat-label>
+                                    <input matInput [matDatepicker]="picker1"
+                                        [(ngModel)]="LHDatas.message.date_for_staart" formControlName="date_for_staart"
+                                        name="date_for_staart">
+                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker1></mat-datepicker>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field class="dateIpt-w" appearance="outline">
+                                    <mat-label>*時間</mat-label>
+                                    <input matInput placeholder="請輸入時間" type="text"
+                                        [(ngModel)]="LHDatas.message.date_for_end" formControlName="date_for_end"
+                                        name="date_for_end">
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>*工時</mat-label>
+                        <input matInput type="text" placeholder="請輸入工時" type="text">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="ml-2">
+                        <mat-label>*內容</mat-label>
+                        <textarea matInput name="" id=""></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="col-5">
+                    2021/10/04紀錄列表:
+                </div>
+            </div>
+        </div>
+
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button class="btn-normal-none reset" type="reset">清除</button>
+        <button mat-button class="btn" (click)="uploadLaborHourRequest()" ;>儲存</button>
+    </mat-dialog-actions>
+</form>

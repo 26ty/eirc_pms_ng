@@ -1,0 +1,141 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">人員選定</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" mat-dialog-close
+        (click)="loadingAlertbackCRcountersign()"></button>
+</div>
+
+<mat-dialog-content style="width: 950px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-5">
+                <form [formGroup]="addForm">
+                    <div>
+                        <mat-form-field appearance="outline" class="width100">
+                            <mat-label>預定完成日</mat-label>
+                            <input matInput [matDatepicker]="picker1" formControlName="date_for_estimated_completion"
+                                name="date_for_estimated_completion" ngDefaultControl required>
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="width100">
+                            <mat-label>主旨</mat-label>
+                            <input matInput placeholder="" type="text" formControlName="remark" name="remark"
+                                ngDefaultControl required>
+                        </mat-form-field>
+
+                        <!--人員-->
+                        <mat-form-field appearance="outline" class="width100">
+                            <mat-label>人員</mat-label>
+                            <mat-select formControlName="user_id" name="user_id" ngDefaultControl required>
+                                <mat-option class="option-30" *ngFor="let account of Users"
+                                    [value]="account.account_id">
+                                    {{account.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <button mat-button class="btn-normal-none reset" type="button" (click)="reset()">清除</button>
+                        <button mat-button type="button" *ngIf="btnStatus==false" class="btn"
+                            (click)="addCSuserRequest()">儲存</button>
+                        <!--style="visibility:hidden"-->
+                        <button mat-button type="button" *ngIf="btnStatus==true" class="btn"
+                            (click)="updateCountersignUserRequest()">更新</button>
+                    </div>
+                </form>
+            </div>
+
+
+            <mat-divider [vertical]="true" class="col-1"></mat-divider>
+
+            <div class="col-6">
+                <div class="pt-0 pb-0">
+                    <h3>紀錄列表</h3>
+                    <div class="row">
+                        <div class="col">
+                            <div class="pt-0 pb-2">
+                                <div class="table-container">
+                                    <div class="table">
+                                        <table mat-table class="" [dataSource]="CSDataSource">
+                                            <!-- user_id -->
+                                            <ng-container matColumnDef="user_name">
+                                                <th mat-header-cell *matHeaderCellDef>人員
+                                                </th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    {{element.name}}
+                                                </td>
+                                            </ng-container>
+                                            <!-- department_name -->
+                                            <ng-container matColumnDef="department_name">
+                                                <th mat-header-cell *matHeaderCellDef>部門</th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    {{element.d_name}}
+                                                </td>
+                                            </ng-container>
+                                            <!-- date_for_estimated_completion -->
+                                            <ng-container matColumnDef="date_for_estimated_completion">
+                                                <th mat-header-cell *matHeaderCellDef>預定完成日</th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    {{element.date_for_estimated_completion | date: 'yyyy/MM/dd'}}
+                                                </td>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="action_edit">
+                                                <th mat-header-cell *matHeaderCellDef class="text-center"> 編輯 </th>
+                                                <td mat-cell *matCellDef="let element;let index = index"
+                                                    class="text-center">
+                                                    <button mat-mini-fab color="basic" class="table-btn-none"
+                                                        (click)="doPostEdit(element.cu_id)">
+                                                        <mat-icon>edit</mat-icon>
+                                                    </button>
+                                                </td>
+                                            </ng-container>
+                                            <!-- delete -->
+                                            <ng-container matColumnDef="action_delete">
+                                                <th mat-header-cell *matHeaderCellDef class="text-center"> 刪除 </th>
+                                                <td mat-cell *matCellDef="let element;let index = index"
+                                                    class="text-center">
+                                                    <button mat-mini-fab color="basic" class="table-btn-none"
+                                                        (click)="deleteCSuserRequest(element.cu_id)">
+                                                        <mat-icon>delete</mat-icon>
+                                                    </button>
+                                                </td>
+                                            </ng-container>
+
+                                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"> </tr>
+                                        </table>
+                                        <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="6"
+                                            [pageSizeOptions]="[6, 12, 18]" [showFirstLastButtons]="true">
+                                        </mat-paginator>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-5">
+                    2021/10/04紀錄列表:
+                    <div class="row">
+                        <div class="col">
+                            <mat-list>
+                                <mat-list-item *ngFor="let item of laborHourDatas;let index = index">
+                                    {{index+1}}.[{{item.hour}}hr][{{item.nature}}]<b>{{item.name}}</b>
+                                                        <button mat-mini-fab color="basic" class="table-btn-none">
+                                                            <mat-icon>attach_file</mat-icon>
+                                                        </button>
+                                    <mat-divider></mat-divider>
+                                </mat-list-item>
+                            </mat-list>
+                        </div>
+                    </div>
+                </div> -->
+        </div>
+    </div>
+
+
+</mat-dialog-content>
+<!-- <mat-dialog-actions>
+        
+    </mat-dialog-actions> -->

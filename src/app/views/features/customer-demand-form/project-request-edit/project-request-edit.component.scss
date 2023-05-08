@@ -1,0 +1,75 @@
+@import '/src/scss/container_children';
+
+// tr{
+//     margin-top: 10px;
+//     padding: 10px;
+// }
+// td{
+//     margin-left: 2px;
+// }
+
+.text-context {
+    font-weight: 500;
+    color: #000;
+    line-height: 24px;
+    margin-left: 15px;
+}
+
+
+// .div-h {
+//     display: inline-block;
+//     margin-left: 10px;
+// }
+
+// .example-radio-group {
+//     display: flex;
+//     flex-direction: column;
+//     margin: 15px 0;
+// }
+
+.icon-green {
+    color: #35D15F;
+}
+
+// .icon-disappear {
+//     visibility: hidden;
+// }
+
+// .left {
+//     float: left;
+// }
+
+// .text-context {
+//     color: #FF3D57;
+// }
+
+// .bg-import {
+//     display: block;
+//     background: rgb(255, 193, 193);
+//     border-radius: 10px;
+//     padding: 2px;
+//     padding-bottom: 0;
+// }
+
+
+// :host ::ng-deep {
+//     .mat-form-field-outline {
+//         border-radius: 5px;
+//         //background-color: rgb(223, 223, 223);
+//     }
+
+//     .search-group {
+//         .mat-form-field-wrapper {
+//             padding-bottom: 0;
+//         }
+//     }
+
+
+
+//     .mat-paginator-range-label {
+//         @include media-breakpoint-down(sm) {
+//             // margin-right: ;
+//             margin-left: 15px;
+//         }
+//     }
+// }

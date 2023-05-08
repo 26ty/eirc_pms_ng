@@ -1,0 +1,28 @@
+@import '/src/scss/container_children';
+
+.btn-search {
+  overflow: hidden;
+  padding: 0;
+  box-shadow: rgb(194 202 211) 0px 0px 0px 1px, rgb(28 32 43 / 10%) 0px 1px 0px 0px;
+  border: black;
+}
+
+.mat-column-project_leader {
+    max-width: 60px;
+}
+.mat-column-project_code {
+    max-width: 40px;
+}
+.mat-column-project_date {
+    max-width: 40px;
+}
+.mat-column-project_member {
+    max-width: 100px;
+}
+.mat-column-edit_btn {
+    max-width: 20px;
+}
+
+.test {
+    color:blue;
+}

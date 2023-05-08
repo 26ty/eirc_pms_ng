@@ -1,0 +1,120 @@
+<mat-toolbar class="layout-topbar ">
+  <button mat-icon-button (click)="toggleRightSidenav()">
+    <mat-icon class="menu-toggle">menu</mat-icon>
+
+  </button>
+  <!--選單按紐 如何連接sidnav元件?-->
+
+  <a class="app-name title" routerLink="/main/dashboard">
+    <img alt="" src="assets/img/logo/hta-mbg.png" class="app-logo" style="width: 200px;">
+    <!-- <span>
+      HTA
+    </span> -->
+  </a>
+  <span class="example-spacer"></span>
+  <!-- <button mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+    <mat-icon-button [matMenuTriggerFor]="messageMenu" #menuTrigger="matMenuTrigger">
+      <mat-icon>logout</mat-icon>
+      <mat-menu #messageMenu="matMenu">
+        <button mat-menu-item (click)="logout()">登出</button>
+      </mat-menu>
+    </mat-icon-button>
+    <button mat-icon-button>
+      <mat-icon>help</mat-icon>
+    </button> -->
+  <div class="people-root">
+    <div class="people-root-aria" [matMenuTriggerFor]="profileMenu" #menuTrigger="matMenuTrigger">
+      <span class="" style="margin-right: 5px;margin-left: 5px;font-size: 1rem;">
+        HI!{{userNameData}} {{UserDepartmentData}}
+      </span>
+      <div class="color-defalt cursor-pointer people-logo">
+        <svg class="svg-aria svg-photo" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z">
+          </path>
+        </svg>
+      </div>
+
+      <!-- <mat-icon>person_outline</mat-icon> -->
+
+      <mat-menu #profileMenu="matMenu" xPosition="before" yPosition="above">
+        <button mat-menu-item [routerLink]="['/main/dashboard']" style="background-color: rgba(220, 230, 237, 0.1);
+          border: 2px solid #829AB1;">
+          <mat-icon>home</mat-icon>
+          首頁
+        </button>
+        <button mat-menu-item [routerLink]="['/admin']">
+          <mat-icon>settings</mat-icon>
+          後台權限管理
+        </button>
+        <button mat-menu-item routerLink="/main/task-transfer">
+          <mat-icon>transfer_within_a_station</mat-icon>
+          任務轉移
+        </button>
+        <button mat-menu-item routerLink="/main/to-do-list">
+          <mat-icon>list_alt</mat-icon>
+          個人待辦事項
+        </button>
+        <button mat-menu-item routerLink="/main/my-daily-works">
+          <mat-icon>query_builder</mat-icon>
+          個人工作時數表
+        </button>
+        <button mat-menu-item routerLink="/main/laborhour-return">
+          <mat-icon>check</mat-icon>
+          已提報異動工時
+        </button>
+        <!-- <button mat-menu-item>
+          <mat-icon>query_builder</mat-icon>
+          專案紀錄簿
+        </button> -->
+        <button mat-menu-item>
+          <mat-icon>person</mat-icon>
+          個人資料
+        </button>
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          設定
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          登出
+        </button>
+      </mat-menu>
+      <!-- <button mat-mini-fab class="people-settings" [matMenuTriggerFor]="messageMenu" #menuTrigger="matMenuTrigger">
+          <div>S</div>
+          <mat-menu #messageMenu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>settings</mat-icon>
+              個人設定
+            </button>
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>logout</mat-icon>
+              登出
+            </button>
+          </mat-menu>
+        </button> -->
+    </div>
+
+  </div>
+
+  <div class="select-group">
+    <!--選單-->
+    <button (click)="opensubmenu()" #btn [ngClass]="{'disabled': checkUrl(forCheckIsSetting)}" style="background-color: rgba(220, 230, 237, 0.1);
+      border: 2px solid #829AB1;">
+      {{selectedCompany}}
+      <mat-icon #icon>arrow_drop_down</mat-icon>
+    </button>
+    <!--選單內容-->
+    <div class="select-menu" #menu [ngClass]="{ 'open': menuOpenStatus}">
+      <mat-selection-list #company [multiple]="false" [disabled]="checkUrl(forCheckIsSetting)">
+        <mat-list-option *ngFor="let company of companys" [value]="company" [selected]="selectedCompany === company"
+          (click)="selectCompany(company)">
+          {{company}}
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+  </div>
+
+</mat-toolbar>

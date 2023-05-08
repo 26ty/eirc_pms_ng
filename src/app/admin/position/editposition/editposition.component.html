@@ -1,0 +1,38 @@
+
+<h2 align="center">創建職稱</h2>
+<form [formGroup]="editPositionForm" (ngSubmit)="onSubmit()">
+<mat-dialog-content class="mat-typography">
+<mat-grid-list cols="2" rowHeight="20vh"  >
+  <mat-grid-tile >
+    <mat-form-field>
+      <mat-label>部門</mat-label>
+      <input type="text" matInput  formControlName="department" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayDpFn">
+      <mat-option *ngFor="let option of filteredDpOptions | async" [value]="option">
+        {{option.department}}
+      </mat-option>
+    </mat-autocomplete>
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-form-field>
+    <mat-label>職稱</mat-label>
+    <input type="text" id="position" name="position" matInput placeholder="position" formControlName="position"  required>
+  </mat-form-field>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-form-field>
+      <mat-label>簽核等級</mat-label>
+      <input type="number" id="review_level" name="review_level" matInput formControlName="review_level" >
+    </mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>取消</button>
+  <button type="submit" mat-button class="primary" >創建</button>
+</mat-dialog-actions>
+</form>

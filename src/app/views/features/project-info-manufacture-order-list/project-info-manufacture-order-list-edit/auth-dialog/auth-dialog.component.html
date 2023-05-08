@@ -1,0 +1,72 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">修改製令副本</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+<form [formGroup]="authForm">
+    <mat-dialog-content>
+        <div class="row mt-3">
+            <div class="col-8">
+                <!-- <mat-form-field class="" appearance="outline">
+                    <mat-label>加入可瀏覽成員</mat-label>
+                    <mat-select [(value)]="sitem">
+                      <mat-option>None</mat-option>
+                      <mat-option *ngFor="let item of SysUserName" [value]="item">
+                        {{item}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+                <mat-form-field appearance="outline" class="people-form-field">
+                    <mat-label>加入製令副本</mat-label>
+                    <mat-select [(value)]="selected_id">
+                        <mat-optgroup *ngFor="let group of accountgroup" [label]="group.name"
+                            [disabled]="group.disabled">
+                            <mat-option *ngFor="let account of group.account" [value]="account.account_id">
+                                {{account.name}}
+                            </mat-option>
+                        </mat-optgroup>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-4 mt-3">
+                <button mat-button class="btn-normal" (click)="addSelectedUserList()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="bg-import">
+            <div class="row">
+                <div class="col">
+                    <b>
+                        <h4>
+                            已選擇列表:({{num}})
+                        </h4>
+                    </b>
+                </div>
+            </div>
+            <div class="row" *ngFor="let i of selectedList;let index=index">
+                <div class="col mt-2 ml-2">
+                    <span>
+                        {{index+1}}
+                        <b>
+                            {{i.dep}}
+                        </b>
+                        :{{i.name}}
+                    </span>
+                    <button mat-button (click)="deleteSelectedUserList(index)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </mat-dialog-content>
+    <mat-dialog-actions class="text-center ">
+        <div class="">
+            <!-- <button mat-button class="btn-normal-none reset" type="reset" (click)="resetSelectValues()">清除</button> -->
+            <button mat-button class="btn" mat-dialog-close (click)="save()">確認</button>
+        </div>
+    </mat-dialog-actions>
+
+
+</form>

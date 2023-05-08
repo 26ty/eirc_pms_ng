@@ -1,0 +1,103 @@
+<div class="offcanvas-header card-h">
+  <h2 class="offcanvas-title" id="offcanvasLabel">部門-新增</h2>
+  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+    mat-dialog-close></button>
+</div>
+<form [formGroup]="addForm" class="form-h">
+  <mat-dialog-content class="mat-typography">
+
+    <!--
+      name:any
+      eng_name:any
+      introduction:any
+      email:any
+      fax:any
+      tel:any
+      //displayName:any
+      manager:any
+      parent_group_id:any
+    -->
+    <table>
+      <tr>
+        <mat-form-field appearance="outline" class="input_1">
+          <mat-label>部門名稱</mat-label>
+          <input matInput placeholder="" type="text" [(ngModel)]="name" formControlName="name" name="name"
+            ngDefaultControl required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="input_1">
+          <mat-label>部門英文名稱</mat-label>
+          <input matInput placeholder="" type="text" [(ngModel)]="eng_name" formControlName="eng_name" name="eng_name"
+            ngDefaultControl required>
+        </mat-form-field>
+      </tr>
+
+      <tr>
+        <mat-form-field appearance="outline" class="input_1">
+          <mat-label> 選擇父部門</mat-label>
+          <mat-select [(ngModel)]="bonita_parent_group_id" formControlName="bonita_parent_group_id"
+            name="bonita_parent_group_id" ngDefaultControl required>
+            <mat-option [value]=" ">
+              無
+            </mat-option>
+            <mat-option *ngFor="let item of departmentData" value="{{item.bonita_group_id}}">{{item.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="input_1">
+          <mat-label>部門主管</mat-label>
+          <mat-select [(ngModel)]="manager" formControlName="manager" name="manager" ngDefaultControl required>
+            <mat-optgroup *ngFor="let group of accountgroup" [label]="group.name" [disabled]="group.disabled">
+              <mat-option *ngFor="let account of group.account" [value]="account.account_id">
+                {{account.name}}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+      </tr>
+      <!-- <mat-form-field  appearance="outline" class="select_2">
+        <mat-label>部門郵件</mat-label>
+        <input matInput placeholder="" type="text"
+        [(ngModel)]="email" formControlName="email" name="email"
+        ngDefaultControl required>
+      </mat-form-field> -->
+      <tr>
+        <mat-form-field appearance="outline" class="input_1">
+          <mat-label>部門電話</mat-label>
+          <input matInput placeholder="" type="text" [(ngModel)]="tel" formControlName="tel" name="tel" ngDefaultControl
+            required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="input_1">
+          <mat-label>部門傳真</mat-label>
+          <input matInput placeholder="" type="text" [(ngModel)]="fax" formControlName="fax" name="fax" ngDefaultControl
+            required>
+        </mat-form-field>
+      </tr>
+
+      <tr>
+        <mat-form-field appearance="outline" class="select_2">
+          <mat-label>部門描述</mat-label>
+          <input matInput placeholder="" type="text" [(ngModel)]="introduction" formControlName="introduction"
+            name="introduction" ngDefaultControl required>
+        </mat-form-field>
+      </tr>
+
+    </table>
+
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="text-center">
+    <div class="">
+      <button mat-button class="btn-normal-none reset" type="reset">重填</button>
+      <button mat-button class="btn" (click)="addDepartment()">儲存</button>
+    </div>
+  </mat-dialog-actions>
+
+</form>
+
+<!-- <mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close>離開</button>
+    <button mat-raised-button [mat-dialog-close]="true" style="background-color: #6ea7fc;color:white;" >資料儲存</button>
+  </mat-dialog-actions> -->

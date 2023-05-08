@@ -1,0 +1,168 @@
+<div class="container" style="width: 820px;">
+
+  <div #content id="content" *ngIf="crDatas" class="col-12">
+    <!-- <h1 class="text-center">竑騰科技股份有限公司</h1>
+        <h2 class="text-center">客戶需求紀錄單</h2> -->
+    <table style="margin: 5px;margin-top: 5px;">
+      <table class="bordertitle">
+        <tr>
+          <td class="test"><img alt="" src="assets/img/logo/hta-mbg.png" class="app-logo" style="width: 200px;"></td>
+        </tr>
+        <tr>
+          <td class="test">客戶需求紀錄單</td>
+        </tr>
+      </table>
+      <table class="allborder col-12">
+        <tr class="borderbottom">
+          <td class="col-3 borderright text-center" style="padding-left:20px">客戶名稱</td>
+          <td class="col-6 borderright text-center">{{crDatas.customer_name}}</td>
+
+          <td class="col-1 borderright text-center">單號</td>
+          <td class="col-2">{{crDatas.code}}</td>
+
+        </tr>
+        <tr class="borderbottom">
+          <td class="col-3 borderright text-center" style="padding-left:20px">
+            客路聯絡人
+            <br>
+            姓名/電話
+          </td>
+          <td class="col-6 borderright text-center">
+            {{crDatas.contact_person_name}}
+            <br>
+
+          </td>
+
+          <td class="col-1 borderright text-center">日期</td>
+          <td class="col-2">{{crDatas.date_for_recive| date:'yyyy/MM/dd'}}</td>
+
+        </tr>
+      </table>
+      <table class="allborder col-12">
+        <tr class="borderbottom">
+          <td class="col-3 borderright text-center" style="padding-left:20px">需求說明</td>
+          <td class="col-9">
+            {{crDatas.demand_content}}
+          </td>
+        </tr>
+        <tr class="borderbottom">
+          <td class="col-3 borderright text-center" style="padding-left:20px">適用製程說明</td>
+          <td class="col-9">{{crDatas.suitable_content}}</td>
+        </tr>
+        <tr class="borderbottom">
+          <td class="col-3 borderright text-center" style="padding-left:20px">其他</td>
+          <td class="col-9">{{crDatas.other_content}}</td>
+        </tr>
+        <tr class="borderbottom">
+          <td class="col-3 borderright text-center" style="padding-left:20px">客戶預算</td>
+          <td class="col-9">{{crDatas.budget}}</td>
+        </tr>
+        <tr class="borderbottom">
+          <td class="col-3 borderright text-center" style="padding-left:20px">預估時程</td>
+          <td class="col-9">{{crDatas.date_for_estimated_start| date:'yyyy/MM/dd'}} ~ {{crDatas.date_for_estimated_end|
+            date:'yyyy/MM/dd'}}</td>
+        </tr>
+      </table>
+      <table class="allborder col-12">
+        <tr>
+          <td class="col-3 borderright borderbottom text-center" rowspan="20" style="padding-left:20px">結論/後續</td>
+          <td class="col-1 text-center">
+            <mat-checkbox [(ngModel)]="old" disabled>
+            </mat-checkbox>
+          </td>
+          <td class="col-2" colspan="5">
+            舊機型衍生：{{crDatas.extend_rem}}
+          </td>
+        </tr>
+        <tr>
+          <td class="col-1 text-center">
+            <mat-checkbox [(ngModel)]="new" disabled>
+            </mat-checkbox>
+          </td>
+          <td class="col-2" colspan="5">
+            新機型。
+          </td>
+        </tr>
+        <tr>
+          <td class="col-1 text-center"></td>
+          <td class="col-2" colspan="5">
+            『技術可行性評估報告』預計送審時間：{{crDatas.date_for_devlop | date:'yyyy/MM/dd'}}
+          </td>
+        </tr>
+        <tr>
+          <td class="col-1 text-center"></td>
+          <td class="col-2" colspan="5">
+            未來三年預估數量：{{crDatas.est_quantity}}
+          </td>
+        </tr>
+        <tr>
+          <td class="col-1 text-center">
+            <mat-checkbox [(ngModel)]="no" disabled>
+            </mat-checkbox>
+          </td>
+          <td class="col-2" colspan="5">
+            不承接此案，說明：
+          </td>
+        </tr>
+        <tr>
+          <td class="col-1 text-center">
+            <mat-checkbox [(ngModel)]="crDatas.eva_report" disabled>
+            </mat-checkbox>
+          </td>
+          <td class="col-2" colspan="5">
+            不需提出『技術可行性評估報告』，說明：
+          </td>
+        </tr>
+        <tr>
+          <td class="col-1 text-center" rowspan="17">
+            <mat-checkbox disabled>
+            </mat-checkbox>
+          </td>
+          <td class="col-3" rowspan="17">需求技術支援人員</td>
+        </tr>
+        <tr class="col-12" *ngFor="let item of CSdepartmentList;let i=index">
+          <td></td>
+          <td></td>
+          <td class="col-2">
+            <mat-checkbox [(ngModel)]="item.ckecked" disabled> </mat-checkbox>
+            {{item.name}}:
+          </td>
+
+          <td class="col-3" *ngIf="item.countersign_user">
+            <span *ngFor="let item of CSdepartmentList[i].countersign_user">
+              {{item.name}}
+            </span>
+          </td>
+        </tr>
+      </table>
+      <table class=" col-12">
+
+        <tr>
+          <td class="col-4">
+            核准：
+            <span *ngIf="crDatas.create_time == '0001-01-01T00:00:00Z'">{{crDatas.a}}</span>
+
+            <span *ngIf="crDatas.create_time != '0001-01-01T00:00:00Z'">{{crDatas.a}} {{crDatas.a |
+              date:'yyyy/MM/dd hh:mm'}}</span>
+          </td>
+          <td class="col-4">
+            審核：
+            <span *ngIf="crDatas.create_time == '0001-01-01T00:00:00Z'">{{crDatas.a}}</span>
+
+            <span *ngIf="crDatas.create_time != '0001-01-01T00:00:00Z'">{{crDatas.a}} {{crDatas.a |
+              date:'yyyy/MM/dd hh:mm'}}</span>
+          </td>
+          <td class="col-4">
+            填表人：
+            <span *ngIf="crDatas.create_time == '0001-01-01T00:00:00Z'">{{crDatas.salesman_name}}</span>
+
+            <span *ngIf="crDatas.create_time != '0001-01-01T00:00:00Z'">{{crDatas.salesman_name}} {{crDatas.create_time
+              |
+              date:'yyyy/MM/dd hh:mm'}}</span>
+          </td>
+        </tr>
+      </table>
+    </table>
+  </div>
+
+</div>

@@ -1,0 +1,53 @@
+<div class="sidenav-group">
+  <mat-sidenav-container mode="side" class="demo-app-container">
+    <mat-list mode="side">
+      <!-- <div mat-subheader>Folders</div> -->
+      <ng-container *ngFor="let item of sidenav; let i =index">
+
+        <!--(click)="closeSidenav()"-->
+        <mat-list-item routerLink="/main/{{item.path}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" [ngClass]="{'active': checkIsHome(item.path)}" *ngIf="!item.children" >
+          <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
+          <div mat-line>{{item.name}}</div>
+        </mat-list-item><!--沒下層的-->
+
+        <mat-list-item *ngIf="item.children" (click)="openChildren(i)">
+          <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
+          <div mat-line>{{item.name}}</div>
+          <mat-icon class="arrow" [ngClass]="{'open': openedChild === i}" *ngIf="item.children?.length">
+            navigate_next
+          </mat-icon>
+        </mat-list-item><!--有下層的-->
+
+        <mat-list class="child-list" [ngClass]="{'open': openedChild === i}" *ngFor="let child of item.children; let k = index">
+          <!--(click)="closeSidenav()"-->
+          <mat-list-item routerLink="/main/{{item.path}}/{{child.path}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" [ngClass]="{'active': checkIsHome(item.path)}" *ngIf="!child.children" >
+            <mat-icon mat-list-icon>{{child.icon}}</mat-icon>
+            <div mat-line>{{child.name}}</div>
+          </mat-list-item><!--第二層 無下層-->
+
+          <mat-list-item *ngIf="child.children" (click)="openSecendChildren(k)">
+            <mat-icon mat-list-icon>{{child.icon}}</mat-icon>
+            <div mat-line>{{child.name}}</div>
+            <mat-icon class="arrow" [ngClass]="{'open': openedSecendChild === k}" *ngIf="child.children?.length">
+              navigate_next
+            </mat-icon>
+          </mat-list-item><!--有下層的-->
+
+          <mat-list class="child-list"[ngClass]="{'open': openedSecendChild === k}" *ngFor="let thirdchildren of child.children">
+            <!-----------------------------------------------------------------------(click)="closeSidenav()"-->
+            <mat-list-item routerLink="/main/{{child.path}}/{{thirdchildren.path}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+              true}" [ngClass]="{'active': checkIsHome(item.path)}" *ngIf="!thirdchildren.children">
+              <mat-icon mat-list-icon>{{thirdchildren.icon}}</mat-icon>
+              <div mat-line>{{thirdchildren.name}}</div>
+            </mat-list-item><!--第三層 無下層-->
+
+          </mat-list>
+
+        </mat-list>
+      </ng-container>
+
+      <!-- <mat-divider></mat-divider> -->
+      <!-- <div mat-subheader>Notes</div> -->
+    </mat-list>
+  </mat-sidenav-container>
+</div>

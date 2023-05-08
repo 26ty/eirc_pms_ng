@@ -1,0 +1,59 @@
+<html>
+
+<body class="text-center">
+  <div class="login-body flex flex-column align-items-center justify-content-center">
+    <div class="login-panel p-5 pt-6 p-fluid flex flex-column justify-content-center">
+      <!-- <h4 class="font-bold">竑騰科技股份有限公司</h4> -->
+      <div class="row text-center">
+        <div class="col">
+          <img src="./../../../assets/img/logo/HTA_LOGO_.png" alt="HORNG TERNG AUTOMATION CO., LTD."
+        title="HORNG TERNG AUTOMATION CO., LTD." width="150" class="margin:auto">
+        </div>
+      </div>
+      
+
+      <span class="mb-4 line-height-3">僅
+        <span class="font-bold">HTA</span>成員可登入本系統...
+      </span>
+
+      <form [formGroup]="loginForm">
+        <span class="p-input-icon-left mb-3">
+          <i class="pi pi-user"></i>
+          <input type="text" pinputtext="" placeholder="請輸入帳號" class="p-inputtext p-component p-element"
+            formControlName="account" [(ngModel)]="account">
+        </span>
+
+        <span class="p-input-icon-left mb-6">
+          <i class="pi pi-key"></i>
+          <input type="password" pinputtext="" placeholder="請輸入密碼" class="p-inputtext p-component p-element"
+            formControlName="password" [(ngModel)]="password">
+        </span>
+      </form>
+
+      <button type="button" pbutton="" label="Sign In" class="p-element p-button p-component" tabindex="0">
+        <span class="p-button-label" (click)="login(company_id,account,password)"> 登入</span>
+      </button>
+    </div>
+
+    <span class="mt-4">
+      <span class="font-bold cursor-pointer" tabindex="0" routerLink="/main">忘記密碼?</span>
+    </span>
+
+    <div class="language-select-group">
+      <span class="">‪
+        繁體中文
+        <mat-icon aria-hidden="false" aria-label="icon">arrow_drop_down</mat-icon>
+      </span>
+    </div>
+    <div class="description-group">
+      <a href="/" target="_blank">說明</a>
+      <a href="/" target="_blank">隱私權</a>
+      <a href="/" target="_blank">條款</a>
+    </div>
+
+  </div>
+  <!---->
+
+</body>
+
+</html>

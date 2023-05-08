@@ -1,0 +1,32 @@
+<h2 align="center">創建職稱</h2>
+<form [formGroup]="createPositionForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="mat-typography">
+    <mat-grid-list cols="2" rowHeight="20vh">
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>職稱</mat-label>
+          <input type="text" matInput formControlName="department" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayDpFn">
+            <mat-option *ngFor="let option of filteredDpOptions | async" [value]="option">
+              {{option.department}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-label>是否為管理員</mat-label>
+        <mat-radio-group aria-label="是否為管理員?" formControlName="is_children">
+          <mat-radio-button value="是">是</mat-radio-button>
+          <mat-radio-button value="否">否</mat-radio-button>
+        </mat-radio-group>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>取消</button>
+    <button type="submit" mat-button class="primary">創建</button>
+  </mat-dialog-actions>
+</form>

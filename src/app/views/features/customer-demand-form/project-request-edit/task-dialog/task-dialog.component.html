@@ -1,0 +1,123 @@
+<div class="container" class="detail-container">
+    <div class="offcanvas-header">
+        <h2 class="offcanvas-title" id="offcanvasLabel">任務管理</h2>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+            mat-dialog-close></button>
+    </div>
+    <mat-dialog-content>
+        <!--內容顯示區-->
+        <div class="row">
+            <div class="col-md-12">
+                <mat-card class="card search-group">
+                    <div class="edit-form-group pb-0">
+                        <div class="row">
+                            <div class="col">
+                                <mat-list>
+                                    <mat-list-item>
+                                        <h4>專案名稱:</h4>
+                                        <h4 class="text-context"></h4>
+                                    </mat-list-item>
+
+                                    <table class="example-full-width" cellspacing="0">
+                                        <tr>
+                                            <td>
+                                                <mat-list-item>
+                                                    <h4 class="px-0">任務代號:</h4>
+                                                    <h4 class="text-context"></h4>
+                                                </mat-list-item>
+                                            </td>
+                                            <td>
+                                                <mat-list-item>
+                                                    <h4>任務名稱:</h4>
+                                                    <h4 class="text-context">{{taskData.name}}</h4>
+                                                </mat-list-item>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <mat-list-item>
+                                        <h4>任務描述:</h4>
+                                        <h4 class="text-context">{{taskData.description}}</h4>
+                                    </mat-list-item>
+
+                                    <mat-list-item>
+                                        <h4>比較基準:</h4>
+                                        <h4 class="text-context"></h4>
+                                    </mat-list-item>
+
+                                    <table class="example-full-width" cellspacing="0">
+                                        <tr>
+                                            <td>
+                                                <mat-list-item>
+                                                    <h4 class="px-0">任務時程:</h4>
+                                                    <h4 class="text-context">
+                                                        {{taskData.time_for_start}}~{{taskData.time_for_done}}</h4>
+                                                </mat-list-item>
+                                            </td>
+                                            <td>
+                                                <mat-list-item>
+                                                    <h4>工時:</h4>
+                                                    <h4 class="text-context">{{taskData.labor_hour}}</h4>
+                                                </mat-list-item>
+                                            </td>
+                                            <td>
+                                                <mat-list-item>
+                                                    <h4>百分比:</h4>
+                                                    <h4 class="text-context"></h4>
+                                                </mat-list-item>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <mat-list-item>
+                                        <h4>前一任務:</h4>
+                                        <h4 class="text-context">{{taskData.last_task}}</h4>
+                                    </mat-list-item>
+
+                                    <mat-list-item>
+                                        <h4>任務關聯:</h4>
+                                        <h4 class="text-context"></h4>
+                                    </mat-list-item>
+
+                                    <table class="example-full-width" cellspacing="0">
+                                        <tr>
+                                            <td>
+                                                <mat-list-item>
+                                                    <h4 class="px-0">預計成本:</h4>
+                                                    <h4 class="text-context"></h4>
+                                                </mat-list-item>
+                                            </td>
+                                            <td>
+                                                <mat-list-item>
+                                                    <h4>負責人:</h4>
+                                                    <h4 class="text-context">{{taskData.principal}}</h4>
+                                                </mat-list-item>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <mat-list-item>
+                                        <h4>狀態:</h4>
+                                    </mat-list-item>
+                                </mat-list>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col-md-12">
+                <mat-card class="card" style="height: 150px;">
+                    <mat-list>
+                        <mat-list-item>備註:</mat-list-item>
+                    </mat-list>
+                </mat-card>
+
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button class="btn-normal reset" type="reset" mat-dialog-close>關閉</button>
+    </mat-dialog-actions>
+</div>

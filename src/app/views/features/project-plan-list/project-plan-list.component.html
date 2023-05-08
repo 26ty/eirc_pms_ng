@@ -1,0 +1,197 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/main/dashboard">首頁</a></li>
+              <li class="breadcrumb-item active">專案計畫管理</li>
+              <li class="breadcrumb-item active" aria-current="page">專案計畫瀏覽</li>
+            </ol>
+          </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        專案計畫瀏覽
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!--查詢區域-->
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="form-group pt-3 pb-0">
+                <mat-card class="card search-group">
+                    <mat-form-field appearance="outline">
+                        <mat-label>專案代號/名稱</mat-label>
+                        <input matInput type="text" name="">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>專案年度</mat-label>
+                        <input matInput type="text" name="">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>專案類型</mat-label>
+                        <mat-select disableRipple name="">
+                            <mat-option value="A101">年度計畫</mat-option>
+                            <mat-option value="A102">一般計畫</mat-option>
+                            <mat-option value="A103">特殊計畫</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>專案成員</mat-label>
+                        <mat-select disableRipple name="">
+                            <mat-option value="1">admin</mat-option>
+                            <mat-option value="2">***</mat-option>
+                            <mat-option value="3">***</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-checkbox class="mx-10">里程碑</mat-checkbox>
+                    <button mat-button id="" class="btn">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                    <mat-form-field appearance="outline" class="topping-choose">
+                        <mat-label>欄位顯示設定</mat-label>
+                        <mat-select [formControl]="toppings" multiple>
+                            <mat-select-trigger>
+                                {{toppings.value ? toppings.value[0] : ''}}
+                                <span *ngIf="toppings.value?.length > 1" class="choose-tips">
+                                    (+{{toppings.value.length - 0}})
+                                </span>
+                            </mat-select-trigger>
+                            <mat-option *ngFor="let topping of toppingList" [value]="topping">
+                                {{topping}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button mat-button class="btn-normal-none">
+                        <!-- <mat-icon>visibility</mat-icon> -->
+                        顯示
+                    </button>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <!--顯示資料區域-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-0 pb-2">
+                <!--表格-->
+                <mat-card class="card table">
+
+                    <div class="table-container">
+                        <h5 class="">專案任務列表</h5>
+                        <hr>
+                        <table mat-table [dataSource]="dataSource" class="">
+                            <!-- task_name -->
+                            <ng-container matColumnDef="task_name">
+                                <th mat-header-cell *matHeaderCellDef>任務名稱</th>
+                                <td mat-cell *matCellDef="let element"> {{element.task_name}} </td>
+                            </ng-container>
+                            <!-- task_principal -->
+                            <ng-container matColumnDef="task_principal">
+                                <th mat-header-cell *matHeaderCellDef> 負責人員 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.task_principal}} </td>
+                            </ng-container>
+                            <!-- labor_start_doner -->
+                            <ng-container matColumnDef="labor_start_done">
+                                <th mat-header-cell *matHeaderCellDef> 開始-結束(工時) </th>
+                                <td mat-cell *matCellDef="let element"> {{element.labor_start_done}} </td>
+                            </ng-container>
+                            <!-- pre_labor_hour -->
+                            <ng-container matColumnDef="pre_labor_hour">
+                                <th mat-header-cell *matHeaderCellDef> 預計工時 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.pre_labor_hour}} </td>
+                            </ng-container>
+                            <!-- description -->
+                            <ng-container matColumnDef="description">
+                                <th mat-header-cell *matHeaderCellDef> 備註說明 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                            </ng-container>
+                            <!-- act_start_done -->
+                            <ng-container matColumnDef="act_start_done">
+                                <th mat-header-cell *matHeaderCellDef> 實際開始-結束 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.act_start_done}} </td>
+                            </ng-container>
+                            
+                            <!-- act_labor_hour -->
+                            <ng-container matColumnDef="act_labor_hour">
+                                <th mat-header-cell *matHeaderCellDef> 實際工時 </th>
+                                <td mat-cell *matCellDef="let element" >
+                                    {{element.act_labor_hour}}
+                                </td>
+                            </ng-container>
+
+                            <!-- action_source -->
+                            <ng-container matColumnDef="action_source">
+                                <th mat-header-cell *matHeaderCellDef class="text-center"> 資源管理 </th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    <button mat-mini-fab color="basic" class="table-btn-none" (click)="sourceItem(element)">
+                                        <mat-icon>device_hub</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <!-- labor_hour_detail -->
+                            <ng-container matColumnDef="labor_hour_detail">
+                                <th mat-header-cell *matHeaderCellDef class="text-center"> 工時明細 </th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    <button mat-mini-fab color="basic" class="table-btn-none" (click)="worktimeItem()">
+                                        <mat-icon>list</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            
+                            <!-- action_file -->
+                            <ng-container matColumnDef="action_file">
+                                <th mat-header-cell *matHeaderCellDef class="text-center"> 附件 </th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    <button mat-mini-fab color="basic" class="table-btn-none" (click)="fileItem()">
+                                        <mat-icon>attach_file</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <!-- action_edit -->
+                            <ng-container matColumnDef="action_edit">
+                                <th mat-header-cell *matHeaderCellDef class="text-center"> 編輯 </th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    <button mat-mini-fab color="basic" class="table-btn-none" (click)="editItem(element)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+                    <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true">
+                    </mat-paginator>
+
+                    <ng-template #fileUpdateDialog>
+                        <app-file-update-dialog title=""></app-file-update-dialog>
+                    </ng-template>
+
+                    <!-- <ng-template #EditDialog>
+                        <app-Edit-dialog title=""></app-Edit-dialog>
+                    </ng-template> -->
+
+                    <ng-template #sourceDialog>
+                        <app-source-dialog title=""></app-source-dialog>
+                    </ng-template>
+                    <ng-template #worktimeDialog>
+                        <app-worktime-dialog title=""></app-worktime-dialog>
+                    </ng-template>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

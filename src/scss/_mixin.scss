@@ -1,0 +1,93 @@
+// 產生漸層
+@mixin linear-gradient($type: 0deg, $color1: #000, $color2: #fff, $position1: 0%, $position2: 100%) {
+    background: linear-gradient($type, $color1 $position1, $color2 $position2);
+    background: -moz-linear-gradient($type, $color1 $position1, $color2 $position2);
+    background: -webkit-linear-gradient($type, $color1 $position1, $color2 $position2);
+    background: -o-linear-gradient($type, $color1 $position1, $color2 $position2);
+}
+
+// 依比例產生 方形
+@mixin img-percent-Toone-by($percent: 100%) {
+    position: relative;
+    width: 100%;
+
+    /* desired width */
+    &:before {
+        content: "";
+        display: block;
+        padding-top: $percent;
+        /* initial ratio of 1:1*/
+    }
+}
+
+// 計算列表寬度 amoun: 一排顯示數量, space:間距px, width: 列表寬度
+@function getWidthByAmounAndSpace($amoun: 4, $space: 15px, $width) {
+    @return calc((#{$width} - (#{$space} * #{$amoun - 1}))/ #{$amoun});
+}
+
+@mixin getListWidth($amoun: 4, $space: 15px, $width) {
+    width: getWidthByAmounAndSpace($amoun, $space, $width);
+}
+
+// 設定同類型的第幾個 margin right為參數 
+@mixin typeNoMarginRightByAmoun($amoun: 4, $right) {
+    &:nth-of-type(#{$amoun}n) {
+        margin-right: $right;
+    }
+}
+
+// 產生svg icon 用style
+@mixin setStyleForSvg($width, $height, $line_height) {
+    svg-icon {
+        width: $width;
+        height: $height;
+        line-height: $line_height;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: $width;
+            height: $height;
+        }
+    }
+}
+
+@mixin setColorForSvg($fill) {
+    svg-icon {
+        svg {
+            fill: $fill;
+            transition: fill .3s;
+        }
+    }
+}
+
+@mixin setMarginLeftRoRightForSvg($left, $right) {
+    svg-icon {
+        margin-left: $left;
+        margin-right: $right;
+    }
+}
+
+@mixin setMarginTopRoBottomForSvg($top, $bottom) {
+    svg-icon {
+        margin-top: $top;
+        margin-bottom: $bottom;
+    }
+}
+
+// 列表高度用
+
+// 產生高度限制
+@function getHeightByMaxHeightAndListNum($height, $marginBottom, $num) {
+    @return (($height - ($marginBottom * ($num - 1))) / $num);
+}
+
+@function getNthByNumber($num) {
+    @return $num+'n';
+}
+
+@mixin column-list-limit-num($height, $marginBottom, $num) {
+    height: getHeightByMaxHeightAndListNum($height, $marginBottom, $num);
+    margin-bottom: $marginBottom;
+}

@@ -1,0 +1,175 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">工作紀錄</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+<mat-dialog-content>
+    <mat-card class="card search-group">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <div class="pt-0 pb-0">
+                    <mat-list>
+
+                        <mat-form-field appearance="outline" style="width: 50%;">
+                            <mat-label>工時歸屬</mat-label>
+                            <mat-select>
+                                <mat-option class="option-30"
+                                    *ngFor="let select of ['會議','客需單','治具需求單','專案任務','CRM','待辦事項']" [value]="select"
+                                    title="{{select}}">
+                                    {{select}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" style="width: 50%;">
+                            <mat-select>
+                                <mat-option class="option-30" *ngFor="let select of ['-未指定-']" [value]="select"
+                                    title="{{select}}">
+                                    {{select}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-list-item>
+                            <h4 class="text-head">主題:</h4>
+                            <h4></h4>
+                        </mat-list-item>
+
+
+
+
+                        <table class="example-full-width" cellspacing="0">
+                            <tr>
+                                <td>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>性質</mat-label>
+                                        <mat-select>
+                                            <mat-option class="option-30"
+                                                *ngFor="let select of ['設計','駔裝','試機','維修','出差','教育訓練']"
+                                                [value]="select" title="{{select}}">
+                                                {{select}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                </td>
+                                <td>
+                                    <mat-list-item>
+                                        <h4 class="text-head">機台序號:</h4>
+                                        <h4>
+                                        </h4>
+                                    </mat-list-item>
+                                </td>
+                            </tr>
+                        </table>
+
+
+
+                        <mat-list-item>
+                            <h4 class="text-head">時間:</h4>
+                            <h4></h4>
+                        </mat-list-item>
+
+                        <mat-list-item>
+                            <h4 class="text-head">工時:</h4>
+                            <h4></h4>
+                        </mat-list-item>
+
+                        <mat-form-field appearance="outline" style="width: 100%;">
+                            <mat-label>內容</mat-label>
+                            <textarea matInput></textarea>
+                        </mat-form-field>
+
+                    </mat-list>
+                </div>
+
+            </div>
+
+            <div class="col-md-6 text-left">
+                <div class="pt-0 pb-0">
+                    <h3>紀錄列表</h3>
+                    <div class="row">
+                        <div class="col">
+                            <div class="pt-0 pb-2">
+                                <div class="table-container">
+                                    <div class="table">
+                                        <table mat-table [dataSource]="datasSource5" class="">
+                                            <!-- projectman_id -->
+                                            <ng-container matColumnDef="title">
+                                                <th mat-header-cell *matHeaderCellDef>主題</th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    {{element.title}}
+                                                </td>
+                                            </ng-container>
+                                            <!-- action_copy -->
+                                            <ng-container matColumnDef="action_copy">
+                                                <th mat-header-cell *matHeaderCellDef class="action_copy">
+                                                </th>
+                                                <td mat-cell *matCellDef="let element" class="action_copy">
+                                                    <button mat-mini-fab color="basic" class="table-btn-none">
+                                                        <mat-icon>content_copy</mat-icon>
+                                                    </button>
+                                                </td>
+                                            </ng-container>
+                                            <!-- action_file -->
+                                            <ng-container matColumnDef="action_file">
+                                                <th mat-header-cell *matHeaderCellDef class="action_file">
+                                                </th>
+                                                <td mat-cell *matCellDef="let element" class="action_file">
+                                                    <button mat-mini-fab color="basic" class="table-btn-none"
+                                                        (click)="fileItem()">
+                                                        <mat-icon>attach_file</mat-icon>
+                                                    </button>
+                                                </td>
+                                            </ng-container>
+                                            <!-- action_add -->
+                                            <ng-container matColumnDef="action_add">
+                                                <th mat-header-cell *matHeaderCellDef class="action_add">
+                                                </th>
+                                                <td mat-cell *matCellDef="let element" class="action_add">
+                                                    <button mat-mini-fab color="basic" class="table-btn-none"
+                                                        (click)="laborHourExtraView(l_id,'')">
+                                                        <mat-icon>note_add</mat-icon>
+                                                    </button>
+                                                </td>
+                                            </ng-container>
+                                            <!-- action_more_time -->
+                                            <ng-container matColumnDef="action_more_time">
+                                                <th mat-header-cell *matHeaderCellDef class="action_more_time">
+                                                </th>
+                                                <td mat-cell *matCellDef="let element" class="action_more_time">
+                                                    <button mat-mini-fab color="basic" class="table-btn-none"
+                                                        (click)="laborHourBreakView(l_id,'')">
+                                                        <mat-icon>more_time</mat-icon>
+                                                    </button>
+                                                </td>
+                                            </ng-container>
+                                            <tr mat-header-row *matHeaderRowDef="displayedColumn5"></tr>
+                                            <tr mat-row *matRowDef="let row; columns: displayedColumn5;"> </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button class="btn-normal reset" type="reset" mat-dialog-close>儲存</button>
+    <button mat-button class="btn-normal reset" type="reset" mat-dialog-close>清除</button>
+    <button mat-button class="btn-normal reset" type="reset" mat-dialog-close>重新整理</button>
+</mat-dialog-actions>
+
+<ng-template #fileUploadDialog>
+    <app-file-upload-dialog title=""></app-file-upload-dialog>
+</ng-template>
+
+<ng-template #laborHourExtraDialog>
+    <app-labor-hour-extra-dialog title=""></app-labor-hour-extra-dialog>
+</ng-template>
+
+<ng-template #laborHourBreakDialog>
+    <app-labor-hour-break-dialog title=""></app-labor-hour-break-dialog>
+</ng-template>

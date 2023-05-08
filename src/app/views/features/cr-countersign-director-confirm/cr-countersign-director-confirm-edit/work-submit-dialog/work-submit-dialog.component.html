@@ -1,0 +1,136 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">工作紀錄回報</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+<form [formGroup]="addForm" style="width: 950px;">
+    <mat-dialog-content>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-12">
+                    <div class="pt-0 pb-0">
+                        <h3>紀錄列表</h3>
+                        <div class="row">
+                            <div class="col">
+                                <div class="pt-0 pb-2">
+                                    <div class="table-container">
+                                        <div class="table">
+                                            <table mat-table [dataSource]="laborHourDataSource" class="">
+                                                <!-- h_title -->
+                                                <ng-container matColumnDef="h_title">
+                                                    <th mat-header-cell *matHeaderCellDef class="display-none">h_title
+                                                    </th>
+                                                    <td mat-cell *matCellDef="let element" class="display-none">
+                                                        {{element.title}}
+                                                    </td>
+                                                </ng-container>
+                                                <!-- nature -->
+                                                <ng-container matColumnDef="nature">
+                                                    <th mat-header-cell *matHeaderCellDef>工作項目</th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                        [{{element.nature}}]{{element.title}}
+                                                    </td>
+                                                </ng-container>
+                                                <!-- time_start -->
+                                                <ng-container matColumnDef="time_for_start">
+                                                    <th mat-header-cell *matHeaderCellDef>時間</th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                        <!--{{element.time_for_start}}~{{element.time_for_end}}({{element.hour}})-->
+                                                        {{element.time_for_start}}~{{element.time_for_end}}
+                                                    </td>
+                                                </ng-container>
+                                                <!-- time_for_end -->
+                                                <ng-container matColumnDef="time_for_end">
+                                                    <th mat-header-cell *matHeaderCellDef class="display-none">
+                                                        time_for_end
+                                                    </th>
+                                                    <td mat-cell *matCellDef="let element" class="display-none">
+                                                        {{element.time_for_end}}
+                                                    </td>
+                                                </ng-container>
+                                                <!-- hour -->
+                                                <ng-container matColumnDef="laborhour">
+                                                    <th mat-header-cell *matHeaderCellDef>時數</th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                        <!--{{element.time_for_start}}~{{element.time_for_end}}({{element.hour}})-->
+                                                        {{element.laborhour}}
+                                                    </td>
+                                                </ng-container>
+                                                <!--action_edit-->
+                                                <!-- <ng-container matColumnDef="action_edit">
+                                                    <th mat-header-cell *matHeaderCellDef class="text-center"> 編輯 </th>
+                                                    <td mat-cell *matCellDef="let element;let index = index"
+                                                        class="text-center">
+                                                        <button mat-mini-fab color="basic" class="table-btn-none"
+                                                            (click)="doPostEdit(element.h_id)">
+                                                            <mat-icon>edit</mat-icon>
+                                                        </button>
+                                                    </td>
+                                                </ng-container> -->
+                                                <!-- delete -->
+                                                <ng-container matColumnDef="action_delete">
+                                                    <th mat-header-cell *matHeaderCellDef
+                                                        class="text-center display-none"> 刪除 </th>
+                                                    <td mat-cell *matCellDef="let element;let index = index"
+                                                        class="text-center display-none">
+                                                        <button mat-mini-fab color="basic" class="table-btn-none">
+                                                            <mat-icon>delete</mat-icon>
+                                                        </button>
+                                                    </td>
+                                                </ng-container>
+                                                <!-- file -->
+                                                <!-- <ng-container matColumnDef="action_file">
+                                                    <th mat-header-cell *matHeaderCellDef> 附件 </th>
+                                                    <td mat-cell *matCellDef="let element;let index = index">
+                                                        <button mat-mini-fab color="basic" class="table-btn-none">
+                                                            <mat-icon>attach_file</mat-icon>
+                                                        </button>
+                                                        
+                                                    </td>
+                                                </ng-container> -->
+
+                                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"> </tr>
+                                            </table>
+                                            <mat-paginator #paginator [length]="totalCount" [pageIndex]="0"
+                                                [pageSize]="6" [pageSizeOptions]="[6, 12, 18]"
+                                                [showFirstLastButtons]="true">
+                                            </mat-paginator>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-5">
+                    2021/10/04紀錄列表:
+                    <div class="row">
+                        <div class="col">
+                            <mat-list>
+                                <mat-list-item *ngFor="let item of laborHourDatas;let index = index">
+                                    {{index+1}}.[{{item.hour}}hr][{{item.nature}}]<b>{{item.name}}</b>
+                                                        <button mat-mini-fab color="basic" class="table-btn-none">
+                                                            <mat-icon>attach_file</mat-icon>
+                                                        </button>
+                                    <mat-divider></mat-divider>
+                                </mat-list-item>
+                            </mat-list>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+
+    </mat-dialog-content>
+    <!-- <mat-dialog-actions>
+
+        <button mat-button class="btn-normal-none reset" type="reset" (click)="btnResetClick()">清除</button>
+
+        <button mat-button *ngIf="btnStatus==true" class="btn" type="reset"
+            (click)="updateLaborHourRequest()">更新</button>
+        <button mat-button *ngIf="btnStatus==false" class="btn" (click)="addLaborHourRequest()">儲存</button>
+    </mat-dialog-actions> -->
+</form>

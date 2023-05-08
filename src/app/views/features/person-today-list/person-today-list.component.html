@@ -1,0 +1,369 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard">首頁</a></li>
+                    <li class="breadcrumb-item active">每日工作任務清單</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        每日工作任務清單
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col-md-7 text-center">
+            <div class="form-group pt-0 pb-3">
+                <mat-card class="card table">
+                    <mat-list>
+                        <mat-list-item class="text-center">
+                            <h2>2021年8月17號</h2>
+                        </mat-list-item>
+                        <hr>
+                        <mat-list-item>
+                            <h3>近期會議:</h3>
+                            <mat-divider></mat-divider>
+                        </mat-list-item>
+                        
+                        <mat-list-item>
+                            <h3>專案任務:</h3>
+                            <mat-divider></mat-divider>
+                        </mat-list-item>
+                        
+                        <mat-list-item>
+                            <h3>客需單:</h3>
+                            <mat-divider></mat-divider>
+                        </mat-list-item>
+                        
+                        <mat-list-item>
+                            <h3>治具需求單:</h3>
+                            <mat-divider></mat-divider>
+                        </mat-list-item>
+                        
+                        <mat-list-item>
+                            <h3>客服資源申請單:</h3>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-card>
+            </div>
+        </div>
+        <div class="col-md-5 px-0">
+            <div class="form-group pt-0 pb-3">
+                <mat-card class="card table" style="height:426px">
+                    <mat-list>
+                        <mat-list-item>
+                            <h3>待辦事項:</h3>
+                        </mat-list-item>
+                        
+                    </mat-list>
+                </mat-card>
+            </div>
+        </div>
+    </div> -->
+    <!--tab-->
+    <!--Tab-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pt-0 pb-3">
+                <mat-card class="card">
+                    <mat-tab-group dynamicHeight>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                專案任務
+                            </ng-template>
+                            <div class="container pt-3 ">
+                                <div class="table-container table" *ngIf="pmCaseTotal != 0">
+                                    <h5 class="text-center">專案列表</h5>
+                                    <hr>
+                                    <table mat-table [dataSource]="projectDataSource" class="mat-elevation-z8">
+                                        <ng-container matColumnDef="status">
+                                            <th mat-header-cell *matHeaderCellDef> </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <mat-icon class="none" matTooltip={{element.status}}
+                                                    [ngClass]="{'blue3' : (element.status == '建檔中') , 'green3' : (element.status == '執行中') ,
+                                                'yellow3' : (element.status == '已中止') , 'red3' : (element.status == '待完工'), 'big' : (element.status == '已完工'), 'pause' : (element.status == '已暫停'), 'end' : (element.status == '已結案')}">
+                                                    circle
+                                                </mat-icon>
+                                            </td>
+                                        </ng-container>
+                                        <ng-container matColumnDef="code">
+                                            <th mat-header-cell *matHeaderCellDef>專案代號</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+                                        </ng-container>
+                                        <ng-container matColumnDef="p_name">
+                                            <th mat-header-cell *matHeaderCellDef>專案名稱</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.p_name}} </td>
+                                        </ng-container>
+                                        <ng-container matColumnDef="customer_name">
+                                            <th mat-header-cell *matHeaderCellDef> 客戶 </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.customer_name}} </td>
+                                        </ng-container>
+                                        <!-- <ng-container matColumnDef="status">
+                                            <th mat-header-cell *matHeaderCellDef> 狀態 </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                                        </ng-container> -->
+                                        <ng-container matColumnDef="date_for_start">
+                                            <th mat-header-cell *matHeaderCellDef> 預計完成日 </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.date_for_start | date:
+                                                'yyyy/MM/dd'}}
+                                                ~ {{element.date_for_end | date: 'yyyy/MM/dd'}}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="action_edit">
+                                            <th mat-header-cell *matHeaderCellDef> 編輯 </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <button mat-mini-fab color="basic" class="table-btn-none"
+                                                    [routerLink]="['/main/pm-return-edit/' + element.p_id + '/' + element.bonita_task_id]">
+                                                    <mat-icon>edit</mat-icon>
+                                                </button>
+                                            </td>
+                                        </ng-container>
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                                    </table>
+                                    <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5"
+                                        [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true">
+                                    </mat-paginator>
+                                </div>
+
+                            </div>
+
+                            <div class="table-container table" *ngIf="tmCaseTotal != 0">
+                                <h5 class="text-center">專案任務列表</h5>
+                                <hr>
+                                <table mat-table [dataSource]="taskReturnDataSource" class="mat-elevation-z8">
+                                    <!-- code -->
+                                    <ng-container matColumnDef="p_code">
+                                        <th mat-header-cell *matHeaderCellDef style="display: none;">專案代號</th>
+                                        <td mat-cell *matCellDef="let element;let index = index" style="display: none;">
+                                            {{element.p_code}}
+                                        </td>
+                                    </ng-container>
+                                    <!-- p_name -->
+                                    <ng-container matColumnDef="p_name">
+                                        <th mat-header-cell *matHeaderCellDef>專案名稱</th>
+                                        <td mat-cell *matCellDef="let element;let index = index">
+                                            {{element.p_code}}-{{element.p_name}}
+                                        </td>
+                                    </ng-container>
+                                    <!-- code -->
+                                    <ng-container matColumnDef="code">
+                                        <th mat-header-cell *matHeaderCellDef>任務代號</th>
+                                        <td mat-cell *matCellDef="let element;let index = index">
+                                            {{element.code}}
+                                        </td>
+                                    </ng-container>
+                                    <!-- task_name -->
+                                    <ng-container matColumnDef="t_name">
+                                        <th mat-header-cell *matHeaderCellDef>任務名稱</th>
+                                        <td mat-cell *matCellDef="let element;let index = index">
+                                            {{element.t_name}}
+                                        </td>
+                                    </ng-container>
+                                    <!-- name -->
+                                    <ng-container matColumnDef="name">
+                                        <th mat-header-cell *matHeaderCellDef>任務負責人名稱</th>
+                                        <td mat-cell *matCellDef="let element;let index = index">
+                                            {{element.name}}
+                                        </td>
+                                    </ng-container>
+                                    <!-- date_for_estimated_start -->
+                                    <ng-container matColumnDef="date_for_estimated_start">
+                                        <th mat-header-cell *matHeaderCellDef> 開始時間(工時) </th>
+                                        <td mat-cell *matCellDef="let element;let index = index">
+                                            {{element.date_for_estimated_start | date: 'yyyy/MM/dd'}} -
+                                            {{element.date_for_estimated_completion | date: 'yyyy/MM/dd'}} </td>
+                                    </ng-container>
+                                    <!-- date_for_estimated_completion -->
+                                    <ng-container matColumnDef="date_for_estimated_completion">
+                                        <th mat-header-cell *matHeaderCellDef style="display: none;"> 結束時間(工時) </th>
+                                        <td mat-cell *matCellDef="let element;let index = index" style="display: none;">
+                                            {{element.date_for_estimated_completion | date: 'yyyy/MM/dd'}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="bonita_task_id">
+                                        <th mat-header-cell *matHeaderCellDef class="text-center">
+                                            編輯 </th>
+                                        <td mat-cell *matCellDef="let element;let index = index" class="text-center">
+                                            <button mat-mini-fab color="basic" class="table-btn-none"
+                                                [routerLink]="['/main/task-return-edit/' + element.documents_id + '/' + element.t_id + '/'+ element.tu_id + '/' + element.bonita_task_id]">
+                                                <mat-icon>edit</mat-icon>
+                                            </button>
+                                        </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="taskReturnDisplayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: taskReturnDisplayedColumns;"></tr>
+
+                                    <!-- Row shown when there is no matching data. -->
+                                </table>
+                            </div>
+                            <mat-paginator #paginator [length]="taskReturnTotalCount" [pageIndex]="0" [pageSize]="5"
+                                [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true">
+                            </mat-paginator>
+                        </mat-tab>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                近期會議
+                            </ng-template>
+
+                        </mat-tab>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                客需單
+                            </ng-template>
+                            <div class="container pt-3 ">
+                                <div class="table-container table" *ngIf="crRerurnTotal_A1 != 0">
+                                    <h5 class="text-center">客需單列表</h5>
+                                    <hr>
+                                    <table mat-table [dataSource]="crDataSource" class="mat-elevation-z8">
+                                        <!-- create_time -->
+                                        <ng-container matColumnDef="create_time">
+                                            <th mat-header-cell *matHeaderCellDef>創建時間</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.create_time| date:
+                                                'yyyy/MM/dd'}} </td>
+                                        </ng-container>
+                                        <!-- p_code -->
+                                        <ng-container matColumnDef="code">
+                                            <th mat-header-cell *matHeaderCellDef>單號</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+                                        </ng-container>
+                                        <!-- demand_content -->
+                                        <ng-container matColumnDef="demand_content">
+                                            <th mat-header-cell *matHeaderCellDef>主旨</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.demand_content}} </td>
+                                        </ng-container>
+                                        <!-- customer_name -->
+                                        <ng-container matColumnDef="salesman_dep">
+                                            <th mat-header-cell *matHeaderCellDef> 發文單位 </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                {{element.salesman_dep[0].department_name}} </td>
+                                        </ng-container>
+                                        <!-- date_for_start -->
+                                        <ng-container matColumnDef="salesman_name">
+                                            <th mat-header-cell *matHeaderCellDef> 發文者 </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.salesman_name}} </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="action_edit">
+                                            <th mat-header-cell *matHeaderCellDef> 編輯 </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <button mat-mini-fab color="basic" class="table-btn-none"
+                                                    [routerLink]="['/main/cr-return-edit/' + element.cd_id + '/'+ element.bonita_task_id]">
+                                                    <mat-icon>edit</mat-icon>
+                                                </button>
+                                            </td>
+                                        </ng-container>
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns_CR"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns_CR;"></tr>
+
+                                        <!-- Row shown when there is no matching data. -->
+                                    </table>
+                                    <mat-paginator #paginator [length]="totalCount_CR" [pageIndex]="0" [pageSize]="5"
+                                        [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true">
+                                    </mat-paginator>
+                                </div>
+
+                            </div>
+
+                            <div class="table-container table" *ngIf="crTaskRerurnTotal != 0">
+                                <h5 class="text-center">客需單任務列表</h5>
+                                <hr>
+                                <table mat-table [dataSource]="DataSource_CRtask" class="mat-elevation-z8">
+                                    <!-- p_code -->
+                                    <ng-container matColumnDef="code">
+                                        <th mat-header-cell *matHeaderCellDef>客需單單號</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+                                    </ng-container>
+                                    <!-- project_name -->
+                                    <ng-container matColumnDef="subject">
+                                        <th mat-header-cell *matHeaderCellDef>任務名稱</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.t_name}} </td>
+                                    </ng-container>
+                                    <!-- customer_name -->
+                                    <ng-container matColumnDef="department">
+                                        <th mat-header-cell *matHeaderCellDef> 負責人 </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                                    </ng-container>
+                                    <!-- date_for_start -->
+                                    <ng-container matColumnDef="poster">
+                                        <th mat-header-cell *matHeaderCellDef> 預計完成日 </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.date_for_estimated_start|
+                                            date:
+                                            'yyyy/MM/dd'}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="action_edit">
+                                        <th mat-header-cell *matHeaderCellDef> 編輯 </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <button mat-mini-fab color="basic" class="table-btn-none"
+                                                [routerLink]="['/main/cr-task-return-edit/' + element.cd_id+'/'+ element.bonita_task_id]">
+                                                <mat-icon>edit</mat-icon>
+                                            </button>
+                                        </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns_CRtask"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns_CRtask;"></tr>
+
+                                    <!-- Row shown when there is no matching data. -->
+                                </table>
+                                <mat-paginator #paginator [length]="totalCount_CRtask" [pageIndex]="0" [pageSize]="5"
+                                    [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true">
+                                </mat-paginator>
+                            </div>
+
+
+                        </mat-tab>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                治具需求單
+                            </ng-template>
+
+                        </mat-tab>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                客服資源申請單
+                            </ng-template>
+
+                        </mat-tab>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                近期會議
+                            </ng-template>
+
+                        </mat-tab>
+
+                    </mat-tab-group>
+                    <h6>
+                        比較基準:
+                        <mat-icon class="blue3">circle</mat-icon>
+                        建檔中
+                        <mat-icon class="green3">circle</mat-icon>
+                        執行中
+                        <mat-icon class="red3">circle</mat-icon>
+                        待完工
+                        <mat-icon class="yellow3">circle</mat-icon>
+                        已完工/已中止/已暫停/已結案
+                        <!-- <mat-icon class="yellow3">circle</mat-icon>
+                        
+                        <mat-icon class="yellow3">circle</mat-icon>
+                        已暫停
+                        <mat-icon class="yellow3">circle</mat-icon>
+                        已結案 -->
+                    </h6>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

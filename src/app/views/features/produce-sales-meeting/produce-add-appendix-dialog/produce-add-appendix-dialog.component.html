@@ -1,0 +1,23 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">檔案上傳管理</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+<form [formGroup]="addappendixForm">
+    <mat-dialog-content>
+        <div class="row">
+            <div class="col">
+                <div class="file-upload">
+                    <button mat-mini-fab color="basic" class="table-btn-none" (click)="fileUpload.click()">
+                        <mat-icon>attach_file</mat-icon>
+                    </button>
+                    {{fileName || "No file uploaded yet."}}
+                </div>
+                <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions class="text-center">
+        <button mat-button class="btn-none">儲存</button>
+    </mat-dialog-actions>
+</form>

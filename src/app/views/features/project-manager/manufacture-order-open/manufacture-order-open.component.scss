@@ -1,0 +1,20 @@
+
+
+@import '/src/scss/custom';
+@import '/src/scss/container_children';
+
+
+.form-group {
+  padding: 40px 0;
+
+    .mat-form-field {
+        margin-right: 10px;
+        width: 250px;
+        margin-top: 10px;
+    }
+
+    // matInpt{
+    //     width: 150px;
+    // }
+}
+

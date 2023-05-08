@@ -1,0 +1,109 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/main/dashboard">首頁</a></li>
+              <li class="breadcrumb-item active">業務</li>
+              <li class="breadcrumb-item active" aria-current="page">治具需求單作業</li>
+              <li class="breadcrumb-item active" aria-current="page">治具需求單作業-新增</li>
+            </ol>
+          </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        治具需求單作業-新增
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!--查詢區域-->
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="pt-3 pb-0">
+                <div class="">
+                    <mat-card class="card search-group">
+                        <mat-card-content>
+                            <div class="edit-form-group pb-0">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12 text-center">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>分類</mat-label>
+                                            <mat-select disableRipple name="project-principal">
+                                                <mat-option value="A101">A101</mat-option>
+                                                <mat-option value="A102">A102</mat-option>
+                                                <mat-option value="A103">A103</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>標題</mat-label>
+                                            <input matInput type="text" name="client-name">
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>待覆日期</mat-label>
+                                            <mat-date-range-input [rangePicker]="picker">
+                                              <input matStartDate placeholder="Start date">
+                                              <input matEndDate placeholder="End date">
+                                            </mat-date-range-input>
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-date-range-picker #picker></mat-date-range-picker>
+                                        </mat-form-field>
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>客戶需求日</mat-label>
+                                            <input matInput [matDatepicker]="picker_done">
+                                            <mat-datepicker-toggle matSuffix [for]="picker_done"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker_done></mat-datepicker>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" style="width: 510px;">
+                                            <mat-label>摘要說明</mat-label>
+                                            <textarea matInput type="text" name=""></textarea>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 text-center">
+                                        <mat-list>
+                                            <mat-list-item >
+                                                <h4 class="px-0">編號:</h4>
+                                                <h4 class="text-context">E001</h4>
+                                            </mat-list-item>
+                                            <mat-list-item>
+                                                <h4>發文者:</h4>
+                                                <h4 class="text-context">admin</h4>
+                                            </mat-list-item>
+                                            <mat-list-item>
+                                                <h4>發文單位:</h4>
+                                                <h4 class="text-context">總經理室</h4>
+                                            </mat-list-item>
+                                        </mat-list>
+                                        
+                                    </div>
+                                </div>
+                                <div class="row pt-3">
+                                    <div class="col-md-12 text-center">
+                                        <button mat-button class="btn-normal" matTooltip="取消" (click)="cancelItem()">
+                                            <!-- <mat-icon>undo</mat-icon> -->
+                                            取消
+                                        </button>
+                                        <button mat-button class="btn" matTooltip="儲存">
+                                            <!-- <mat-icon>save_alt</mat-icon> -->
+                                            儲存
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

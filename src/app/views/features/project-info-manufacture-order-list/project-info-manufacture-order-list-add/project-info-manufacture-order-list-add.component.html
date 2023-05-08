@@ -1,0 +1,234 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard">首頁</a></li>
+                    <li class="breadcrumb-item active">製造資訊管理</li>
+                    <li class="breadcrumb-item active" aria-current="page">製令開啟通知作業-新增</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        製令開啟通知作業
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <mat-card class="card">
+        <form [formGroup]="receiptForm">
+            <div class="row edit-none-group">
+                <div class="col-md-6 text-left">
+                    <div class="pt-0 pb-0">
+                        <div class="">
+                            <div class="form-box">
+
+                                <table class="width100" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <mat-form-field appearance="outline" class="width100">
+                                                <mat-label>客需單號</mat-label>
+                                                <input matInput type="text" ngDefaultControl>
+                                            </mat-form-field>
+                                        </td>
+                                        <td>
+
+                                            <mat-form-field appearance="outline" class="width100">
+                                                <mat-label>單號</mat-label>
+                                                <input matInput type="text" ngDefaultControl>
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <mat-form-field appearance="outline" class="width100">
+                                    <mat-label>專案代號</mat-label>
+                                    <input matInput type="text" [(ngModel)]="project_id" formControlName="project_id"
+                                        name="project_id" ngDefaultControl>
+                                    <mat-error *ngIf="receiptForm.controls['project_id'].hasError('required')">
+                                        必填
+                                    </mat-error>
+                                </mat-form-field>
+
+                                <table class="width100" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <mat-form-field appearance="outline" class="width100">
+                                                <mat-label>主要品號</mat-label>
+                                                <input matInput type="text" [(ngModel)]="order_name"
+                                                    formControlName="order_name" name="order_name" ngDefaultControl>
+                                                <mat-error
+                                                    *ngIf="receiptForm.controls['order_name'].hasError('required')">
+                                                    必填
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </td>
+                                        <td>
+                                            <mat-form-field appearance="outline" class="width100">
+                                                <mat-label>需求數量</mat-label>
+                                                <input matInput type="text" [(ngModel)]="amount"
+                                                    formControlName="amount" name="amount" ngDefaultControl>
+                                                <mat-error *ngIf="receiptForm.controls['amount'].hasError('required')">
+                                                    必填
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <mat-form-field appearance="outline" class="width100">
+                                    <mat-label>客戶</mat-label>
+                                    <input matInput type="text" [(ngModel)]="customer_id" formControlName="customer_id"
+                                        name="customer_id" ngDefaultControl>
+                                    <mat-error *ngIf="receiptForm.controls['customer_id'].hasError('required')">
+                                        必填
+                                    </mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="width100">
+                                    <mat-label>出貨地點</mat-label>
+                                    <textarea matInput type="text" [(ngModel)]="shipment_location"
+                                        formControlName="shipment_location" name="shipment_location"
+                                        ngDefaultControl></textarea>
+                                    <mat-error *ngIf="receiptForm.controls['shipment_location'].hasError('required')">
+                                        必填
+                                    </mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field class="example-form-field" appearance="outline" class="width100">
+                                    <mat-label>預估時程</mat-label>
+                                    <mat-date-range-input [formGroup]="campaignOne" [rangePicker]="campaignOnePicker">
+                                        <input matStartDate [(ngModel)]="open_date" placeholder="Start date"
+                                            formControlName="start">
+                                        <input matEndDate [(ngModel)]="close_date" placeholder="End date"
+                                            formControlName="end">
+                                    </mat-date-range-input>
+                                    <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                                    <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+                                </mat-form-field>
+
+                                <table class="width100" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <mat-form-field appearance="outline" class="width100">
+                                                <mat-label>日期</mat-label>
+                                                <input matInput [matDatepicker]="picker"
+                                                    [(ngModel)]="except_shipment_day"
+                                                    formControlName="except_shipment_day" name="except_shipment_day"
+                                                    ngDefaultControl>
+                                                <mat-datepicker-toggle matSuffix [for]="picker">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #picker></mat-datepicker>
+                                            </mat-form-field>
+
+
+                                        </td>
+                                        <td>
+                                            <mat-form-field appearance="outline" class="width100">
+                                                <mat-label>內部訂單編號</mat-label>
+                                                <input matInput type="text" ngDefaultControl>
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <mat-form-field appearance="outline" class="width100">
+                                    <mat-label>其他相關單據</mat-label>
+                                    <input matInput type="text" ngDefaultControl>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="width100">
+                                    <mat-label>備註</mat-label>
+                                    <textarea matInput type="text" [(ngModel)]="remark" formControlName="remark"
+                                        name="remarks" ngDefaultControl></textarea>
+                                    <mat-error *ngIf="receiptForm.controls['remark'].hasError('required')">
+                                        必填
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 text-left">
+                    <div class="pt-0 pb-0">
+                        <mat-list>
+                            <div class="search-group">
+                                <table class="width100" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <mat-list-item>
+                                                <h4 class="text-head"> 發文者:</h4>
+                                                <h4></h4>
+                                            </mat-list-item>
+                                        </td>
+                                        <td>
+                                            <mat-list-item>
+                                                <h4 class="text-head">發文單位：</h4>
+                                                <h4></h4>
+                                            </mat-list-item>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <mat-list-item style="height: 80px;">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>業務助理</mat-label>
+                                        <mat-select>
+                                            <mat-option class="option-30"
+                                                *ngFor="let select of ['Rita','Peggy','Ted','Brian','Louis','Ken']"
+                                                [value]="select" title="{{select}}">
+                                                {{select}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </mat-list-item>
+                                <mat-list-item style="height: 80px;">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>收文者</mat-label>
+                                        <mat-select>
+                                            <mat-option class="option-30"
+                                                *ngFor="let select of ['Rita','Peggy','Ted','Brian','Louis','Ken']"
+                                                [value]="select" title="{{select}}">
+                                                {{select}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </mat-list-item>
+                                <mat-list-item style="height: 80px;">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>業務負責人</mat-label>
+                                        <mat-select>
+                                            <mat-option class="option-30"
+                                                *ngFor="let select of ['Rita','Peggy','Ted','Brian','Louis','Ken']"
+                                                [value]="select" title="{{select}}">
+                                                {{select}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </mat-list-item>
+                            </div>
+                        </mat-list>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row pt-3">
+            <div class="col-md-12 text-center">
+                <button mat-button class="btn-normal" (click)="goBack()" matTooltip="取消">
+                    取消
+                </button>
+                <button mat-button class="btn" (click)="addProjectInfoManufacture()" matTooltip="儲存">
+                    儲存
+                </button>
+            </div>
+        </div>
+    </mat-card>
+
+</div>

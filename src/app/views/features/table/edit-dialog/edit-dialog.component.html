@@ -1,0 +1,43 @@
+<app-dialog-outlet title="修改" [closeStatus]="false">
+
+    <form [formGroup]="editForm">
+        <mat-form-field appearance="outline">
+            <mat-label>日期選擇器 </mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="creat_at">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="editForm.controls['creat_at'].hasError('required')">
+                必填
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>下拉選擇器</mat-label>
+            <mat-select formControlName="select">
+                <mat-option *ngFor="let select of [1,2,3,4,5,6]" [value]="select" title="{{select}}">
+                    {{select}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="editForm.controls['select'].hasError('required')">
+                必選
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>字數限制</mat-label>
+            <input matInput formControlName="min_length" placeholder="00000000" type="text">
+            <mat-error *ngIf="editForm.controls['min_length'].hasError('required')">
+                請輸入號碼
+            </mat-error>
+            <mat-error *ngIf="editForm.controls['min_length'].hasError('minlength')">
+                請輸入多於6個字元
+            </mat-error>
+        </mat-form-field>
+
+        <div class="btn-group">
+            <button mat-raised-button class="btn reset" (click)="resetForm()">回復重填</button>
+            <button mat-raised-button class="btn" (click)="submit(editForm.value)">確認修改</button>
+        </div>
+
+    </form>
+</app-dialog-outlet>

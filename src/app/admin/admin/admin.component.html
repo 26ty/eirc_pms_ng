@@ -1,0 +1,58 @@
+<!-- <mat-toolbar class="demo-app-header mat-elevation-z8 flex h-full">
+  <button mat-icon-button (click)="sideNav.toggle()">
+    <mat-icon>{{ sideNav.opened ? 'close' : 'menu' }}</mat-icon>
+  </button>
+  <span>後台管理系統(RBAC)</span>
+  <span class="toolbar-seprator"></span>
+
+  <button mat-icon-button [matMenuTriggerFor]="messageMenu" #menuTrigger="matMenuTrigger">
+    <mat-icon>logout</mat-icon>
+    <mat-menu #messageMenu="matMenu">
+      <button mat-menu-item (click)="logout()">登出</button>
+    </mat-menu>
+  </button>
+
+</mat-toolbar> -->
+<mat-toolbar class="">
+  <button mat-icon-button (click)="sideNav.toggle()">
+    <mat-icon class="menu-toggle">menu</mat-icon>
+  </button>
+  <a class="title" routerLink="/admin">後台管理系統(RBAC)</a>
+  <span class="example-spacer"></span>
+  <button mat-icon-button routerLink="/main">
+    <mat-icon class="menu-toggle">exit_to_app</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-group">
+  <mat-sidenav class="sidenav" #sideNav mode="side"  fixedInViewport="true" >
+    <mat-list mode="side">
+      <mat-list-item mat-list-item>
+        <mat-icon>settings</mat-icon>
+        管理員選單
+      </mat-list-item>
+      <mat-divider></mat-divider>
+
+      <mat-list-item mat-list-item routerLink="user" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        <mat-icon mat-list-icon>people</mat-icon>
+        <div mat-line>用戶</div>
+      </mat-list-item>
+
+      <mat-list-item mat-list-item routerLink="department" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        <mat-icon mat-list-icon>people</mat-icon>
+        <div mat-line>部門</div>
+      </mat-list-item>
+
+      <mat-list-item mat-list-item routerLink="position" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        <mat-icon mat-list-icon>people</mat-icon>
+        <div mat-line>職稱</div>
+      </mat-list-item>
+
+    </mat-list>
+    
+  </mat-sidenav>
+  <mat-sidenav-content>
+  <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

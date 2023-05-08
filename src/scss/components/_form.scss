@@ -1,0 +1,157 @@
+.card-box {
+  margin: 20px 0;
+}
+
+.form-group {
+  .form-box {
+    margin: 0 auto;
+    max-width: 400px;
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      h3 {
+        color: $main-color;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .btn-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .btn {
+      font-size: 14px;
+      padding: 0 24px;
+      background-color: $main-color;
+      color: #fff;
+
+      &:hover {
+        background-color: #185abc;
+      }
+
+      &.reset {
+        background-color: #c7c7c7;
+
+        &:hover {
+          background-color: darken(#c7c7c7, 20%);
+        }
+      }
+    }
+  }
+}
+
+// checkbox
+.checkbox-group {
+  margin-bottom: 15px;
+  padding: 5px 2px;
+  // border: 1px solid rgb(216, 216, 216);
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(236, 236, 236);
+
+  .mat-form-field {
+    &:last-of-type {
+      .mat-form-field-wrapper {
+        margin: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+}
+
+// 
+.slide-toggle-group {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  label {
+    align-self: flex-start;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: rgb(133, 133, 133);
+    font-size: 14px;
+  }
+}
+
+:host ::ng-deep {
+  .btn-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .btn {
+      font-size: 14px;
+      padding: 0 24px;
+      background-color: $main-color;
+      color: #fff;
+
+      &:hover {
+        background-color: #185abc;
+      }
+
+      &.reset {
+        background-color: #c7c7c7;
+
+        &:hover {
+          background-color: darken(#c7c7c7, 20%);
+        }
+      }
+    }
+  }
+
+  // slide toggle
+  .mat-slide-toggle.mat-checked {
+    .mat-slide-toggle-bar {
+      background-color: lighten($main-color, 20%);
+    }
+
+    .mat-slide-toggle-thumb {
+      background-color: $main-color;
+    }
+
+    .mat-ripple-element {
+      background-color: $main-color;
+    }
+  }
+
+  // checkbox
+
+  .mat-checkbox-inner-container {
+    background-color: #fff;
+  }
+
+  .mat-checkbox-checked {
+    &.mat-accent {
+      .mat-checkbox-background {
+        background-color: $main-color;
+      }
+    }
+
+    &:not(.mat-checkbox-disabled) {
+      &.mat-accent {
+        .mat-ripple-element {
+          background-color: $main-color;
+        }
+      }
+    }
+  }
+
+  .mat-checkbox {
+    &:active {
+      &:not(.mat-checkbox-disabled) {
+        &.mat-accent {
+          .mat-ripple-element {
+            background-color: $main-color;
+          }
+        }
+      }
+    }
+  }
+
+}

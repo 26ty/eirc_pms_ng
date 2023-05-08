@@ -1,0 +1,92 @@
+<div class="offcanvas-header card-h">
+  <h2 class="offcanvas-title" id="offcanvasLabel">用戶-編輯</h2>
+  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+    mat-dialog-close></button>
+</div>
+<form [formGroup]="editForm" class="form-h">
+  <mat-dialog-content class="mat-typography">
+    <!-- <table>
+      <tr>
+
+      </tr>
+    </table> -->
+    <mat-form-field appearance="outline" class="input_1" *ngIf="this.userData">
+      <mat-label>帳號</mat-label>
+      <input matInput #input placeholder="輸入帳號" [(ngModel)]="this.userData.account" formControlName="account"
+        name="account" ngDefaultControl required>
+    </mat-form-field>
+    <!-- <mat-form-field appearance="outline" class="select_1">
+      <mat-label>密碼</mat-label>
+      <input matInput #input placeholder="輸入密碼" [(ngModel)]="password" formControlName="password" name="password" ngDefaultControl required>
+    </mat-form-field> -->
+    <mat-form-field appearance="outline" class="select_1" *ngIf="this.userData">
+      <mat-label>姓名</mat-label>
+      <input matInput #input placeholder="輸入姓名" [(ngModel)]="this.userData.name" formControlName="name" name="name"
+        ngDefaultControl required>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="select_1" *ngIf="this.userData">
+      <mat-label>郵件</mat-label>
+      <input matInput #input placeholder="輸入郵件" [(ngModel)]="this.userData.email" formControlName="email" name="email"
+        ngDefaultControl required>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="select_1" *ngIf="this.userData">
+      <mat-label>電話</mat-label>
+      <input matInput #input placeholder="輸入電話" [(ngModel)]="this.userData.phone" formControlName="phone" name="phone"
+        ngDefaultControl required>
+    </mat-form-field>
+    <!-- <mat-form-field appearance="outline" class="select_1">
+      <mat-label> 選擇部門</mat-label>
+      <mat-select [(ngModel)]="dep" formControlName="dep" name="dep" ngDefaultControl required>
+        <mat-option value="1">08</mat-option>
+        <mat-option value="2">09</mat-option>
+      </mat-select>
+    </mat-form-field> -->
+    <mat-form-field appearance="outline" class="select_1" *ngIf="this.userData">
+      <mat-label> 選擇部門</mat-label>
+      <mat-select [(ngModel)]="this.onePAData.body[0].department_id" formControlName="dep" name="dep" ngDefaultControl
+        required>
+        <mat-option [value]="00000000-0000-0000-0000-000000000000">
+          無
+        </mat-option>
+        <mat-option *ngFor="let item of departmentData" value="{{item.d_id}}">{{item.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="select_1" *ngIf="this.userData">
+      <mat-label> 選擇職稱</mat-label>
+      <mat-select [(ngModel)]="this.onePAData.body[0].jobtitle_id" formControlName="jobtitle_id" name="jobtitle_id"
+        ngDefaultControl>
+        <mat-option *ngFor="let item of jobTitleData" value="{{item.j_id}}">{{item.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="select_1" *ngIf="this.userData">
+      <mat-label>直屬主管</mat-label>
+      <mat-select [(ngModel)]="this.userData.bonita_manager_id" formControlName="bonita_manager_id"
+        name="bonita_manager_id" ngDefaultControl required>
+        <mat-optgroup *ngFor="let group of accountgroup" [label]="group.name" [disabled]="group.disabled">
+          <mat-option *ngFor="let account of group.account" [value]="account.bonita_user_id">
+            {{account.name}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+    <!-- <mat-form-field appearance="outline" class="select_1">
+      <mat-label> 直屬主管</mat-label>
+      <mat-select [(ngModel)]="phone" formControlName="phone" name="phone" ngDefaultControl required>
+        <mat-option value="1">08</mat-option>
+        <mat-option value="2">09</mat-option>
+      </mat-select>
+    </mat-form-field> -->
+
+  </mat-dialog-content>
+  <mat-dialog-actions class="text-center">
+    <div class="">
+      <button mat-button class="btn-normal-none reset" type="reset">重填</button>
+      <button mat-button class="btn" (click)="updateUserRequest()">更新</button>
+    </div>
+  </mat-dialog-actions>
+</form>
+
+<!-- <mat-dialog-actions align="end">
+      <button mat-raised-button mat-dialog-close>離開</button>
+      <button mat-raised-button [mat-dialog-close]="true" style="background-color: #6ea7fc;color:white;" >資料儲存</button>
+    </mat-dialog-actions> -->

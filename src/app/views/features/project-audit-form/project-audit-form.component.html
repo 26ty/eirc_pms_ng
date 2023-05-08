@@ -1,0 +1,197 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard">首頁</a></li>
+                    <li class="breadcrumb-item active">專案計畫管理</li>
+                    <li class="breadcrumb-item active" aria-current="page">專案授權書</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        專案授權書
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- 測試關鍵字人員查詢 -->
+    <!-- <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-3 pb-0">
+                <mat-card class="card search-group">
+                    <form [formGroup]="stateForm">
+                        <mat-form-field appearance="outline">
+                            <mat-label>States Group</mat-label>
+                            <input type="text" matInput formControlName="stateGroup" required
+                                [matAutocomplete]="autoGroup" [(ngModel)]="account_name" name="stateGroup"
+                                ngDefaultControl (ngModelChange)="changeaccount($event)">
+                            <mat-autocomplete #autoGroup="matAutocomplete">
+                                <mat-optgroup *ngFor="let group of stateGroupOptions | async" [label]="group.name"
+                                    class="test">
+                                    <mat-option *ngFor="let account of group.account" [value]="account.name">
+                                        {{account.name}}
+                                    </mat-option>
+                                </mat-optgroup>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                        value： 名字：{{account_name}} UUID：{{change_account_id}}
+                    </form>
+                </mat-card>
+            </div>
+        </div>
+    </div> -->
+    <!-- 
+    <div class="row">
+        <div class="col-md-12">
+            <form [formGroup]="addForm">
+                <div class="form-group pt-3 pb-0">
+                    <mat-card class="card search-group">
+                        <mat-form-field appearance="outline">
+                            <textarea matInput [(ngModel)]="texttest" name="texttest" formControlName="texttest" ngDefaultControl style="word-wrap:normal;"></textarea>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" style="vertical-align:top;outline:none;word-wrap:normal;">
+                            <input matInput [(ngModel)]="texttest" name="texttest" formControlName="texttest" ngDefaultControl>
+                        </mat-form-field>
+                        <button mat-button class="btn" (click)="test()">
+                            test
+                        </button>
+                    </mat-card>
+                </div>
+            </form>
+        </div>
+    </div> -->
+
+
+
+    <!--查詢區域2-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-3 pb-0">
+                <mat-card class="card search-group">
+
+                    <!-- <mat-form-field appearance="outline" style="width:200px">
+                        <mat-label>專案負責人</mat-label>
+                        <mat-select [(value)]="userid" [(ngModel)]="user_id" name="user_id" ngDefaultControl (keyup)="applyFilter($event)">
+                            <mat-optgroup *ngFor="let group of accountgroup" [label]="group.name"
+                                [disabled]="group.disabled">
+                                <mat-option *ngFor="let account of group.account" [value]="account.account_id">
+                                    {{account.name}}
+                                </mat-option>
+                            </mat-optgroup>
+                        </mat-select>
+                    </mat-form-field> -->
+
+                    <mat-form-field class="example-full-width" appearance="outline" style="width:200px">
+                        <mat-label>專案負責人</mat-label>
+                        <input type="text" (keyup)="applyFilter($event)" placeholder="專案負責人" aria-label="專案負責人" matInput
+                            [matAutocomplete]="auto1">
+                        <mat-autocomplete #auto1="matAutocomplete">
+                            <mat-option *ngFor="let item of projectman_option" [value]="item">
+                                {{item}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+                    <!-- <mat-form-field appearance="outline" style="width:200px">
+                        <mat-label>專案代號</mat-label>
+                        <input matInput type="text" name="">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" style="width:150px">
+                        <mat-label>生效日期</mat-label>
+                        <input matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field> -->
+
+                    <!-- <button mat-button class="btn-normal-none" (keyup)="applyFilter($event)">
+                        <mat-icon>search</mat-icon>
+                    </button> -->
+                    <button mat-button id="" class="btn" (click)="AddProject()">
+                        新增
+                        <!-- <mat-icon>add</mat-icon> -->
+                    </button>
+                    <!-- <button mat-button id="" class="btn-normal" matTooltip="清除">
+                        <mat-icon>cancel</mat-icon>
+                    </button> -->
+
+
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <!--顯示資料區域-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-0 pb-2">
+                <mat-card class="card table">
+                    <!-- <mat-form-field appearance="outline" style="width:200px">
+                        <mat-label>專案負責人</mat-label>
+                        <mat-select [(value)]="userid" [(ngModel)]="user_id" formControlName="user_id"
+                            name="user_id" ngDefaultControl>
+                            <mat-optgroup *ngFor="let group of accountgroup" [label]="group.name"
+                                [disabled]="group.disabled">
+                                <mat-option *ngFor="let account of group.account" [value]="account.account_id">
+                                    {{account.name}}
+                                </mat-option>
+                            </mat-optgroup>
+                        </mat-select>
+                    </mat-form-field> -->
+                    <div class="table-container">
+                        <table mat-table [dataSource]="B1B2DataSource" class="mat-elevation-z8">
+                            <!-- project_member -->
+                            <ng-container matColumnDef="projectman_name">
+                                <th mat-header-cell *matHeaderCellDef> 專案負責人 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectman_name}} </td>
+                            </ng-container>
+                            <!-- p_code -->
+                            <ng-container matColumnDef="code">
+                                <th mat-header-cell *matHeaderCellDef>專案代號</th>
+                                <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+                            </ng-container>
+                            <!-- date_for_start -->
+                            <ng-container matColumnDef="date_for_start">
+                                <th mat-header-cell *matHeaderCellDef> 專案起始日 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.date_for_start | date:
+                                    'yyyy/MM/dd'}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="action_edit">
+                                <th mat-header-cell *matHeaderCellDef> 編輯 </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button mat-mini-fab color="basic" class="table-btn-none"
+                                        (click)="EditProject(element)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="action_view">
+                                <th mat-header-cell *matHeaderCellDef> 檢視 </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button mat-mini-fab color="basic" class="table-btn-none"
+                                        (click)="ViewProject(element)">
+                                        <mat-icon>list_alt</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                        </table>
+                    </div>
+                    <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5"
+                        [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true">
+                    </mat-paginator>
+                </mat-card>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,290 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">工作紀錄回報</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+
+<mat-dialog-content style="width: 950px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-5">
+                <form [formGroup]="addForm">
+                    <div>
+                        <!-- <table class="" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>*工時類別</mat-label>
+                                    <mat-select [(ngModel)]="origin_id" (ngModelChange)="selectedValue()"
+                                        formControlName="origin_id" name="origin_id" ngDefaultControl>
+                                        <mat-option *ngFor="let item of workType_option" [value]="item.value">
+                                            {{item.key}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>*類別項目</mat-label>
+                                    <mat-select [(ngModel)]="category" formControlName="category" name="category"
+                                        ngDefaultControl>
+                                        <mat-option *ngFor="let item of task_option" [value]="item.value">
+                                            {{item.key}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                    </table> -->
+                        <mat-form-field appearance="outline" class="col-12">
+                            <mat-label>主題</mat-label>
+                            <input matInput placeholder="請輸入任務描述" type="text" formControlName="h_title"
+                                [(ngModel)]="h_title" name="h_title" ngDefaultControl required>
+                        </mat-form-field>
+
+                        <table class="" cellspacing="0">
+                            <tr>
+                                <td>
+                                    <!-- <mat-form-field appearance="outline" formControlName="nature" [(ngModel)]="nature" name="nature" ngDefaultControl>
+                                    <mat-label>*性質</mat-label>
+                                    <mat-select>
+                                        <mat-option *ngFor="let select of ['A','B','C','D','E','F']" [value]="select" title="{{select}}">
+                                            {{select}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field> -->
+
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>性質</mat-label>
+                                        <mat-select formControlName="nature" [(ngModel)]="nature" name="nature"
+                                            ngDefaultControl required>
+                                            <mat-option class="option-30" *ngFor="let item of workNature_option"
+                                                [value]="item" matInput>
+                                                {{item}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>機台序號</mat-label>
+                                        <input matInput placeholder="請輸入機台序號" type="text">
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table class="" cellspacing="0">
+                            <tr>
+                                <td>
+                                    <mat-form-field class="dateIpt-w" appearance="outline">
+                                        <mat-label>日期</mat-label>
+                                        <input matInput [matDatepicker]="picker1" formControlName="date_for_start"
+                                            [(ngModel)]="date_for_start" name="date_for_start" ngDefaultControl
+                                            required>
+                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker1></mat-datepicker>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <!-- <mat-form-field class="timeIpt-w" appearance="outline" formControlName="time_start" [(ngModel)]="time_start" name="time_start" ngDefaultControl>
+                                    <mat-label>*起始時間</mat-label>
+                                    <input matInput placeholder="請輸入起始時間" type="text" >
+                                </mat-form-field> -->
+                                    <mat-form-field class="timeIpt-w" appearance="outline">
+                                        <mat-label>起始時間</mat-label>
+                                        <input type="number" placeholder="起始時間" aria-label="起始時間" matInput
+                                            [matAutocomplete]="auto2" formControlName="time_for_start"
+                                            [(ngModel)]="time_for_start" name="time_for_start" ngDefaultControl
+                                            required>
+                                        <mat-autocomplete #auto2="matAutocomplete">
+                                            <mat-option *ngFor="let item of workTime_option" [value]="item">
+                                                {{item}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                    <!-- <mat-form-field class="timeIpt-w ml-2" appearance="outline" formControlName="time_end" [(ngModel)]="time_end" name="time_end" ngDefaultControl>
+                                    <mat-label>*結束時間</mat-label>
+                                    <input matInput placeholder="請輸入結束時間" type="text" >
+                                </mat-form-field> -->
+                                    <mat-form-field class="timeIpt-w ml-2" appearance="outline">
+                                        <mat-label>結束時間</mat-label>
+                                        <input type="number" placeholder="結束時間" aria-label="結束時間" matInput
+                                            [matAutocomplete]="auto3" formControlName="time_for_end"
+                                            [(ngModel)]="time_for_end" name="time_for_end" ngDefaultControl required>
+                                        <mat-autocomplete #auto3="matAutocomplete">
+                                            <mat-option class="option-30" *ngFor="let item of workTime_option"
+                                                [value]="item">
+                                                {{item}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>工時</mat-label>
+                            <input type="number" placeholder="工時" aria-label="工時" matInput [matAutocomplete]="auto4"
+                                formControlName="laborhour" [(ngModel)]="laborhour" name="laborhour" ngDefaultControl
+                                required>
+                            <mat-autocomplete #auto4="matAutocomplete">
+                                <mat-option class="option-30" *ngFor="let item of laborHour_option" [value]="item">
+                                    {{item}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="ml-2">
+                            <mat-label>內容</mat-label>
+                            <textarea matInput id="" formControlName="content" [(ngModel)]="content" name="content"
+                                ngDefaultControl required></textarea>
+                        </mat-form-field>
+
+                        <button mat-button class="btn-normal-none reset" type="reset">清除</button>
+
+                        <!--style="visibility:hidden"-->
+                        <button mat-button *ngIf="btnStatus==false" class="btn" type="button"
+                            (click)="addLaborHourRequest()">儲存</button>
+                        <button mat-button *ngIf="btnStatus==true" class="btn" type="button"
+                            (click)="updateLaborHourRequest()">更新</button>
+                        <!-- <button mat-button class="btn" type="submit" (click)="addLaborHourRequest()">複製轉新增</button> -->
+                    </div>
+                </form>
+            </div>
+
+            <mat-divider [vertical]="true" class="col-1"></mat-divider>
+
+            <div class="col-6 text-left">
+                <div class="pt-0 pb-0">
+                    <h3>紀錄列表</h3>
+                    <div class="row">
+                        <div class="col">
+                            <div class="pt-0 pb-2">
+                                <div class="table-container">
+                                    <div class="table">
+                                        <table mat-table [dataSource]="laborHourDataSource" class="">
+                                            <!-- h_title -->
+                                            <ng-container matColumnDef="h_title">
+                                                <th mat-header-cell *matHeaderCellDef class="display-none">h_title
+                                                </th>
+                                                <td mat-cell *matCellDef="let element" class="display-none">
+                                                    {{element.title}}
+                                                </td>
+                                            </ng-container>
+                                            <!-- nature -->
+                                            <ng-container matColumnDef="nature">
+                                                <th mat-header-cell *matHeaderCellDef>工作項目</th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    [{{element.nature}}]{{element.title}}
+                                                </td>
+                                            </ng-container>
+                                            <!-- date_for_start -->
+                                            <ng-container matColumnDef="date_for_start">
+                                                <th mat-header-cell *matHeaderCellDef>日期</th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    {{element.date_for_start | date: 'yyyy/MM/dd'}}
+                                                </td>
+                                            </ng-container>
+                                            <!-- time_start -->
+                                            <ng-container matColumnDef="time_for_start">
+                                                <th mat-header-cell *matHeaderCellDef>時間</th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    <!--{{element.time_for_start}}~{{element.time_for_end}}({{element.hour}})-->
+                                                    {{element.time_for_start}}~{{element.time_for_end}}
+                                                </td>
+                                            </ng-container>
+                                            <!-- time_for_end -->
+                                            <ng-container matColumnDef="time_for_end">
+                                                <th mat-header-cell *matHeaderCellDef class="display-none">
+                                                    time_for_end
+                                                </th>
+                                                <td mat-cell *matCellDef="let element" class="display-none">
+                                                    {{element.time_for_end}}
+                                                </td>
+                                            </ng-container>
+                                            <!-- hour -->
+                                            <ng-container matColumnDef="laborhour">
+                                                <th mat-header-cell *matHeaderCellDef>時數</th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    <!--{{element.time_for_start}}~{{element.time_for_end}}({{element.hour}})-->
+                                                    {{element.laborhour}}
+                                                </td>
+                                            </ng-container>
+                                            <!--action_edit-->
+                                            <ng-container matColumnDef="action_edit">
+                                                <th mat-header-cell *matHeaderCellDef class="text-center"> </th>
+                                                <td mat-cell *matCellDef="let element;let index = index"
+                                                    class="text-center">
+                                                    <button matTooltip="編輯" mat-mini-fab color="basic"
+                                                        class="table-btn-none" (click)="doPostEdit(element.h_id)">
+                                                        <mat-icon>edit</mat-icon>
+                                                    </button>
+                                                </td>
+                                            </ng-container>
+                                            <!--action_copy-->
+                                            <ng-container matColumnDef="action_copy">
+                                                <th mat-header-cell *matHeaderCellDef class="text-center"> </th>
+                                                <td mat-cell *matCellDef="let element;let index = index"
+                                                    class="text-center">
+                                                    <button matTooltip="複製轉新增" mat-mini-fab color="basic"
+                                                        class="table-btn-none" (click)="doPostCopy(element.h_id)">
+                                                        <mat-icon>content_copy</mat-icon>
+                                                    </button>
+                                                </td>
+                                            </ng-container>
+                                            <!-- delete -->
+                                            <ng-container matColumnDef="action_delete">
+                                                <th mat-header-cell *matHeaderCellDef class="text-center display-none">
+                                                    刪除 </th>
+                                                <td mat-cell *matCellDef="let element;let index = index"
+                                                    class="text-center display-none">
+                                                    <button mat-mini-fab color="basic" class="table-btn-none">
+                                                        <mat-icon>delete</mat-icon>
+                                                    </button>
+                                                </td>
+                                            </ng-container>
+                                            <!-- file -->
+                                            <!-- <ng-container matColumnDef="action_file">
+                                                <th mat-header-cell *matHeaderCellDef> 附件 </th>
+                                                <td mat-cell *matCellDef="let element;let index = index">
+                                                    <button mat-mini-fab color="basic" class="table-btn-none">
+                                                        <mat-icon>attach_file</mat-icon>
+                                                    </button>
+                                                </td>
+                                            </ng-container> -->
+
+                                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"> </tr>
+                                        </table>
+                                        <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="6"
+                                            [pageSizeOptions]="[6, 12, 18]" [showFirstLastButtons]="true">
+                                        </mat-paginator>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-5">
+                    2021/10/04紀錄列表:
+                    <div class="row">
+                        <div class="col">
+                            <mat-list>
+                                <mat-list-item *ngFor="let item of laborHourDatas;let index = index">
+                                    {{index+1}}.[{{item.hour}}hr][{{item.nature}}]<b>{{item.name}}</b>
+                                                        <button mat-mini-fab color="basic" class="table-btn-none">
+                                                            <mat-icon>attach_file</mat-icon>
+                                                        </button>
+                                    <mat-divider></mat-divider>
+                                </mat-list-item>
+                            </mat-list>
+                        </div>
+                    </div>
+                </div> -->
+        </div>
+    </div>
+
+
+</mat-dialog-content>

@@ -1,0 +1,51 @@
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+@import '/src/scss/container_children';
+@import '/src/scss/custom';
+
+body {
+  padding: 2em;
+  font-family: -apple-system, BlinkMacSystemFont, “Segoe UI”, Roboto, Helvetica, Arial, sans-serif, “Apple Color Emoji”, “Segoe UI Emoji”, “Segoe UI Symbol”;
+}
+
+.edit-form-group {
+    padding: 40px 0;
+  
+    .mat-form-field {
+      margin-right: 10px;
+      width: 200px;
+      margin-top: 10px;
+    }
+
+    .people-form-field {
+      width: 130px;
+    }
+  
+  }
+
+.text-bg{
+  background-color: rgb(241, 241, 241);
+}
+.text-context{
+  //color: #FF3D57;
+  
+  color: #8b8689;
+  line-height: 24px;
+}
+
+
+.primary{
+  background-color: #2ecc71;
+}
+
+.secondary {
+  background-color: #e53935;
+}
+
+.mat-tab-label {
+  background-color: blue;
+}

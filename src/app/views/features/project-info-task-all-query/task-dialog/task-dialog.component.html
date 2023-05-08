@@ -1,0 +1,127 @@
+<div class="container" class="detail-container">
+    <div class="offcanvas-header">
+        <h2 class="offcanvas-title" id="offcanvasLabel">任務管理</h2>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+            mat-dialog-close></button>
+    </div>
+    <mat-dialog-content>
+        <div class="row" style="width: 500px;">
+            <div class="col-md-12">
+                <mat-card class="card search-group">
+                    <div class="edit-form-group pb-0">
+                        <div class="row">
+                            <div class="col">
+                                <mat-list *ngIf="testtaskDatas[0]">
+                                    <mat-list-item>
+                                        <h4 class="text-head">專案名稱:</h4>
+                                        <h4>{{p_code}}</h4>
+                                    </mat-list-item>
+
+                                    <table class="example-full-width" cellspacing="0">
+                                        <tr>
+                                            <td>
+                                                <mat-list-item>
+                                                    <h4 class="px-0">任務代號:</h4>
+                                                    <h4>{{testtaskDatas[0].code}}</h4>
+                                                </mat-list-item>
+                                            </td>
+                                            <td>
+                                                <mat-list-item>
+                                                    <h4 class="text-head">任務名稱:</h4>
+                                                    <h4>{{testtaskDatas[0].t_name}}</h4>
+                                                </mat-list-item>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <mat-list-item>
+                                        <h4 class="text-head">任務描述:</h4>
+                                        <h4>{{testtaskDatas[0].description}}</h4>
+                                    </mat-list-item>
+
+                                    <mat-list-item>
+                                        <h4 class="text-head">比較基準:</h4>
+                                        <h4></h4>
+                                    </mat-list-item>
+
+                                    <table class="example-full-width" cellspacing="0">
+                                        <tr>
+                                            <td>
+                                                <mat-list-item>
+                                                    <h4 class="px-0">任務時程:</h4>
+                                                    <h4>
+                                                        {{testtaskDatas[0].date_for_estimated_start| date:
+                                                        'yyyy/MM/dd'}} ~
+                                                        {{testtaskDatas[0].date_for_estimated_completion| date:
+                                                        'yyyy/MM/dd'}}
+                                                    </h4>
+                                                </mat-list-item>
+                                            </td>
+                                            <td>
+                                                <mat-list-item>
+                                                    <h4 class="text-head">工時:</h4>
+                                                    <h4>{{testtaskDatas[0].labor_hour}}</h4>
+                                                </mat-list-item>
+                                            </td>
+                                            <td>
+                                                <mat-list-item>
+                                                    <h4 class="text-head">百分比:</h4>
+                                                    <h4></h4>
+                                                </mat-list-item>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <mat-list-item>
+                                        <h4 class="text-head">前一任務:</h4>
+                                        <h4>{{testtaskDatas[0].before_id}}</h4>
+                                    </mat-list-item>
+
+                                    <mat-list-item>
+                                        <h4 class="text-head">任務關聯:</h4>
+                                        <h4></h4>
+                                    </mat-list-item>
+
+                                    <table class="example-full-width" cellspacing="0">
+                                        <tr>
+                                            <td>
+                                                <mat-list-item>
+                                                    <h4 class="px-0">預計成本:</h4>
+                                                    <h4></h4>
+                                                </mat-list-item>
+                                            </td>
+                                            <td>
+                                                <mat-list-item>
+                                                    <h4 class="text-head">負責人:</h4>
+                                                    <h4>{{testtaskDatas[0].name}}</h4>
+                                                </mat-list-item>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <mat-list-item>
+                                        <h4 class="text-head">狀態:</h4>
+                                        <h4>{{testtaskDatas[0].status}}</h4>
+                                    </mat-list-item>
+
+                                    <mat-form-field appearance="outline" style="width: 100%;">
+                                        <mat-label>備註:</mat-label>
+                                        <textarea matInput></textarea>
+                                    </mat-form-field>
+
+
+                                </mat-list>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button class="btn-normal reset" type="reset" mat-dialog-close>關閉</button>
+    </mat-dialog-actions>
+</div>

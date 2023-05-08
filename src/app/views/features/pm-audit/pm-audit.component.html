@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard">首頁</a></li>
+                    <li class="breadcrumb-item active">PM專案待完工</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        PM專案待完工
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!--顯示資料區域-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-0 pb-3">
+                <!--表格-->
+                <mat-card class="card table">
+                    <div class="table-container">
+                        <table mat-table [dataSource]="projectDataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="code">
+                                <th mat-header-cell *matHeaderCellDef>代號</th>
+                                <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="p_name">
+                                <th mat-header-cell *matHeaderCellDef>名稱</th>
+                                <td mat-cell *matCellDef="let element"> {{element.p_name}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="projectman_name">
+                                <th mat-header-cell *matHeaderCellDef> 負責人 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.projectman_name}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="status">
+                                <th mat-header-cell *matHeaderCellDef> 狀態 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="date_for_start">
+                                <th mat-header-cell *matHeaderCellDef> 起訖 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.date_for_start | date: 'yyyy/MM/dd'}}
+                                    ~ {{element.date_for_end | date: 'yyyy/MM/dd'}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="action_edit">
+                                <th mat-header-cell *matHeaderCellDef>審核</th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button mat-mini-fab color="basic" class="table-btn-none" 
+                                        matTooltip="審核"
+                                        [routerLink]="['/main/pm-audit-edit/' + element.p_id + '/' + element.bonita_task_id]">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                            <!-- Row shown when there is no matching data. -->
+                        </table>
+                    </div>
+                    <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5"
+                        [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true">
+                    </mat-paginator>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,189 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">編輯任務</h2>
+    <h6 style="color: red;">　*</h6>
+    <h6>下滑還有待填事項</h6>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        mat-dialog-close></button>
+</div>
+
+<mat-dialog-content>
+    <div class="row" style="width: 860px;">
+        <div class="col-6">
+            <form [formGroup]="editTaskForm" *ngIf="testtaskDatas">
+                <table>
+                    <tr>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>*任務代號 </mat-label>
+                                <input matInput placeholder="請輸入任務代號" type="text" [(ngModel)]="testtaskDatas.body.code"
+                                    formControlName="code" name="code" ngDefaultControl readonly disable>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>*任務名稱</mat-label>
+                                <input matInput placeholder="請輸入任務名稱" type="text"
+                                    [(ngModel)]="testtaskDatas.body.t_name" formControlName="t_name" name="t_name"
+                                    ngDefaultControl readonly>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+                <mat-form-field appearance="outline" class="w-100p">
+                    <mat-label>任務描述</mat-label>
+                    <input matInput placeholder="請輸入任務描述" [(ngModel)]="testtaskDatas.body.remark"
+                        formControlName="remark" name="remark" ngDefaultControl type="text">
+                </mat-form-field>
+                <table>
+                    <tr>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>前一個任務</mat-label>
+                                <mat-select [(ngModel)]="testtaskDatas.body.last_task" formControlName="last_task"
+                                    name="last_task" ngDefaultControl required>
+                                    <mat-option *ngFor="let task of taskList" [value]="task.id">
+                                        {{task.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>關聯任務</mat-label>
+                                <mat-select>
+                                    <mat-option *ngFor="let select of ['A','B','C','D','E','F']" [value]="select"
+                                        title="{{select}}">
+                                        {{select}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+                <mat-form-field appearance="outline" class="w-100p">
+                    <mat-label>任務時程</mat-label>
+                    <mat-date-range-input [rangePicker]="task_picker">
+                        <input matStartDate placeholder="起始日" [(ngModel)]="testtaskDatas.body.date_for_estimated_start"
+                            formControlName="date_for_estimated_start" name="date_for_estimated_start" ngDefaultControl required>
+                        <input matEndDate placeholder="結束日"
+                            [(ngModel)]="testtaskDatas.body.date_for_estimated_completion"
+                            formControlName="date_for_estimated_completion" name="date_for_estimated_completion"
+                            ngDefaultControl required>
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="task_picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #task_picker></mat-date-range-picker>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100p">
+                    <mat-label>比較基準</mat-label>
+                    <mat-date-range-input>
+                        <input matStartDate placeholder="起始日" [(ngModel)]="last_date_start"
+                            formControlName="last_date_start" name="last_date_start" ngDefaultControl readonly>
+                        <input matEndDate placeholder="結束日" [(ngModel)]="last_date_completion"
+                            formControlName="last_date_completion" name="last_date_completion" ngDefaultControl
+                            readonly>
+                    </mat-date-range-input>
+                    <!-- <mat-datepicker-toggle matSuffix [for]="task_picker2"></mat-datepicker-toggle>
+                    <mat-date-range-picker #task_picker2></mat-date-range-picker> -->
+                </mat-form-field>
+
+                <table>
+                    <tr>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>狀態</mat-label>
+                                <mat-select>
+                                    <mat-option *ngFor="let select of ['A','B','C','D','E','F']" [value]="select"
+                                        title="{{select}}">
+                                        {{select}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-checkbox class="ml-10" [(ngModel)]="testtaskDatas.body.landmark"
+                                formControlName="landmark" name="landmark">里程碑</mat-checkbox>
+                            <mat-checkbox class="ml-10" [(ngModel)]="testtaskDatas.body.sales_order_number"
+                                formControlName="sales_order_number" name="sales_order_number">銷售單號</mat-checkbox>
+                        </td>
+                    </tr>
+                </table>
+                <mat-form-field appearance="outline">
+                    <mat-label>工時</mat-label>
+                    <input matInput type="text" [(ngModel)]="testtaskDatas.body.labor_hour" formControlName="labor_hour"
+                        name="labor_hour" ngDefaultControl readonly>
+                </mat-form-field>
+                <button mat-mini-fab class="table-btn" matTooltip="附件">
+                    <mat-icon>attach_file</mat-icon>
+                </button>
+            </form>
+        </div>
+        <div class="col-5">
+            <form [formGroup]="editChairmanForm" *ngIf="oneUserDatas">
+                <table>
+                    <tr>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>負責人</mat-label>
+                                <mat-select [(ngModel)]="taskPrincipalIdDatas" formControlName="taskPrincipalIdDatas"
+                                    name="taskPrincipalIdDatas" ngDefaultControl required>
+                                    <mat-optgroup *ngFor="let group of accountgroup" [label]="group.name"
+                                        [disabled]="group.disabled">
+                                        <mat-option *ngFor="let account of group.account" [value]="account.account_id">
+                                            {{account.name}}
+                                        </mat-option>
+                                    </mat-optgroup>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>任務參與人員</mat-label>
+                                <mat-select [(value)]="userid" [(ngModel)]="user_id" formControlName="user_id"
+                                    name="user_id" ngDefaultControl>
+                                    <mat-optgroup *ngFor="let group of accountgroup" [label]="group.name"
+                                        [disabled]="group.disabled">
+                                        <mat-option *ngFor="let account of group.account" [value]="account.account_id">
+                                            {{account.name}}
+                                        </mat-option>
+                                    </mat-optgroup>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <button mat-button class="btn-normal-none ml-10" (click)="addSelectUser()">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <mat-card class="card bg-import" style="min-height: 400px;display: block;">
+                <div class="row">
+                    <div class="col">
+                        <b>
+                            <h4>
+                                參與人員列表:({{num}})
+                            </h4>
+                        </b>
+                    </div>
+                </div>
+                <div class="row" *ngFor="let i of taskUserNameDatas;let index=index">
+                    <div class="col mt-2 ml-2">
+                        <span>
+                            {{index+1}}:{{i}}
+                        </span>
+                        <button mat-button (click)="deleteSelectUser(index)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button class="btn-normal-none reset" type="reset" (click)="resetForm()">清除</button>
+    <button mat-button class="btn" (click)="updateTaskRequest()">儲存</button>
+</mat-dialog-actions>

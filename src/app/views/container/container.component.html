@@ -1,0 +1,15 @@
+<app-header></app-header>
+<mat-sidenav-container class="sidenav-container" (backdropClick)="close()"  fixedInViewport="true">
+
+  <mat-sidenav #sidenav mode="side" (keydown.escape)="close()" disableClose class="sidenav" [fixedInViewport]="true">
+    <app-sidenav></app-sidenav>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="wrapper">
+      <router-outlet></router-outlet>
+    </div>
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+  
+</mat-sidenav-container>

@@ -1,0 +1,1085 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard" class="a-blue">首頁</a></li>
+                    <li class="breadcrumb-item active"><a href="/main/projectinfo/project-manager"
+                            class="a-blue">專案管理</a></li>
+                    <li class="breadcrumb-item active"><a>專案管理作業-修改</a></li>
+
+                    <!-- <li class="breadcrumb-item"><a href="/main/dashboard">首頁</a></li>
+                    <li class="breadcrumb-item active">PM待回報專案</li> -->
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <!-- <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>edit</mat-icon>
+                    <span class="text-left">
+                        專案管理作業-修改
+                    </span>
+                </h1>
+            </div>
+            <div class="right">
+                <button mat-icon-button (click)="cancelItem()">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div> -->
+    <!--查詢區域-->
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="pt-3 pb-0">
+                <div class="">
+                    <mat-card class="card search-group">
+                        <mat-card-content>
+                            <div class="edit-form-group pb-0">
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <h2 *ngIf="projectDatas">
+                                            <b>
+                                                {{projectDatas.body.code}}
+                                            </b>
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5 col-sm-12 text-center" *ngIf="projectDatas">
+                                        <form [formGroup]="editProjectForm">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>分類</mat-label>
+                                                <input matInput type="text" [(ngModel)]="projectDatas.body.type"
+                                                    formControlName="type" name="type" ngDefaultControl>
+                                            </mat-form-field>
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>代號</mat-label>
+                                                <input matInput type="text" [(ngModel)]="projectDatas.body.code"
+                                                    formControlName="code" name="code" ngDefaultControl required>
+                                            </mat-form-field>
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>名稱</mat-label>
+                                                <input matInput type="text" [(ngModel)]="projectDatas.body.p_name"
+                                                    formControlName="p_name" name="p_name" ngDefaultControl required>
+                                            </mat-form-field>
+
+                                            <!-- <mat-form-field appearance="outline">
+                                                <mat-label>客戶</mat-label>
+                                                <input matInput type="text" [(ngModel)]="projectDatas.body.customer_id" formControlName="customer_id"  name="customer_id" ngDefaultControl>
+                                            </mat-form-field> -->
+
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>客戶</mat-label>
+                                                <mat-select [(ngModel)]="projectDatas.body.customer_id"
+                                                    formControlName="customer_id" name="customer_id" ngDefaultControl>
+                                                    <mat-option *ngFor="let user of userList" [value]="user.id">
+                                                        {{user.name}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <!-- <p> Selected food: {{projectDatas.body.customer_id}} </p> -->
+
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>起始日</mat-label>
+                                                <input matInput [matDatepicker]="picker_done"
+                                                    [(ngModel)]="projectDatas.body.date_for_start"
+                                                    formControlName="date_for_start" name="date_for_start"
+                                                    ngDefaultControl required>
+                                                <mat-datepicker-toggle matSuffix [for]="picker_done">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #picker_done></mat-datepicker>
+                                                <mat-error>
+                                                    必填
+                                                </mat-error>
+                                            </mat-form-field>
+
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>結束日</mat-label>
+                                                <input matInput [matDatepicker]="picker"
+                                                    [(ngModel)]="projectDatas.body.date_for_end"
+                                                    formControlName="date_for_end" name="date_for_end" ngDefaultControl
+                                                    required>
+                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker></mat-datepicker>
+                                                <mat-error>
+                                                    必填
+                                                </mat-error>
+                                            </mat-form-field>
+
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>機台總成品</mat-label>
+                                                <input matInput type="text" name="client-name"
+                                                    [(ngModel)]="projectDatas.body.machine_finished_number"
+                                                    formControlName="machine_finished_number"
+                                                    name="machine_finished_number" ngDefaultControl>
+                                            </mat-form-field>
+
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>數量</mat-label>
+                                                <input matInput type="text" name="client-name"
+                                                    [(ngModel)]="projectDatas.body.machine_quantity"
+                                                    formControlName="machine_quantity" name="machine_quantity"
+                                                    ngDefaultControl>
+                                            </mat-form-field>
+
+                                            <!-- <mat-form-field appearance="outline" class="people-form-field">
+                                                <mat-label>專案負責人</mat-label>
+                                                <input matInput type="text" [(ngModel)]="user_name" formControlName="projectman_id"  name="projectman_id" ngDefaultControl>
+                                            </mat-form-field> -->
+
+                                            <mat-form-field appearance="outline" class="people-form-field">
+                                                <mat-label>負責人</mat-label>
+                                                <mat-select [(ngModel)]="projectDatas.body.projectman_id"
+                                                    formControlName="projectman_id" name="projectman_id"
+                                                    ngDefaultControl required>
+                                                    <mat-optgroup class="option-30" *ngFor="let group of accountgroup"
+                                                        [label]="group.name" [disabled]="group.disabled">
+                                                        <mat-option class="option-30"
+                                                            *ngFor="let account of group.account"
+                                                            [value]="account.account_id">
+                                                            {{account.name}}
+                                                        </mat-option>
+                                                    </mat-optgroup>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <mat-form-field appearance="outline" class="people-form-field">
+                                                <mat-label>客服</mat-label>
+                                                <mat-select [(ngModel)]="projectDatas.body.serviceman_id"
+                                                    formControlName="serviceman_id" name="serviceman_id"
+                                                    ngDefaultControl required>
+                                                    <mat-optgroup class="option-30" *ngFor="let group of accountgroup"
+                                                        [label]="group.name" [disabled]="group.disabled">
+                                                        <mat-option class="option-30"
+                                                            *ngFor="let account of group.account"
+                                                            [value]="account.account_id">
+                                                            {{account.name}}
+                                                        </mat-option>
+                                                    </mat-optgroup>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <!-- <p> Selected food: {{projectDatas.body.serviceman_id}} </p> -->
+
+                                            <!-- <mat-form-field appearance="outline" class="people-form-field">
+                                                <mat-label>業務負責人</mat-label>
+                                                <input matInput type="text" [(ngModel)]="projectDatas.body.salesman_id" formControlName="salesman_id"  name="salesman_id" ngDefaultControl>
+                                            </mat-form-field> -->
+
+                                            <mat-form-field appearance="outline" class="people-form-field">
+                                                <mat-label>業務</mat-label>
+                                                <mat-select [(ngModel)]="projectDatas.body.salesman_id"
+                                                    formControlName="salesman_id" name="salesman_id" ngDefaultControl
+                                                    required>
+                                                    <!-- <mat-option *ngFor="let user of userList" [value]="user.id">
+                                                    {{user.name}}
+                                                  </mat-option> -->
+                                                    <mat-optgroup class="option-30" *ngFor="let group of accountgroup"
+                                                        [label]="group.name" [disabled]="group.disabled">
+                                                        <mat-option class="option-30"
+                                                            *ngFor="let account of group.account"
+                                                            [value]="account.account_id">
+                                                            {{account.name}}
+                                                        </mat-option>
+                                                    </mat-optgroup>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                            <!-- <p> Selected food: {{projectDatas.body.salesman_id}} </p> -->
+                                        </form>
+                                    </div>
+                                    <div class="col-md-7 col-sm-12 mt-3">
+                                        <div class="row" *ngIf="projectDatas">
+                                            <div class="col-6">
+                                                <dl class="row">
+                                                    <dt class="col-sm-5 text-right">
+                                                        <h4 class="px-0 text-head">銷貨單號:</h4>
+                                                    </dt>
+                                                    <dd class="col-sm-7">
+                                                        <h4>E001</h4>
+                                                    </dd>
+                                                    <dt class="col-sm-5 text-right">
+                                                        <h4 class="px-0 text-head">外部訂單:</h4>
+                                                    </dt>
+                                                    <dd class="col-sm-7">
+                                                        <h4>E001-1</h4>
+                                                    </dd>
+                                                    <dt class="col-sm-5">
+                                                        <h4 class="px-0 text-head text-right">內部訂單:</h4>
+                                                    </dt>
+                                                    <dd class="col-sm-7">
+                                                        <h4>{{projectDatas.body.inner_id}}</h4>
+                                                    </dd>
+                                                    <dt class="col-sm-5">
+                                                        <h4 class="px-0 text-head text-right">收款日:</h4>
+                                                    </dt>
+                                                    <dd class="col-sm-7">
+                                                        <h4
+                                                            *ngIf="projectDatas.body.date_for_pay !='0001-01-01T00:00:00Z'">
+                                                            {{projectDatas.body.date_for_pay | date: 'yyyy/MM/dd'}}</h4>
+                                                    </dd>
+                                                    <dt class="col-sm-5">
+                                                        <h4 class="px-0 text-head text-right">預計驗收日:</h4>
+                                                    </dt>
+                                                    <dd class="col-sm-7">
+                                                        <h4
+                                                            *ngIf="projectDatas.body.date_for_check !='0001-01-01T00:00:00Z'">
+                                                            {{projectDatas.body.date_for_check | date: 'yyyy/MM/dd'}}
+                                                        </h4>
+                                                    </dd>
+                                                    <dt class="col-sm-5">
+                                                        <h4 class="px-0 text-head text-right">出機日:</h4>
+                                                    </dt>
+                                                    <dd class="col-sm-7">
+                                                        <h4
+                                                            *ngIf="projectDatas.body.date_for_delivery !='0001-01-01T00:00:00Z'">
+                                                            {{projectDatas.body.date_for_delivery | date: 'yyyy/MM/dd'}}
+                                                        </h4>
+                                                    </dd>
+                                                    <dt class="col-sm-5">
+                                                        <h4 class="px-0 text-head text-right">建檔日:</h4>
+                                                    </dt>
+                                                    <dd class="col-sm-7">
+                                                        <h4>{{projectDatas.body.create_time | date: 'yyyy/MM/dd'}}</h4>
+                                                    </dd>
+                                                </dl>
+                                            </div>
+                                            <div class="col-6">
+                                                <dl class="row">
+                                                    <dt class="col-sm-4">
+                                                        <h4 class="px-0 text-head text-right">狀態:</h4>
+                                                    </dt>
+                                                    <dd class="col-sm-8">
+                                                        <h4>{{this.projectDatas.body.status}}</h4>
+                                                    </dd>
+                                                    <!-- <dt class="col-sm-4">
+                                                        <h4 class="px-0 text-head text-right">負責人:</h4>
+                                                    </dt>
+                                                    <dd class="col-sm-8">
+                                                        <h4>{{projectDatas.body.creater}}</h4>
+                                                    </dd>
+                                                    <dt class="col-sm-4">
+                                                        <h4 class="px-0 text-head text-right">業務:</h4>
+                                                    </dt>
+                                                    <dd class="col-sm-8">
+                                                        <h4>{{projectDatas.body.creater}}</h4>
+                                                    </dd>
+                                                    <dt class="col-sm-4">
+                                                        <h4 class="px-0 text-head text-right">客服:</h4>
+                                                    </dt>
+                                                    <dd class="col-sm-8">
+                                                        <h4>{{projectDatas.body.creater}}</h4>
+                                                    </dd> -->
+                                                    <dt class="col-sm-4">
+                                                        <h4 class="px-0 text-head text-right">建檔:</h4>
+                                                    </dt>
+                                                    <dd class="col-sm-8">
+                                                        <h4>{{projectDatas.body.creater}}</h4>
+                                                    </dd>
+                                                    <dt class="col-sm-4">
+                                                        <h4 class="px-0 text-head text-right">
+                                                            <a (click)="authItem()">
+                                                                <u class="text-head">成員:</u>
+                                                            </a>
+                                                        </h4>
+                                                    </dt>
+                                                    <dd class="col-sm-8">
+                                                        <span *ngFor="let item of taskUserList;let index = index">
+                                                            {{item}}、
+                                                        </span>
+                                                        <!-- <button mat-mini-fab color="basic" class="list-btn-none">
+                                                            <mat-icon>edit</mat-icon>
+                                                        </button> -->
+                                                    </dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pt-3">
+                                    <div class="col-md-12 text-center">
+                                        <!-- <button mat-button class="btn-normal-none" (click)="cancelItem()">
+                                            
+                                            離開
+                                        </button> -->
+                                        <button mat-button class="btn" (click)="updateProject()">
+                                            <!-- <mat-icon>save_alt</mat-icon> -->
+                                            儲存
+                                        </button>
+                                        <button mat-button [matMenuTriggerFor]="menu" class="btn-normal"
+                                            matTooltip="更新狀態" style="margin-left: 5%;">
+                                            <mat-icon>more_horiz</mat-icon>
+                                        </button>
+                                        <mat-menu #menu="matMenu">
+                                            <button mat-menu-item (click)="updateStatus('stop','中止')">中止</button>
+                                            <button mat-menu-item (click)="updateStatus('end','結案')">結案</button>
+                                            <button mat-menu-item (click)="updateStatus('pause','暫停')">暫停</button>
+                                        </mat-menu>
+                                        <button mat-button class="btn"
+                                            (click)="getProjectBonitaUserList(p_id)">啟動</button>
+                                        <!-- <button mat-button class="btn-normal"
+                                            (click)="updateStatus('stop','中止')">中止</button>
+                                        <button mat-button class="btn-normal"
+                                            (click)="updateStatus('end','結案')">結案</button>
+                                        <button mat-button class="btn-normal"
+                                            (click)="updateStatus('pause','暫停')">暫停</button> -->
+
+
+                                        <!-- <button mat-button class="btn-normal" (click)="authItem()">
+                                            
+                                            權限
+                                        </button> -->
+                                        <!-- <button mat-button class="btn-normal" matTooltip="出機行程">
+                                            <mat-icon>access_time</mat-icon>
+                                            出機行程
+                                        </button> -->
+                                        <button mat-button class="btn-normal" matTooltip="甘特圖"
+                                            (click)="ganttOpen(p_id)">
+                                            <!-- <mat-icon>multiline_chart</mat-icon> -->
+                                            甘特圖
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--查詢區域2 未命名
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="form-group pt-3 pb-0">
+                <mat-card class="card search-group">
+                    
+                    <button mat-button class="btn">專案結案</button>
+                    <button mat-button class="btn-danger">專案取消</button>
+                    <button mat-button class="btn-danger">專案中止</button>
+                    <button mat-button class="btn-danger">專案暫停</button>
+                    
+                </mat-card>
+            </div>
+        </div>
+    </div>-->
+    <!--Tab-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pt-0 pb-3">
+                <mat-card class="card">
+                    <mat-tab-group dynamicHeight backgroundolor="black">
+
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                任務
+                            </ng-template>
+                            <div class="container">
+                                <div class="row pt-2 pb-0">
+                                </div>
+                                <div class="row pt-0 pb-0">
+                                    <div class="form-group pt-0 pb-0 text-center">
+                                        <!-- <mat-form-field appearance="outline">
+                                            <mat-label>排序方式</mat-label>
+                                            <mat-select disableRipple name="projet-type">
+                                                <mat-option value="1">依照任務代碼排序</mat-option>
+                                                <mat-option value="2">依照產銷結構排序</mat-option>
+                                            </mat-select>
+                                        </mat-form-field> -->
+                                        <!-- <button mat-button class="btn-normal-none" matTooltip="排序">
+                                            <mat-icon>repeat</mat-icon>
+                                            排序
+                                        </button> -->
+                                        <!--<button mat-button class="btn-none mb-3" (click)="doPostAdd(p_id)"
+                                            matTooltip="新建任務">
+                                            <mat-icon class="icon-white">add</mat-icon>
+                                        </button>-->
+                                        <!-- <button mat-button class="btn-normal-none" matTooltip="顯示">
+                                            <mat-icon>sort</mat-icon>
+                                            顯示
+                                        </button> -->
+                                    </div>
+                                </div>
+                                <!--顯示資料區域-->
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="pt-3 pb-2">
+                                            <!--p-treeTable-->
+                                            <p-treeTable [value]="files1" [columns]="cols" class="table">
+                                                <!-- <ng-template pTemplate="caption">
+                                                    任務列表
+                                                </ng-template> -->
+                                                <ng-template pTemplate="colgroup" let-columns>
+                                                    <colgroup>
+                                                        <col *ngFor="let col of columns" [style.width]="col.width">
+                                                    </colgroup>
+                                                </ng-template>
+                                                <ng-template pTemplate="header" let-columns>
+                                                    <!-- <colgroup>
+                                                        
+                                                    </colgroup> -->
+                                                    <tr>
+                                                        <th *ngFor="let col of columns">
+                                                            {{col.header}}
+                                                        </th>
+                                                        <th>
+                                                            <button mat-mini-fab color="basic" class="table-btn-none"
+                                                                (click)="doPostAdd(p_id)">
+                                                                <mat-icon>add</mat-icon>
+                                                            </button>
+                                                        </th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-rowNode let-rowData="rowData"
+                                                    let-columns="columns">
+                                                    <tr>
+                                                        <td *ngFor="let col of columns; let i = index">
+                                                            <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0">
+                                                            </p-treeTableToggler>
+
+                                                            {{rowData[col.field]}}
+                                                        </td>
+
+                                                        <!-- <td *ngFor="let col of columns; let i = index">
+                                                            <p-button icon="pi pi-pencil" styleClass="p-button-warning">{{col}}</p-button>
+                                                        </td> -->
+
+                                                        <td>
+                                                            <!-- <p-button icon="pi pi-pencil" styleClass="p-button-warning"
+                                                                (click)="doPostEdit(rowData.t_id)">
+                                                            </p-button> -->
+                                                            <button mat-mini-fab color="basic" class="table-btn-none"
+                                                                (click)="doPostEdit(rowData.t_id)">
+                                                                <mat-icon>edit</mat-icon>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template>
+                                                    <div style="text-align:left">
+                                                        <p-button icon="pi pi-refresh"></p-button>
+                                                    </div>
+                                                </ng-template>
+                                            </p-treeTable>
+                                            <!--<div class="table-container">
+                                                <div class="table">
+                                                    <table mat-table [dataSource]="dataSource_1" class="">
+                                                        
+                                                        <ng-container matColumnDef="code">
+                                                            <th mat-header-cell *matHeaderCellDef>任務編號</th>
+                                                            <td mat-cell *matCellDef="let element;let index = index">
+                                                                {{element.code}}
+                                                            </td>
+                                                        </ng-container>
+                                                        
+                                                        <ng-container matColumnDef="t_name">
+                                                            <th mat-header-cell *matHeaderCellDef>任務名稱</th>
+                                                            <td mat-cell *matCellDef="let element;let index = index">
+                                                                {{element.t_name}}
+                                                            </td>
+                                                        </ng-container>
+                                                        
+                                                        <ng-container matColumnDef="name">
+                                                            <th mat-header-cell *matHeaderCellDef>任務負責人名稱</th>
+                                                            <td mat-cell *matCellDef="let element;let index = index">
+                                                                {{element.name}}
+                                                            </td>
+                                                        </ng-container>
+                                                        
+                                                        <ng-container matColumnDef="remark">
+                                                            <th mat-header-cell *matHeaderCellDef> 任務描述 </th>
+                                                            <td mat-cell *matCellDef="let element;let index = index">
+                                                                {{element.remark}}
+                                                            </td>
+                                                        </ng-container>
+                                                        
+                                                        <ng-container matColumnDef="date_for_estimated_start">
+                                                            <th mat-header-cell *matHeaderCellDef> 開始時間(工時) </th>
+                                                            <td mat-cell *matCellDef="let element;let index = index">
+                                                                {{element.date_for_estimated_start  | date: 'yyyy/MM/dd'}} </td>
+                                                        </ng-container>
+                                                        
+                                                        <ng-container matColumnDef="date_for_estimated_completion">
+                                                            <th mat-header-cell *matHeaderCellDef> 結束時間(工時) </th>
+                                                            <td mat-cell *matCellDef="let element;let index = index">
+                                                                {{element.date_for_estimated_completion  | date: 'yyyy/MM/dd'}} </td>
+                                                        </ng-container>
+
+                                                       
+                                                        <ng-container matColumnDef="date_for_actual_completion">
+                                                            <th mat-header-cell *matHeaderCellDef> 實際完成日 </th>
+                                                            <td mat-cell *matCellDef="let element;let index = index">
+                                                                {{element.date_for_actual_completion  | date: 'yyyy/MM/dd'}} </td>
+                                                        </ng-container>
+
+                                                      
+                                                        <ng-container matColumnDef="file">
+                                                            <th mat-header-cell *matHeaderCellDef> 附件負責 </th>
+                                                            <td mat-cell *matCellDef="let element;let index = index">
+                                                                <button mat-mini-fab color="basic"
+                                                                    class="table-btn-none" (click)="fileUpload()">
+                                                                    <mat-icon>attach_file</mat-icon>
+                                                                </button>
+                                                            </td>
+                                                        </ng-container>
+
+                                                        <ng-container matColumnDef="landmark">
+                                                            <th mat-header-cell *matHeaderCellDef > 里程碑 </th>
+                                                            <td mat-cell *matCellDef="let element;let index = index">
+                                                                
+                                                                <mat-checkbox [(ngModel)]="element.landmark" [disabled]="true"></mat-checkbox>
+                                                                <mat-checkbox [(ngModel)]="element.landmark"></mat-checkbox>
+                                                            </td>
+                                                        </ng-container>
+                                                        
+                                                        <ng-container matColumnDef="t_id">
+                                                            <th mat-header-cell *matHeaderCellDef class="text-center">
+                                                                編輯 </th>
+                                                            <td mat-cell *matCellDef="let element;let index = index"
+                                                                class="text-center">
+                                                                <button mat-mini-fab color="basic"
+                                                                    class="table-btn-none"
+                                                                    (click)="doPostEdit(element.t_id)">
+                                                                    <mat-icon>edit</mat-icon>
+                                                                </button>
+                                                            </td>
+                                                        </ng-container>
+                                                        
+                                                        <ng-container matColumnDef="action_detail">
+                                                            <th mat-header-cell *matHeaderCellDef style="width: 30px;"
+                                                                class="text-center"> 檢視 </th>
+                                                            <td mat-cell *matCellDef="let element;let index = index"
+                                                                class="text-center">
+                                                                <button mat-mini-fab color="basic"
+                                                                    class="table-btn-none"
+                                                                    (click)="doPostDetail(element.name,element.t_id,p_id)">
+                                                                    <mat-icon>visibility</mat-icon>
+                                                                </button>
+                                                            </td>
+                                                        </ng-container>
+                                                        <tr mat-header-row *matHeaderRowDef="displayedColumns_1"></tr>
+                                                        <tr mat-row *matRowDef="let row; columns: displayedColumns_1;">
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <mat-paginator #paginator [length]="tasktotalCount" [pageIndex]="0"
+                                                [pageSize]="5" [pageSizeOptions]="[5, 10, 15]"
+                                                [showFirstLastButtons]="true">
+                                            </mat-paginator>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </mat-tab>
+
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                資源
+                            </ng-template>
+                            <div class="container">
+                                <div class="row pt-2">
+                                    <div class="col-md-12 text-center">
+                                        <h3>點選檢視</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="table-container">
+                                            <div class="table">
+                                                <table mat-table [dataSource]="dataSource_resource" class="">
+
+                                                    <ng-container matColumnDef="account_id">
+                                                        <th mat-header-cell *matHeaderCellDef style="display: none;">
+                                                            account_id </th>
+                                                        <td mat-cell *matCellDef="let element;let index = index"
+                                                            style="display: none;">
+                                                            {{element.account_id}}
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <ng-container matColumnDef="name">
+                                                        <th mat-header-cell *matHeaderCellDef> 負責人員 </th>
+                                                        <td mat-cell *matCellDef="let element;let index = index">
+                                                            {{element.name}}
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <ng-container matColumnDef="hour">
+                                                        <th mat-header-cell *matHeaderCellDef> 工時 </th>
+                                                        <td mat-cell *matCellDef="let element;let index = index">
+                                                            <b>
+                                                                {{element.hour}}
+                                                            </b>
+                                                            H
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <ng-container matColumnDef="action_detail">
+                                                        <th mat-header-cell *matHeaderCellDef style="width: 30px;"
+                                                            class="text-center"> </th>
+                                                        <td mat-cell *matCellDef="let element;let index = index"
+                                                            class="text-center">
+                                                            <button mat-mini-fab color="basic" class="table-btn-none"
+                                                                (click)="getOneResourceRequest(p_id,element.account_id)">
+                                                                <mat-icon>more_horiz</mat-icon>
+                                                            </button>
+                                                        </td>
+                                                    </ng-container>
+                                                    <tr mat-header-row *matHeaderRowDef="displayedColumns_resource">
+                                                    </tr>
+                                                    <tr mat-row
+                                                        *matRowDef="let row; columns: displayedColumns_resource;">
+                                                    </tr>
+                                                </table>
+                                                <mat-paginator #paginator_resource [length]="resourcetotalCount"
+                                                    [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 15]"
+                                                    [showFirstLastButtons]="true">
+                                                </mat-paginator>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <mat-card class="card" style="height: 100%;">
+                                            <div style="display: block">
+                                                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                                    [options]="barChartOptions" [legend]="barChartLegend"
+                                                    [chartType]="barChartType">
+                                                </canvas>
+                                            </div>
+                                        </mat-card>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                製令
+                            </ng-template>
+                            <div class="container">
+                                <div class="row pt-2">
+                                    <div class="col-md-12 text-center">
+                                        <h3>製令單號紀錄</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="table-container">
+                                            <div class="table">
+                                                <table mat-table [dataSource]="datasSource_3" class="mat-elevation-z8">
+
+                                                    <!--- Note that these columns can be defined in any order.
+                                                          The actual rendered columns are set as a property on the row definition" -->
+
+                                                    <!-- Position Column -->
+                                                    <ng-container matColumnDef="position">
+                                                        <th mat-header-cell *matHeaderCellDef> 製令單號 </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.position}}
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <!-- Weight Column -->
+                                                    <ng-container matColumnDef="date">
+                                                        <th mat-header-cell *matHeaderCellDef> 開單日期 </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                                                    </ng-container>
+
+                                                    <!-- Name Column -->
+                                                    <ng-container matColumnDef="name">
+                                                        <th mat-header-cell *matHeaderCellDef>機台名稱 </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                                                    </ng-container>
+
+                                                    <tr mat-header-row *matHeaderRowDef="displayedColumn_3"></tr>
+                                                    <tr mat-row *matRowDef="let row; columns: displayedColumn_3;"></tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                工時
+                            </ng-template>
+                            <div class="container">
+                                <div class="row pt-2">
+                                    <div class="col-md-12 text-center">
+                                        <h3>工時紀錄</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="table-container">
+                                            <div class="table">
+                                                <table mat-table [dataSource]="dataSource_laborhour" class="">
+
+                                                    <!-- account_id -->
+                                                    <ng-container matColumnDef="account_id">
+                                                        <th mat-header-cell *matHeaderCellDef style="display: none;">
+                                                            account_id </th>
+                                                        <td mat-cell *matCellDef="let element;let index = index"
+                                                            style="display: none;">
+                                                            {{element.account_id}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <!-- name -->
+                                                    <ng-container matColumnDef="name">
+                                                        <th mat-header-cell *matHeaderCellDef> 負責人員 </th>
+                                                        <td mat-cell *matCellDef="let element;let index = index">
+                                                            {{element.name}}
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <ng-container matColumnDef="hour">
+                                                        <th mat-header-cell *matHeaderCellDef> 工時 </th>
+                                                        <td mat-cell *matCellDef="let element;let index = index">
+                                                            <b>
+                                                                0{{element.hour}}
+                                                            </b>
+                                                            H
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <!-- action_detail -->
+                                                    <ng-container matColumnDef="action_detail">
+                                                        <th mat-header-cell *matHeaderCellDef style="width: 30px;"
+                                                            class="text-center"> </th>
+                                                        <td mat-cell *matCellDef="let element;let index = index"
+                                                            class="text-center">
+                                                            <button mat-mini-fab color="basic" class="table-btn-none"
+                                                                (click)="getOneLaborRequest(p_id,element.account_id,element.hour,element.name)">
+                                                                <mat-icon>more_horiz</mat-icon>
+                                                            </button>
+                                                        </td>
+                                                    </ng-container>
+                                                    <tr mat-header-row *matHeaderRowDef="displayedColumns_laborhour">
+                                                    </tr>
+                                                    <tr mat-row
+                                                        *matRowDef="let row; columns: displayedColumns_laborhour;">
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <mat-paginator #paginator_labor [length]="labortotalCount" [pageIndex]="0"
+                                            [pageSize]="5" [pageSizeOptions]="[5, 10, 15]"
+                                            [showFirstLastButtons]="true">
+                                        </mat-paginator>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <mat-list>
+                                            <mat-list-item *ngFor="let item of laborDetailList;let index=index">
+                                                {{index+1}}. {{item.t_name}} 已提報 {{item.hour}}小時
+                                            </mat-list-item>
+                                            <hr>
+                                            <mat-list-item *ngIf="sumLaborHour">
+                                                總計: {{sumLaborHour}} 小時
+                                            </mat-list-item>
+
+                                        </mat-list>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                會議|紀錄
+                            </ng-template>
+                            <div class="container">
+                                <!-- <div class="row pt-2">
+                                    <div class="col-md-12 text-center">
+                                        <h3>會議紀錄</h3>
+                                    </div>
+                                </div> -->
+                                <!-- <div class="row pb-0">
+                                    <div class="form-group pt-0 pb-0 text-center">
+                                        <button mat-button class="btn-none" matRipple [matRippleUnbounded]="false"
+                                            (click)="doPostMeetAdd(p_id)" matTooltip="新建會議">
+                                            <mat-icon class="icon-white">add</mat-icon>
+                                        </button>
+                                    </div>
+                                </div> -->
+                                <ng-template #addMeetDialog>
+                                    <app-add-meet-dialog title=""></app-add-meet-dialog>
+                                </ng-template>
+                                <ng-template #editMeetDialog>
+                                    <app-edit-meet-dialog title=""></app-edit-meet-dialog>
+                                </ng-template>
+                                <div class="row pt-3">
+                                    <div class="col-md-12">
+                                        <div class="table-container">
+                                            <div class="table">
+                                                <table mat-table [dataSource]="meetDataSource" class="mat-elevation-z8">
+
+                                                    <!--- Note that these columns can be defined in any order.
+                                                      The actual rendered columns are set as a property on the row definition" -->
+
+                                                    <!-- Position Column -->
+                                                    <ng-container matColumnDef="m_name">
+                                                        <th mat-header-cell *matHeaderCellDef> 名稱 </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.m_name}} </td>
+                                                    </ng-container>
+
+                                                    <!-- Position Column -->
+                                                    <ng-container matColumnDef="name">
+                                                        <th mat-header-cell *matHeaderCellDef> 主席 </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                                                    </ng-container>
+
+                                                    <!-- Name Column -->
+                                                    <ng-container matColumnDef="time_for_start">
+                                                        <th mat-header-cell *matHeaderCellDef> 開始 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.time_for_start}}:00
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <!-- Weight Column -->
+                                                    <ng-container matColumnDef="time_for_end">
+                                                        <th mat-header-cell *matHeaderCellDef> 結束 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.time_for_end}}:00
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <!-- Symbol Column -->
+                                                    <ng-container matColumnDef="date_for_start">
+                                                        <th mat-header-cell *matHeaderCellDef> 日期 </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.date_for_start
+                                                            | date: 'yyyy/MM/dd'}}
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <ng-container matColumnDef="room">
+                                                        <th mat-header-cell *matHeaderCellDef> 地點 </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.room}} </td>
+                                                    </ng-container>
+
+                                                    <ng-container matColumnDef="action_edit">
+                                                        <th mat-header-cell *matHeaderCellDef>
+                                                            <button mat-mini-fab color="basic" class="table-btn-none"
+                                                                (click)="doPostMeetAdd(p_id)">
+                                                                <mat-icon>add</mat-icon>
+                                                            </button>
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <!-- <button mat-button class="" (click)="doPostMeetEdit(element.m_id,p_id)">
+                                                                <mat-icon>edit</mat-icon>
+                                                            </button> -->
+                                                            <button mat-mini-fab color="basic" class="table-btn-none"
+                                                                (click)="doPostMeetEdit(element.m_id,p_id)">
+                                                                <mat-icon>edit</mat-icon>
+                                                            </button>
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <!-- Weight Column -->
+                                                    <ng-container matColumnDef="action_detail">
+                                                        <th mat-header-cell *matHeaderCellDef></th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <!-- <button mat-button class=""
+                                                                (click)="doPostMeet(element.m_id)">
+                                                                <mat-icon>info</mat-icon>
+                                                            </button> -->
+
+                                                            <button mat-mini-fab color="basic" class="table-btn-none"
+                                                                (click)="doPostMeet(element.m_id)">
+                                                                <mat-icon>more_horiz</mat-icon>
+                                                            </button>
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <!-- <ng-container matColumnDef="action_add">
+                                                        <th mat-header-cell *matHeaderCellDef>
+                                                            <button mat-mini-fab color="basic" class="table-btn-none"
+                                                                (click)="doPostMeetAdd(p_id)">
+                                                                <mat-icon>add</mat-icon>
+                                                            </button>
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                        </td>
+                                                    </ng-container> -->
+                                                    <tr mat-header-row *matHeaderRowDef="display_meet"></tr>
+                                                    <tr mat-row *matRowDef="let row; columns: display_meet;"></tr>
+                                                </table>
+                                                <mat-paginator #paginator_meet [length]="meet_total" [pageIndex]="0"
+                                                    [pageSize]="10" [pageSizeOptions]="[10, 15, 20]"
+                                                    [showFirstLastButtons]="true">
+                                                </mat-paginator>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                附件|紀錄
+                            </ng-template>
+                            <div class="container">
+                                <div class="row pt-2">
+                                    <div class="col-md-6">
+                                        <div class="text-center">
+                                            <h3>相關附件</h3>
+                                        </div>
+
+                                        <div class="table-container">
+                                            <div class="table">
+                                                <table mat-table [dataSource]="filesDataSource"
+                                                    class="mat-elevation-z8">
+
+                                                    <!--- Note that these columns can be defined in any order.
+                                                          The actual rendered columns are set as a property on the row definition" -->
+
+                                                    <!-- name Column -->
+                                                    <ng-container matColumnDef="file_name">
+                                                        <th mat-header-cell *matHeaderCellDef> 檔名 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <button mat-button (click)="download(element.file_name)">
+                                                                {{element.file_name}}.{{element.file_extension}}
+                                                            </button>
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <!-- path Column -->
+                                                    <ng-container matColumnDef="file_extension">
+                                                        <th mat-header-cell *matHeaderCellDef class="display-none"> 副檔
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element" class="display-none">
+                                                            {{element.file_extension}} </td>
+                                                    </ng-container>
+
+                                                    <!-- path Column -->
+                                                    <ng-container matColumnDef="creater_name">
+                                                        <th mat-header-cell *matHeaderCellDef> 上傳者 </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.creater_name}}
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <!-- creatTime Column -->
+                                                    <ng-container matColumnDef="create_time">
+                                                        <th mat-header-cell *matHeaderCellDef> 時間 </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.create_time |
+                                                            date: 'yyyy/MM/dd hh:mm'}}
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <!-- action Column -->
+                                                    <!-- <ng-container matColumnDef="action_delete">
+                                                        <th mat-header-cell *matHeaderCellDef class="text-center">
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element" class="text-center">
+                                                            <button mat-button class=""
+                                                                (click)="deleteFilesRequest(element.f_id)">
+                                                                <mat-icon>delete</mat-icon>
+                                                            </button>
+                                                        </td>
+                                                    </ng-container> -->
+
+                                                    <tr mat-header-row *matHeaderRowDef="filescol"></tr>
+                                                    <tr mat-row *matRowDef="let row; columns: filescol;"></tr>
+
+                                                </table>
+                                                <mat-paginator #paginatorFile [length]="filesTotal" [pageIndex]="0"
+                                                    [pageSize]="5" [pageSizeOptions]="[5, 10, 15]"
+                                                    [showFirstLastButtons]="true">
+                                                </mat-paginator>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-center">
+                                            <h3>相關紀錄</h3>
+                                        </div>
+
+                                        <div class="table-container">
+                                            <div class="table">
+                                                <table mat-table [dataSource]="interviewDataSource"
+                                                    class="mat-elevation-z8">
+
+                                                    <!-- <ng-container matColumnDef="actor">
+                                                        <th mat-header-cell *matHeaderCellDef style="display: none;"> 備註說明 </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.actor}}
+                                                        </td>
+                                                    </ng-container> -->
+
+                                                    <ng-container matColumnDef="content">
+                                                        <th mat-header-cell *matHeaderCellDef> 動作 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.actor}}{{element.content}}
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <!-- remark Column -->
+                                                    <ng-container matColumnDef="remark">
+                                                        <th mat-header-cell *matHeaderCellDef> 說明 </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.remark}}
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <!-- name Column -->
+                                                    <ng-container matColumnDef="creater_name">
+                                                        <th mat-header-cell *matHeaderCellDef> 人員 </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.creater_name}}
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <!-- creatTime Column -->
+                                                    <ng-container matColumnDef="create_time">
+                                                        <th mat-header-cell *matHeaderCellDef> 時間 </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.create_time | date:
+                                                            'yyyy/MM/dd hh:mm'}}
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <tr mat-header-row *matHeaderRowDef="interviewcol"></tr>
+                                                    <tr mat-row *matRowDef="let row; columns: interviewcol;"></tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                專案紀錄簿
+                            </ng-template>
+                            No data available
+                        </mat-tab>
+                    </mat-tab-group>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<ng-template #editDialog>
+    <app-edit-dialog title=""></app-edit-dialog>
+</ng-template>
+<ng-template #addDialog>
+    <app-add-dialog title=""></app-add-dialog>
+</ng-template>
+<ng-template #caseDialog>
+    <app-case-dialog title=""></app-case-dialog>
+</ng-template>
+<ng-template #worktimeDialog>
+    <app-worktime-dialog title=""></app-worktime-dialog>
+</ng-template>
+<ng-template #authDialog>
+    <app-auth-dialog title=""></app-auth-dialog>
+</ng-template>

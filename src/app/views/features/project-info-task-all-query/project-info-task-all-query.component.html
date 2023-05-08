@@ -1,0 +1,1020 @@
+<div class="container">
+    <!--標題-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        專案任務工作查詢
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <!--查詢區域 未命名-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-3 pb-0">
+                <mat-card class="card search-group">
+                    <mat-form-field appearance="outline">
+                        <mat-label>部門群組</mat-label>
+                        <mat-select>
+                            <mat-option class="option-30"
+                                *ngFor="let select of ['總公司','行政管理','機械研發','軟體研發Mosion','軟體研發Vision']" [value]="select"
+                                title="{{select}}">
+                                {{select}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>群組成員</mat-label>
+                        <mat-select>
+                            <mat-option class="option-30"
+                                *ngFor="let select of ['Rita','Peggy','Ted','Brian','Louis','Ken']" [value]="select"
+                                title="{{select}}">
+                                {{select}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <!-- <mat-form-field class="example-form-field" appearance="outline">
+                        <mat-label>時間起迄</mat-label>
+                        <mat-date-range-input [formGroup]="campaignOne" [rangePicker]="campaignOnePicker"
+                            [comparisonStart]="campaignTwo.value.start" [comparisonEnd]="campaignTwo.value.end">
+                            <input matStartDate placeholder="Start date" formControlName="start">
+                            <input matEndDate placeholder="End date" formControlName="end">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+                    </mat-form-field> -->
+
+                    <mat-form-field appearance="outline" style="width: 250px;">
+                        <mat-label>時間起迄</mat-label>
+                        <mat-date-range-input [rangePicker]="picker">
+                            <input matStartDate matInput name="date_for_start">
+                            <input matEndDate matInput name="date_for_done">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+
+                    <!-- <mat-checkbox class="ml-10">比較基準</mat-checkbox> -->
+
+                    <button mat-button class="btn-normal">查詢</button>
+                    <button mat-button class="btn-normal">未完工任務</button>
+                    <!--表格-->
+
+
+                </mat-card>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pt-0 pb-3">
+                <mat-card class="card">
+                    <mat-tab-group dynamicHeight>
+                        <!--專案任務-->
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                專案任務
+                            </ng-template>
+                            <div class="container">
+                                <!--顯示資料區域-->
+                                <!-- <div class="row pt-2">
+                                    <div class="col-md-12 text-center">
+                                        <h3>專案任務</h3>
+                                    </div>
+                                </div> -->
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="pt-0 pb-2">
+                                            <div class="table-container">
+                                                <div class="table">
+                                                    <table #projectTaskSort='matSort' matSort mat-table
+                                                        [dataSource]="projectTaskDataSource" class="">
+                                                        <!-- status -->
+                                                        <ng-container matColumnDef="status">
+                                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 狀態
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element">
+                                                                <mat-icon class="none"
+                                                                    [ngClass]="{'red' : (element.status == '逾期未完工') , 'green' : (element.status == '如期完工') , 'yellow' : (element.status =='逾期完工'), 'blue' : (element.status =='未逾期執行中')}">
+                                                                    circle
+                                                                </mat-icon>
+                                                            </td>
+                                                        </ng-container>
+                                                        <!-- project_code -->
+                                                        <ng-container matColumnDef="t_name">
+                                                            <th mat-header-cell *matHeaderCellDef mat-sort-header>任務名稱
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element">
+                                                                <button mat-button class="table-btn-none textleft"
+                                                                    (click)="taskView(element.t_id,element.p_name)">
+                                                                    {{element.code}}，{{element.p_name}}<br>{{element.t_name}}
+
+                                                                </button>
+                                                            </td>
+                                                        </ng-container>
+                                                        <!-- project_name -->
+                                                        <ng-container matColumnDef="date_for_estimated_start">
+                                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 開始
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element">
+                                                                {{element.date_for_estimated_start | date:
+                                                                'yyyy/MM/dd'}} </td>
+                                                        </ng-container>
+                                                        <!-- customer_name -->
+                                                        <ng-container matColumnDef="date_for_estimated_completion">
+                                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 結束
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element">
+                                                                {{element.date_for_estimated_completion | date:
+                                                                'yyyy/MM/dd'}} </td>
+                                                        </ng-container>
+                                                        <!-- date_for_start -->
+                                                        <ng-container matColumnDef="estimate_time">
+                                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 預計工時
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element">
+                                                                {{element.default_labor_hour}} </td>
+                                                        </ng-container>
+                                                        <!-- date_for_done -->
+                                                        <ng-container matColumnDef="name">
+                                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 負責人
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element">
+                                                                <!-- <button mat-button class="table-btn-none"
+                                                                    (click)="userResourse()">
+                                                                    {{element.name}}
+                                                                </button> -->
+                                                                {{element.name}}
+                                                            </td>
+                                                        </ng-container>
+                                                        <!-- c_id -->
+                                                        <ng-container matColumnDef="description">
+                                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 備註
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element">
+                                                                {{element.remark}}
+                                                            </td>
+                                                        </ng-container>
+                                                        <!-- projectman_id -->
+                                                        <ng-container matColumnDef="start_date">
+                                                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                                實際開始~結束 </th>
+                                                            <td mat-cell *matCellDef="let element">
+                                                                {{element.date_for_actual_start | date:'yyyy/MM/dd' }}
+                                                                ~
+                                                                {{element.date_for_actual_completion |
+                                                                date:'yyyy/MM/dd' }} </td>
+                                                        </ng-container>
+                                                        <!-- inner_id -->
+                                                        <ng-container matColumnDef="labor_hour">
+                                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 實際工時
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element">
+                                                                {{element.labor_hour}}
+                                                            </td>
+                                                        </ng-container>
+                                                        <!-- date_for_pay -->
+                                                        <ng-container matColumnDef="manhour_detail">
+                                                            <th mat-header-cell *matHeaderCellDef> </th>
+                                                            <td mat-cell *matCellDef="let element" matTooltip="工時明細">
+                                                                <button mat-mini-fab color="basic"
+                                                                    class="table-btn-none"
+                                                                    (click)="proectLHView(element.t_id)">
+                                                                    <mat-icon>task</mat-icon>
+                                                                </button>
+                                                            </td>
+                                                        </ng-container>
+                                                        <!-- date_for_pay -->
+                                                        <ng-container matColumnDef="attachment">
+                                                            <th mat-header-cell *matHeaderCellDef class="attachment">
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element" class="attachment"
+                                                                matTooltip="附件">
+                                                                <button mat-mini-fab color="basic"
+                                                                    class="table-btn-none"
+                                                                    (click)="addappendixItem(element.p_id)">
+                                                                    <mat-icon>attach_file</mat-icon>
+                                                                </button>
+                                                            </td>
+                                                        </ng-container>
+                                                        <!-- date_for_pay -->
+                                                        <ng-container matColumnDef="record">
+                                                            <th mat-header-cell *matHeaderCellDef> </th>
+                                                            <td mat-cell *matCellDef="let element" matTooltip="紀錄">
+                                                                <button mat-mini-fab color="basic"
+                                                                    class="table-btn-none"
+                                                                    (click)="customerInterView(element.p_id)">
+                                                                    <mat-icon>history_edu</mat-icon>
+                                                                </button>
+                                                            </td>
+                                                        </ng-container>
+                                                        <tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
+                                                        <tr mat-row *matRowDef="let row; columns: displayedColumn;">
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="left2">
+                                                <h6>
+                                                    比較基準:
+                                                    <mat-icon class="red">circle</mat-icon>
+                                                    逾期未完工
+                                                    <mat-icon class="green">circle</mat-icon>
+                                                    如期完工
+                                                    <mat-icon class="yellow">circle</mat-icon>
+                                                    逾期完工
+                                                    <mat-icon class="blue">circle</mat-icon>
+                                                    未逾期執行中
+                                                </h6>
+                                            </div>
+                                            <div class="right2">
+                                                <mat-paginator #paginator [length]="projectTasktotalCount"
+                                                    [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 15]"
+                                                    [showFirstLastButtons]="true">
+                                                </mat-paginator>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </mat-tab>
+
+                        <!--客需單-->
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                客需單
+                            </ng-template>
+
+                            <div class="container">
+                                <!--顯示資料區域-->
+                                <!-- <div class="row pt-2">
+                                    <div class="col-md-12 text-center">
+                                        <h3>客需單</h3>
+                                    </div>
+                                </div> -->
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="pt-0 pb-2">
+                                            <div class="table-container">
+                                                <div class="table">
+                                                    <table #CRSort='matSort' matSort mat-table
+                                                        [dataSource]="CRdataSource" class="">
+                                                        <!-- status -->
+                                                        <ng-container matColumnDef="status">
+                                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 狀態
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element">
+                                                                <mat-icon class="none"
+                                                                    [ngClass]="{'red' : (element.status == '逾期未完工') , 'green' : (element.status == '如期完工') , 'yellow' : (element.status =='逾期完工'), 'blue' : (element.status =='未逾期執行中')}">
+                                                                    circle
+                                                                </mat-icon>
+                                                            </td>
+                                                        </ng-container>
+                                                        <!-- project_code -->
+                                                        <ng-container matColumnDef="cd_id">
+                                                            <th mat-header-cell *matHeaderCellDef mat-sort-header>任務名稱
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element">
+                                                                <button mat-button class="table-btn-none"
+                                                                    (click)="customerRequestView(element.cd_id)">
+                                                                    {{element.code}}，{{element.demand_content}}
+                                                                </button>
+                                                            </td>
+                                                        </ng-container>
+                                                        <!-- project_name -->
+                                                        <ng-container matColumnDef="date">
+                                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 主管預定
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element">
+                                                                {{element.date_for_estimated_completion | date:
+                                                                'yyyy/MM/dd'}} </td>
+                                                        </ng-container>
+                                                        <!-- customer_name -->
+                                                        <ng-container matColumnDef="estimate_end">
+                                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 預定完工
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element">
+
+                                                                <span
+                                                                    *ngIf="element.date_for_estimated_completion_employee != '0001-01-01T00:00:00Z'">
+                                                                    {{element.date_for_estimated_completion_employee |
+                                                                    date: 'yyyy/MM/dd'}}
+                                                                </span>
+                                                                <span
+                                                                    *ngIf="element.date_for_estimated_completion_employee == '0001-01-01T00:00:00Z'">
+
+                                                                </span>
+                                                            </td>
+                                                        </ng-container>
+                                                        <!-- date_for_start -->
+                                                        <ng-container matColumnDef="submit">
+                                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 完工送審
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element">
+                                                                <span
+                                                                    *ngIf="element.date_for_completion_employee != '0001-01-01T00:00:00Z'">
+                                                                    {{element.date_for_completion_employee | date:
+                                                                    'yyyy/MM/dd'}}
+                                                                </span>
+                                                                <span
+                                                                    *ngIf="element.date_for_completion_employee == '0001-01-01T00:00:00Z'">
+
+                                                                </span>
+                                                            </td>
+                                                        </ng-container>
+                                                        <!-- projectman_id -->
+                                                        <ng-container matColumnDef="authorize">
+                                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 完工核准
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element">
+                                                                <span
+                                                                    *ngIf="element.date_for_completion != '0001-01-01T00:00:00Z'">
+                                                                    {{element.date_for_completion | date: 'yyyy/MM/dd'}}
+                                                                </span>
+                                                                <span
+                                                                    *ngIf="element.date_for_completion == '0001-01-01T00:00:00Z'">
+
+                                                                </span>
+                                                            </td>
+                                                        </ng-container>
+                                                        <!-- date_for_done -->
+                                                        <ng-container matColumnDef="represent">
+                                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 負責人
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element">
+                                                                {{element.user_name}}
+                                                            </td>
+                                                        </ng-container>
+                                                        <!-- c_id -->
+                                                        <ng-container matColumnDef="note">
+                                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 備註
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element"> {{element.remark}}
+                                                            </td>
+                                                        </ng-container>
+                                                        <!-- inner_id -->
+                                                        <ng-container matColumnDef="man_hour">
+                                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 工時
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element">
+                                                                <!-- <button mat-button class="table-btn-none">
+                                                                    {{element.man_hour}}
+                                                                </button> -->
+                                                            </td>
+                                                        </ng-container>
+                                                        <!-- date_for_pay -->
+                                                        <ng-container matColumnDef="man_hour_detail">
+                                                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element" matTooltip="工時明細">
+                                                                <button mat-mini-fab color="basic"
+                                                                    class="table-btn-none"
+                                                                    (click)="customerLHView(element.cu_id)">
+                                                                    <mat-icon>task</mat-icon>
+                                                                </button>
+                                                            </td>
+                                                        </ng-container>
+                                                        <!-- date_for_pay -->
+                                                        <ng-container matColumnDef="attachment">
+                                                            <th mat-header-cell *matHeaderCellDef class="attachment">
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let element" class="attachment"
+                                                                matTooltip="附件">
+                                                                <button mat-mini-fab color="basic"
+                                                                    class="table-btn-none"
+                                                                    (click)="addappendixItem(element.cd_id)">
+                                                                    <mat-icon>attach_file</mat-icon>
+                                                                </button>
+                                                            </td>
+                                                        </ng-container>
+                                                        <!-- date_for_pay -->
+                                                        <ng-container matColumnDef="record">
+                                                            <th mat-header-cell *matHeaderCellDef> </th>
+                                                            <td mat-cell *matCellDef="let element" matTooltip="表單紀錄">
+                                                                <button mat-mini-fab color="basic"
+                                                                    class="table-btn-none"
+                                                                    (click)="customerInterView(element.cd_id)">
+                                                                    <mat-icon>history_edu</mat-icon>
+                                                                </button>
+                                                            </td>
+                                                        </ng-container>
+                                                        <tr mat-header-row *matHeaderRowDef="CRdisplayedColumn"></tr>
+                                                        <tr mat-row *matRowDef="let row; columns: CRdisplayedColumn;">
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="left2">
+                                                <h6>
+                                                    比較基準:
+                                                    <mat-icon class="red">circle</mat-icon>
+                                                    逾期未完工
+                                                    <mat-icon class="green">circle</mat-icon>
+                                                    如期完工
+                                                    <mat-icon class="yellow">circle</mat-icon>
+                                                    逾期完工
+                                                    <mat-icon class="blue">circle</mat-icon>
+                                                    未逾期執行中
+                                                </h6>
+                                            </div>
+                                            <div class="right2">
+                                                <mat-paginator #CRpaginator [length]="CRtotalCount" [pageIndex]="0"
+                                                    [pageSize]="10" [pageSizeOptions]="[5, 10, 15]"
+                                                    [showFirstLastButtons]="true">
+                                                </mat-paginator>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </mat-tab>
+
+                        <!--治具需求單-->
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                治具需求單
+                            </ng-template>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="pt-0 pb-2">
+                                        <div class="table-container">
+                                            <div class="table">
+                                                <table mat-table [dataSource]="dataSource3" class="">
+                                                    <!-- status -->
+                                                    <ng-container matColumnDef="status">
+                                                        <th mat-header-cell *matHeaderCellDef> 狀態 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <mat-icon class="none"
+                                                                [ngClass]="{'red' : (element.status == '逾期未完工') , 'green' : (element.status == '如期完工') , 'yellow' : (element.status =='逾期完工'), 'blue' : (element.status =='未逾期執行中')}">
+                                                                circle
+                                                            </mat-icon>
+                                                        </td>
+                                                    </ng-container>
+                                                    <!-- project_code -->
+                                                    <ng-container matColumnDef="project_id">
+                                                        <th mat-header-cell *matHeaderCellDef>任務名稱</th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <button mat-button class="table-btn-none"
+                                                                (click)="internalContactView()">
+                                                                {{element.project_id}}
+                                                            </button>
+                                                        </td>
+                                                    </ng-container>
+                                                    <!-- project_name -->
+                                                    <ng-container matColumnDef="manager">
+                                                        <th mat-header-cell *matHeaderCellDef> 主管預定 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.manager}} </td>
+                                                    </ng-container>
+                                                    <!-- customer_name -->
+                                                    <ng-container matColumnDef="estimate_end">
+                                                        <th mat-header-cell *matHeaderCellDef> 預定完工 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.estimate_end}} </td>
+                                                    </ng-container>
+                                                    <!-- date_for_start -->
+                                                    <ng-container matColumnDef="submit">
+                                                        <th mat-header-cell *matHeaderCellDef> 完工送審 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.submit}} </td>
+                                                    </ng-container>
+                                                    <!-- projectman_id -->
+                                                    <ng-container matColumnDef="authorize">
+                                                        <th mat-header-cell *matHeaderCellDef> 完工核准 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.authorize}} </td>
+                                                    </ng-container>
+                                                    <!-- date_for_done -->
+                                                    <ng-container matColumnDef="contact_person">
+                                                        <th mat-header-cell *matHeaderCellDef> 主要負責人 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.contact_person}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <!-- c_id -->
+                                                    <ng-container matColumnDef="note">
+                                                        <th mat-header-cell *matHeaderCellDef> 備註說明 </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.note}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <!-- inner_id -->
+                                                    <ng-container matColumnDef="man_hour">
+                                                        <th mat-header-cell *matHeaderCellDef> 實際工時 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.man_hour}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <!-- date_for_pay -->
+                                                    <ng-container matColumnDef="man_hour_detail">
+                                                        <th mat-header-cell *matHeaderCellDef> </th>
+                                                        <td mat-cell *matCellDef="let element" matTooltip="工時明細">
+                                                            {{element.man_hour_detail}} </td>
+                                                    </ng-container>
+                                                    <!-- date_for_pay -->
+                                                    <ng-container matColumnDef="attachment">
+                                                        <th mat-header-cell *matHeaderCellDef class="attachment">
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element" class="attachment">
+                                                            <button mat-mini-fab color="basic" class="table-btn-none"
+                                                                (click)="addappendixItem(element.m_id)" matTooltip="附件">
+                                                                <mat-icon>attach_file</mat-icon>
+                                                            </button>
+                                                        </td>
+                                                    </ng-container>
+                                                    <!-- date_for_pay -->
+                                                    <ng-container matColumnDef="record">
+                                                        <th mat-header-cell *matHeaderCellDef> </th>
+                                                        <td mat-cell *matCellDef="let element" matTooltip="表單紀錄">
+                                                            <button mat-mini-fab color="basic" class="table-btn-none">
+                                                                <mat-icon>history_edu</mat-icon>
+                                                            </button>
+                                                        </td>
+                                                    </ng-container>
+                                                    <tr mat-header-row *matHeaderRowDef="displayedColumn3"></tr>
+                                                    <tr mat-row *matRowDef="let row; columns: displayedColumn3;">
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="left2">
+                                            <h6>
+                                                比較基準:
+                                                <mat-icon class="red">circle</mat-icon>
+                                                逾期未完工
+                                                <mat-icon class="green">circle</mat-icon>
+                                                如期完工
+                                                <mat-icon class="yellow">circle</mat-icon>
+                                                逾期完工
+                                                <mat-icon class="blue">circle</mat-icon>
+                                                未逾期執行中
+                                            </h6>
+                                        </div>
+                                        <div class="right2">
+                                            <mat-paginator #paginator [length]="totalCount" [pageIndex]="0"
+                                                [pageSize]="10" [pageSizeOptions]="[5, 10, 15]"
+                                                [showFirstLastButtons]="true">
+                                            </mat-paginator>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+
+                        <!--CRM-->
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                CRM
+                            </ng-template>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="pt-0 pb-2">
+                                        <div class="table-container">
+                                            <div class="table">
+                                                <table mat-table [dataSource]="datasSource4" class="">
+                                                    <!-- status -->
+                                                    <ng-container matColumnDef="status">
+                                                        <th mat-header-cell *matHeaderCellDef> 狀態 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <mat-icon class="none"
+                                                                [ngClass]="{'red' : (element.status == '逾期未完工') , 'green' : (element.status == '如期完工') , 'yellow' : (element.status =='逾期完工'), 'blue' : (element.status =='未逾期執行中')}">
+                                                                circle
+                                                            </mat-icon>
+                                                        </td>
+                                                    </ng-container>
+                                                    <!-- project_code -->
+                                                    <ng-container matColumnDef="task_name">
+                                                        <th mat-header-cell *matHeaderCellDef>任務名稱</th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <button mat-button class="table-btn-none"
+                                                                (click)="crmView()">
+                                                                {{element.task_name}}
+                                                            </button>
+                                                        </td>
+                                                    </ng-container>
+                                                    <!-- project_name -->
+                                                    <ng-container matColumnDef="manager">
+                                                        <th mat-header-cell *matHeaderCellDef> 主管預定 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.manager}} </td>
+                                                    </ng-container>
+                                                    <!-- customer_name -->
+                                                    <ng-container matColumnDef="estimate_end">
+                                                        <th mat-header-cell *matHeaderCellDef> 預定完工 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.estimate_end}} </td>
+                                                    </ng-container>
+                                                    <!-- date_for_start -->
+                                                    <ng-container matColumnDef="submit">
+                                                        <th mat-header-cell *matHeaderCellDef> 完工送審 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.submit}} </td>
+                                                    </ng-container>
+                                                    <!-- projectman_id -->
+                                                    <ng-container matColumnDef="authorize">
+                                                        <th mat-header-cell *matHeaderCellDef> 完工核准 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.authorize}} </td>
+                                                    </ng-container>
+                                                    <!-- date_for_done -->
+                                                    <ng-container matColumnDef="represent">
+                                                        <th mat-header-cell *matHeaderCellDef> 負責人 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.represent}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <!-- c_id -->
+                                                    <ng-container matColumnDef="note">
+                                                        <th mat-header-cell *matHeaderCellDef> 備註說明 </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.note}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <!-- inner_id -->
+                                                    <ng-container matColumnDef="man_hour">
+                                                        <th mat-header-cell *matHeaderCellDef> 實際工時 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.man_hour}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <!-- date_for_pay -->
+                                                    <ng-container matColumnDef="man_hour_detail">
+                                                        <th mat-header-cell *matHeaderCellDef> </th>
+                                                        <td mat-cell *matCellDef="let element" matTooltip="工時明細">
+                                                            <button mat-mini-fab color="basic" class="table-btn-none">
+                                                                <mat-icon>task</mat-icon>
+                                                            </button>
+                                                        </td>
+                                                    </ng-container>
+                                                    <!-- date_for_pay -->
+                                                    <ng-container matColumnDef="attachment">
+                                                        <th mat-header-cell *matHeaderCellDef class="attachment">
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element" class="attachment"
+                                                            matTooltip="附件">
+                                                            <button mat-mini-fab color="basic" class="table-btn-none"
+                                                                (click)="addappendixItem(element.crm_id)">
+                                                                <mat-icon>attach_file</mat-icon>
+                                                            </button>
+                                                        </td>
+                                                    </ng-container>
+                                                    <!-- date_for_pay -->
+                                                    <ng-container matColumnDef="record">
+                                                        <th mat-header-cell *matHeaderCellDef> </th>
+                                                        <td mat-cell *matCellDef="let element" matTooltip="表單紀錄">
+                                                            <button mat-mini-fab color="basic" class="table-btn-none">
+                                                                <mat-icon>history_edu</mat-icon>
+                                                            </button>
+                                                        </td>
+                                                    </ng-container>
+                                                    <tr mat-header-row *matHeaderRowDef="displayedColumn4"></tr>
+                                                    <tr mat-row *matRowDef="let row; columns: displayedColumn4;">
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="left2">
+                                            <h6>
+                                                比較基準:
+                                                <mat-icon class="red">circle</mat-icon>
+                                                逾期未完工
+                                                <mat-icon class="green">circle</mat-icon>
+                                                如期完工
+                                                <mat-icon class="yellow">circle</mat-icon>
+                                                逾期完工
+                                                <mat-icon class="blue">circle</mat-icon>
+                                                未逾期執行中
+                                            </h6>
+                                        </div>
+                                        <div class="right2">
+                                            <mat-paginator #paginator [length]="totalCount" [pageIndex]="0"
+                                                [pageSize]="10" [pageSizeOptions]="[5, 10, 15]"
+                                                [showFirstLastButtons]="true">
+                                            </mat-paginator>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+
+                        <!--Daily Report-->
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                Daily Report
+                            </ng-template>
+                            <div class="container">
+                                <!-- <div class="row pt-2">
+                                    <div class="col-md-12 text-center">
+                                        <h3>Daily Report</h3>
+                                    </div>
+                                </div> -->
+                                <!--table-->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="table-container">
+                                            <div class="table">
+
+                                                <table mat-table matSort [dataSource]="dataSource3"
+                                                    class="mat-elevation-z8">
+
+                                                    <ng-container [matColumnDef]="str.en"
+                                                        *ngFor="let str of displayedColumnsObj3">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                            {{str.cn}} </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element[str.en]}}
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <tr mat-header-row
+                                                        *matHeaderRowDef="displayedColumns3; sticky: true"></tr>
+                                                    <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
+                                                </table>
+
+                                            </div>
+                                            <div class="left2">
+                                                <h6>
+                                                    比較基準:
+                                                    <mat-icon class="red">circle</mat-icon>
+                                                    逾期未完工
+                                                    <mat-icon class="green">circle</mat-icon>
+                                                    如期完工
+                                                    <mat-icon class="yellow">circle</mat-icon>
+                                                    逾期完工
+                                                    <mat-icon class="blue">circle</mat-icon>
+                                                    未逾期執行中
+                                                </h6>
+                                            </div>
+                                            <div class="right2">
+                                                <mat-paginator #paginator [length]="totalCount" [pageIndex]="0"
+                                                    [pageSize]="10" [pageSizeOptions]="[5, 10, 15]"
+                                                    [showFirstLastButtons]="true">
+                                                </mat-paginator>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+
+                        <!--工時明細-->
+                        <mat-tab>
+
+                            <ng-template mat-tab-label>
+                                工時明細
+                            </ng-template>
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="pt-0 pb-2">
+                                        <div class="table-container">
+                                            <div class="table">
+                                                <table #LHSort='matSort' matSort mat-table [dataSource]="LHdatasSource"
+                                                    class="">
+                                                    <!-- project_code -->
+                                                    <ng-container matColumnDef="nature">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>性質</th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.nature}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <!-- project_name -->
+                                                    <ng-container matColumnDef="date_for_start">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> 日期 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.date_for_start| date: 'yyyy/MM/dd'}} </td>
+                                                    </ng-container>
+                                                    <!-- customer_name -->
+                                                    <ng-container matColumnDef="man_hour">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> 工時 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.laborhour}} </td>
+                                                    </ng-container>
+                                                    <!-- date_for_start -->
+                                                    <ng-container matColumnDef="create_user">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> 建檔人 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.creater_name}} </td>
+                                                    </ng-container>
+                                                    <!-- date_for_done -->
+                                                    <ng-container matColumnDef="project_id">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> 專案代號
+                                                        </th>
+                                                        <!-- <td mat-cell *matCellDef="let element">
+                                                            {{element.project_id}}
+                                                            
+                                                        </td> -->
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <span *ngIf="element.customer_demand_task_code">
+                                                                {{element.customer_demand_task_code}}
+                                                            </span>
+                                                            <span *ngIf="element.customer_demand_countersign_code">
+                                                                {{element.customer_demand_countersign_code}}
+                                                            </span>
+                                                        </td>
+                                                    </ng-container>
+                                                    <!-- c_id -->
+                                                    <ng-container matColumnDef="machine">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> 機台 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.machine_finished_number}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <!-- projectman_id -->
+                                                    <ng-container matColumnDef="title">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> 主題 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <!-- <button mat-button class="textleft"
+                                                                (click)="laborHourView(element.t_id,element.title)">
+                                                                {{element.title}}<br>{{element.content}}
+                                                            </button> -->
+                                                            {{element.title}}<br>{{element.content}}
+                                                        </td>
+                                                    </ng-container>
+                                                    <!-- date_for_pay -->
+                                                    <!-- <ng-container matColumnDef="action_delete">
+                                                        <th mat-header-cell *matHeaderCellDef class="action_delete">
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element" class="action_delete">
+                                                            <button mat-mini-fab color="basic" class="table-btn-none">
+                                                                <mat-icon>delete</mat-icon>
+                                                            </button>
+                                                        </td>
+                                                    </ng-container> -->
+                                                    <tr mat-header-row *matHeaderRowDef="LHdisplayedColumn"></tr>
+                                                    <tr mat-row *matRowDef="let row; columns: LHdisplayedColumn;"> </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="left2">
+                                            <h6>
+                                                比較基準:
+                                                <mat-icon class="red">circle</mat-icon>
+                                                逾期未完工
+                                                <mat-icon class="green">circle</mat-icon>
+                                                如期完工
+                                                <mat-icon class="yellow">circle</mat-icon>
+                                                逾期完工
+                                                <mat-icon class="blue">circle</mat-icon>
+                                                未逾期執行中
+                                            </h6>
+                                        </div>
+                                        <div class="right2">
+                                            <mat-paginator #LHpaginator [length]="LHTotalCount" [pageIndex]="0"
+                                                [pageSize]="10" [pageSizeOptions]="[5, 10, 15]"
+                                                [showFirstLastButtons]="true">
+                                            </mat-paginator>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </mat-tab>
+
+                        <!--會議參與-->
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                會議參與
+                            </ng-template>
+                            <div class="container">
+                                <!-- <div class="row pt-2">
+                                    <div class="col-md-12 text-center">
+                                        <h3>會議參與</h3>
+                                    </div>
+                                </div> -->
+                                <!--table-->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="table-container">
+                                            <div class="table">
+
+                                                <table #meetSort='matSort' matSort mat-table
+                                                    [dataSource]="meetDataSource" class="">
+                                                    <!-- 時間 -->
+                                                    <ng-container matColumnDef="date_for_start">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> 時間 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.date_for_start| date:'yyyy/MM/dd'}} </td>
+                                                    </ng-container>
+                                                    <!-- 會議主席 -->
+                                                    <ng-container matColumnDef="chairman">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> 會議主席
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.name}} </td>
+                                                    </ng-container>
+                                                    <!-- 參與人員 -->
+                                                    <!-- <ng-container matColumnDef="attendees">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> 參與人員
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.attendees}}
+                                                        </td>
+                                                    </ng-container> -->
+                                                    <!-- 主題 -->
+                                                    <ng-container matColumnDef="m_name">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> 主題 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <button mat-button class="table-btn-none"
+                                                                (click)="meetView(element.m_id,element.m_name)">
+                                                                {{element.m_name}}
+                                                            </button>
+                                                        </td>
+
+                                                    </ng-container>
+                                                    <!-- 成員 -->
+                                                    <!-- <ng-container matColumnDef="member">
+                                                        <th mat-header-cell *matHeaderCellDef> 成員 </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <button mat-mini-fab color="basic" class="table-btn-none">
+                                                                <mat-icon>group</mat-icon>
+                                                            </button>
+                                                        </td>
+                                                    </ng-container> -->
+                                                    <!-- 紀錄 -->
+                                                    <ng-container matColumnDef="record">
+                                                        <th mat-header-cell *matHeaderCellDef class="record">
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element" class="record"
+                                                            matTooltip="紀錄">
+                                                            <button mat-mini-fab color="basic" class="table-btn-none"
+                                                                (click)="addappendixItem(element.m_id)">
+                                                                <mat-icon>history_edu</mat-icon>
+                                                            </button>
+                                                        </td>
+                                                    </ng-container>
+                                                    <tr mat-header-row *matHeaderRowDef="meetCol; sticky: true"></tr>
+                                                    <tr mat-row *matRowDef="let row; columns: meetCol;">
+                                                    </tr>
+                                                </table>
+
+                                            </div>
+                                            <div class="left2">
+                                                <h6>
+                                                    比較基準:
+                                                    <mat-icon class="red">circle</mat-icon>
+                                                    逾期未完工
+                                                    <mat-icon class="green">circle</mat-icon>
+                                                    如期完工
+                                                    <mat-icon class="yellow">circle</mat-icon>
+                                                    逾期完工
+                                                    <mat-icon class="blue">circle</mat-icon>
+                                                    未逾期執行中
+                                                </h6>
+                                            </div>
+                                            <div class="right2">
+                                                <mat-paginator #Meetpaginator [length]="MeetingTotalCount"
+                                                    [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 15]"
+                                                    [showFirstLastButtons]="true">
+                                                </mat-paginator>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<ng-template #fileUploadDialog>
+    <app-file-upload-dialog title=""></app-file-upload-dialog>
+</ng-template>
+
+<ng-template #userDialog>
+    <app-user-dialog title=""></app-user-dialog>
+</ng-template>
+
+<ng-template #taskDialog>
+    <app-task-dialog title=""></app-task-dialog>
+</ng-template>
+
+<ng-template #customerRequestDialog>
+    <app-customer-request-dialog title=""></app-customer-request-dialog>
+</ng-template>
+
+<ng-template #crmDialog>
+    <app-crm-dialog title=""></app-crm-dialog>
+</ng-template>
+
+<ng-template #internalContactDialog>
+    <app-internal-contact-dialog title=""></app-internal-contact-dialog>
+</ng-template>

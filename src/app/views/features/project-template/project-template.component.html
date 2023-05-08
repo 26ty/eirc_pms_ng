@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/main/dashboard">首頁</a></li>
+              <li class="breadcrumb-item active">專案計畫管理</li>
+              <li class="breadcrumb-item active" aria-current="page">專案範本管理</li>
+            </ol>
+          </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        專案範本管理
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!--查詢區域-->
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="form-group pt-3 pb-0">
+                <mat-card class="card search-group">
+                    <mat-form-field appearance="outline">
+                        <mat-label>代號/名稱</mat-label>
+                        <input matInput type="text" name="" (keyup)="applyFilter($event)">
+                    </mat-form-field>
+                    <!-- <button mat-button id="" class="btn-none" matTooltip="查詢">
+                        <mat-icon>search</mat-icon>
+                    </button> -->
+                    <button mat-button id="" class="btn" matTooltip="新增" (click)="addItem()">
+                        
+                        <mat-icon class="icon-white">add</mat-icon>
+                    </button>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <!--顯示資料區域-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group pt-0 pb-2">
+                <mat-card class="card table">
+                    <div class="table-container">
+                        <!-- <h5 class="">專案範本列表</h5> -->
+                        <!-- <hr> -->
+                        <table mat-table [dataSource]="dataSource" class="">
+                            <!-- template_code -->
+                            <ng-container matColumnDef="code">
+                                <th mat-header-cell *matHeaderCellDef>代號</th>
+                                <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+                            </ng-container>
+                            <!-- template_name -->
+                            <ng-container matColumnDef="p_name">
+                                <th mat-header-cell *matHeaderCellDef> 名稱 </th>
+                                <td mat-cell *matCellDef="let element"> {{element.p_name}} </td>
+                            </ng-container>
+                            <!-- action_edit -->
+                            <ng-container matColumnDef="action_edit">
+                                <th mat-header-cell *matHeaderCellDef class="text-center">  </th>
+                                <td mat-cell *matCellDef="let element" class="text-center">
+                                    <button mat-mini-fab color="basic" class="table-btn-none" [routerLink]="['/main/projectinfo/project-template-edit/' + element.p_id]">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true">
+                        </mat-paginator>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

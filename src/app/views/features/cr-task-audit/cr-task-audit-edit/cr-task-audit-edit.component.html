@@ -1,0 +1,182 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/main/dashboard" class="a-blue">首頁</a></li>
+                    <li class="breadcrumb-item active"><a href="/main/cr-task-audit" class="a-blue">客需單待審核任務</a></li>
+                    <li class="breadcrumb-item active">客需單任務完工審核作業</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--標題-->
+    <!-- <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="left">
+                <h1>
+                    <mat-icon>description</mat-icon>
+                    <span class="text-left">
+                        客需單任務完工審核作業
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div> -->
+    <!--顯示資料區域-->
+    <!--查詢區域-->
+
+    <div class="row">
+        <div class="col-md-6">
+            <mat-card class="card search-group" style="height: 100%;">
+                <mat-card-content class="mat-card-content">
+                    <div class="edit-form-group pb-0">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+
+                                <div class="col-12">
+                                    <dl class="row" *ngIf="CRDatas[0]">
+                                        <dt class="px-0 col-sm-2">
+                                            <h4 class="text-head text-right">單號:</h4>
+                                        </dt>
+                                        <dd class="col-sm-10">
+                                            <h4 class="text-context">{{CRDatas[0].code}}</h4>
+                                        </dd>
+                                        <dt class="px-0 col-sm-2">
+                                            <h4 class="text-head text-right">客戶:</h4>
+                                        </dt>
+                                        <dd class="col-sm-10">
+                                            <h4 class="text-context">{{CRDatas[0].customer_name}}</h4>
+                                        </dd>
+                                        <dt class="px-0 col-sm-2">
+                                            <h4 class="text-head text-right">需求說明:</h4>
+                                        </dt>
+                                        <dd class="col-sm-10">
+                                            <h4 class="text-context">{{CRDatas[0].demand_content}}</h4>
+                                        </dd>
+                                    </dl>
+                                </div>
+
+                                <mat-list *ngIf="CRDatas[0]">
+
+                                    <form [formGroup]="editCRForm">
+
+                                        <mat-form-field appearance="outline" class="width100">
+                                            <mat-label>適用製程說明: </mat-label>
+                                            <textarea matInput [(ngModel)]="CRDatas[0].suitable_content"
+                                                formControlName="suitable_content" name="suitable_content"
+                                                ngDefaultControl></textarea>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" class="width100">
+                                            <mat-label>其他: </mat-label>
+                                            <textarea matInput [(ngModel)]="CRDatas[0].other_content"
+                                                formControlName="other_content" name="suitabother_contentle_content"
+                                                ngDefaultControl></textarea>
+                                        </mat-form-field>
+
+
+                                    </form>
+                                </mat-list>
+
+                                <div class="col-12">
+                                    <dl class="row" *ngIf="CRDatas[0]">
+                                        <dt class="px-0 col-sm-3">
+                                            <h4 class="text-head text-right">客戶預估時程:</h4>
+                                        </dt>
+                                        <dd class="col-sm-9">
+                                            <h4 class="text-context">{{CRDatas[0].date_for_estimated_start|
+                                                date:'yyyy/MM/dd'}}
+                                                ~
+                                                {{CRDatas[0].date_for_estimated_end| date:'yyyy/MM/dd'}}</h4>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-6">
+            <mat-card class="card search-group" style="height: 100%;">
+                <mat-card-content class="mat-card-content">
+                    <div class="edit-form-group pb-0">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+
+                                <div class="col-12">
+                                    <dl class="row" *ngIf="CRDatas[0]">
+                                        <dt class="px-0 col-sm-3">
+                                            <h4 class="text-head text-right">任務名稱:</h4>
+                                        </dt>
+                                        <dd class="col-sm-9">
+                                            <h4 class="text-context">{{CRDatas[0].t_name}}</h4>
+                                        </dd>
+                                        <dt class="px-0 col-sm-3">
+                                            <h4 class="text-head text-right">預定完成日:</h4>
+                                        </dt>
+                                        <dd class="col-sm-9">
+                                            <h4 class="text-context">{{CRDatas[0].date_for_estimated_start|
+                                                date:'yyyy/MM/dd'}} ~
+                                                {{CRDatas[0].date_for_estimated_end| date:'yyyy/MM/dd'}}</h4>
+                                        </dd>
+                                        <dt class="px-0 col-sm-3">
+                                            <h4 class="text-head text-right">回復預定完成日:</h4>
+                                        </dt>
+                                        <dd class="col-sm-9">
+                                            <h4 class="text-context">{{CRDatas[0].date_for_estimated_completion| date:
+                                                'yyyy/MM/dd'}}</h4>
+                                        </dd>
+                                        <dt class="px-0 col-sm-3">
+                                            <h4 class="text-head text-right">任務完成送出日:</h4>
+                                        </dt>
+                                        <dd class="col-sm-9">
+                                            <h4 class="text-context">{{CRDatas[0].date_for_delivery| date:
+                                                'yyyy/MM/dd'}}</h4>
+                                        </dd>
+                                        <dt class="px-0 col-sm-3">
+                                            <h4 class="text-head text-right">回覆內容:</h4>
+                                        </dt>
+                                        <dd class="col-sm-9">
+                                            <h4></h4>
+                                        </dd>
+                                    </dl>
+                                </div>
+
+                                <mat-list *ngIf="CRDatas[0]">
+
+                                    <form [formGroup]="editRemarkForm">
+                                        <mat-form-field appearance="outline" class="width100">
+                                            <mat-label>意見回覆</mat-label>
+                                            <textarea matInput [(ngModel)]="remark" formControlName="remark"
+                                                name="remark" ngDefaultControl></textarea>
+                                        </mat-form-field>
+                                    </form>
+
+                                </mat-list>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <!--查詢區域-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="form-group pt-3 pb-0">
+                    <mat-card class="card search-group">
+
+                        <!-- <button mat-button id="" class="btn-normal">會議</button> -->
+                        <button mat-button id="" class="btn-normal" (click)="addappendixItem()">附件</button>
+                        <button mat-button id="" class="btn-danger" (click)="returnCase()">退回</button>
+                        <button mat-button id="" class="btn-green" (click)="submitCase()">確認</button>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

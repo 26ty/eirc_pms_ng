@@ -1,0 +1,62 @@
+<div class="container" class="detail-container">
+    <div class="offcanvas-header">
+        <h2 class="offcanvas-title" id="offcanvasLabel">任務細項</h2>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" mat-dialog-close></button>
+    </div>
+    <mat-dialog-content>
+        <div class="row"  *ngIf="oneTaskDatas">
+            <div class="col">
+                <mat-list>
+                    <mat-list-item>
+                        <h4><b>前置任務:</b></h4>
+                        <h4>{{oneTaskDatas.body.last_task}}</h4>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4><b>任務名稱:</b></h4>
+                        <h4>{{oneTaskDatas.body.t_name}}</h4>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4><b>負責人:</b></h4>
+                        <h4>{{name}}</h4>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4><b>開始時間(工時):</b></h4>
+                        <h4>{{oneTaskDatas.body.date_for_estimated_start}}</h4>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4><b>結束時間(工時):</b></h4>
+                        <h4>{{oneTaskDatas.body.date_for_estimated_completion}}</h4>
+                    </mat-list-item>
+                    <!-- <mat-list-item>
+                        <h4><b>實際開始:</b></h4>
+                        <h4></h4>
+                    </mat-list-item> -->
+                    <mat-list-item>
+                        <h4><b>實際結束:</b></h4>
+                        <h4>{{oneTaskDatas.body.date_for_actual_completion}}</h4>
+                    </mat-list-item>
+
+                    <mat-list-item>
+                        <h4><b>已報工時:</b></h4>
+                        <h4>{{oneTaskDatas.body.labor_hour}}</h4>
+                    </mat-list-item>
+                    <!-- <mat-list-item>
+                        <h4><b>附件:</b></h4>
+                        <h4>-</h4>
+                    </mat-list-item> -->
+                    <mat-list-item>
+                        <h4><b>備註說明:</b></h4>
+                        <h4>{{oneTaskDatas.body.remark}}</h4>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4><b>里程碑:</b></h4>
+                        <h4>{{oneTaskDatas.body.landmark}}</h4>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button class="btn-normal-none reset" type="reset" mat-dialog-close>關閉</button>
+    </mat-dialog-actions>
+</div>

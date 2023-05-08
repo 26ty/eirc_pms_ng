@@ -1,0 +1,58 @@
+<div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">專案產銷-新增(repeat order)</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" mat-dialog-close></button>
+</div>
+<form [formGroup]="addForm" style="width: 300px;">
+    <mat-dialog-content>
+        
+        <!-- <mat-form-field appearance="outline">
+            <mat-label>專案範本</mat-label>
+            <mat-select type="text" placeholder="專案範本" aria-label="專案範本" matInput [(ngModel)]="selectedTempalet" (ngModelChange)="getOneProjectTemplateRequest(selectedTempalet)" formControlName="selectedTempalet" name="selectedTempalet" ngDefaultControl>
+                <mat-option class="option-30" *ngFor="let item of TemplateArray" [value]="item.id">
+                    {{item.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field> -->
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" style="width: 300px;">
+                    <mat-label>專案代號</mat-label>
+                    <input type="text" aria-label="Number" matInput [formControl]="myControl"
+                        [matAutocomplete]="auto" [(ngModel)]="selectedTempalet" name="selectedTempalet">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </div>
+            <div class="col mt-3">
+                <button mat-button class="btn-normal-none-notop" matTooltip="查詢" (click)="search()">
+                    查詢<!-- <mat-icon>search</mat-icon> -->
+                </button>
+            </div>
+        </div>
+        
+
+        <!-- <h4>{{selectedTempalet}}</h4> -->
+        <!-- <mat-form-field appearance="outline" readonly>
+            <mat-label>摘要說明</mat-label>
+            <input matInput type="text" [(ngModel)]="summary_description"
+            formControlName="summary_description" name="summary_description" ngDefaultControl>
+            
+        </mat-form-field> -->
+        <!-- <mat-form-field appearance="outline" class="w-100p" >
+            <mat-label>專案名稱</mat-label>
+            <input matInput type="text"[(ngModel)]="p_name" formControlName="p_name" name="p_name"
+                ngDefaultControl required>
+        </mat-form-field> -->
+        <!-- <h4>{{summary_description}}</h4> -->
+    </mat-dialog-content>
+    <mat-dialog-actions class="text-center">
+        <div class="">
+            <button mat-button class="btn-normal-none reset" type="reset">取消</button>
+            <button mat-button class="btn" (click)="copytoadd()" *ngIf="newp_id != ''">新增</button>
+        </div>
+    </mat-dialog-actions>
+</form>
+

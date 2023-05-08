@@ -1,0 +1,6 @@
+@import '/src/scss/container_children';
+:host ::ng-deep {
+  .mat-form-field-outline {
+    background-color: rgb(255, 255, 255);
+  }
+}

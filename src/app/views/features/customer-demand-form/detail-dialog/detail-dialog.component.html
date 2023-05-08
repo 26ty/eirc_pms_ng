@@ -1,0 +1,105 @@
+<div class="container" class="detail-container">
+    <div class="offcanvas-header">
+        <h2 class="offcanvas-title" id="offcanvasLabel">客需單細項</h2>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+            mat-dialog-close></button>
+    </div>
+    <mat-dialog-content>
+        <!--內容顯示區-->
+        <div class="row">
+            <div class="col" *ngIf="crDatas">
+                <mat-list>
+
+
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-list-item>
+                                    <h4><b>客戶需求單號:</b></h4>
+                                    <h4 class="text-context">{{crDatas.body.code}}</h4>
+                                </mat-list-item>
+                            </td>
+                            <td>
+                                <mat-list-item>
+                                    <h4><b>專案代號:</b></h4>
+                                    <h4 class="text-context">{{crDatas.body.project_code}}</h4>
+                                </mat-list-item>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <mat-list-item>
+                                    <h4><b>業務人員:</b></h4>
+                                    <h4 class="text-context">{{crDatas.body.salesman_name}}</h4>
+                                </mat-list-item>
+                            </td>
+                            <td>
+                                <mat-list-item>
+                                    <h4><b>客戶:</b></h4>
+                                    <h4 class="text-context">{{crDatas.body.customer_name}}</h4>
+                                </mat-list-item>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <mat-list-item>
+                        <h4><b>主旨:</b></h4>
+                        <h4 class="text-context">{{crDatas.body.subject}}</h4>
+                    </mat-list-item>
+
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-list-item>
+                                    <h4><b>客戶提出日:</b></h4>
+                                    <h4 class="text-context">{{crDatas.body.date_for_recive}}</h4>
+                                </mat-list-item>
+                            </td>
+                            <td>
+                                <mat-list-item>
+                                    <h4><b>預計完成日:</b></h4>
+                                    <h4 class="text-context">{{crDatas.body.date_for_expected}}</h4>
+                                </mat-list-item>
+                            </td>
+
+                        </tr>
+                    </table>
+
+                    <mat-list-item>
+                        <h4><b>實際完成日:</b></h4>
+                        <h4 class="text-context">{{crDatas.body.date_for_done}}</h4>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <h4><b>專案經理:</b></h4>
+                        <h4 class="text-context">{{crDatas.body.project_manager}}</h4>
+                    </mat-list-item>
+
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-list-item>
+                                    <h4><b>狀態:</b></h4>
+                                    <h4 class="text-context">{{crDatas.body.status}}</h4>
+                                </mat-list-item>
+                            </td>
+                            <td>
+                                <mat-list-item>
+                                    <h4><b>製令管理:</b></h4>
+                                    <h4 class="text-context"></h4>
+                                </mat-list-item>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <mat-list-item>
+                        <h4><b>附件:</b></h4>
+                        <h4 class="text-context"></h4>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button class="btn-normal reset" type="reset" mat-dialog-close>關閉</button>
+    </mat-dialog-actions>
+</div>
