@@ -1,5 +1,6 @@
 # 企業專案管理系統
-
+### 專案說明影片連結
+https://www.youtube.com/watch?v=jlSs9z7LowQ&ab_channel=%E9%98%BF%E6%9D%B1%E5%B0%8F%E8%B1%AC
 ### 功能說明
 有效率的管理專案時程以及流暢的簽核管理對於企業甚為重要，為了提升企業在專案控管以及簽核流程上的效率，通常中小型企業會直接選擇購買現成的簽核軟體系統，但隨之而來的弊端(現成簽核系統難以完整契合企業所需功能、業務上易發生資料衝突、需要花費額外的時間與MIS人員溝通等等​)卻是源源不絕。 
 
@@ -9,15 +10,18 @@
 
 透過此專案我們可以輕鬆的達到客製化企業商業流程，完全契合企業所需以及清楚的權限控制，並且讓使用者更便捷的看到自己所屬的任務分配，當組織需進行變動時可以快速地進行調整。 
 * 登入畫面
-![image](https://user-images.githubusercontent.com/69799370/236857550-86605170-b88c-4db7-8963-2d029857f3e1.png)
+![image](https://github.com/26ty/eirc_pms_ng/assets/69799370/92761aa5-15eb-42b9-a5e8-a7dee2a62e7a)
 * 首頁
-![image](https://user-images.githubusercontent.com/69799370/236857705-1906029f-0734-4062-bea5-932c29b51d0c.png)
+![image](https://github.com/26ty/eirc_pms_ng/assets/69799370/623424e2-8398-47a2-99c3-49edf15456e0)
+首頁可快速查詢個人待辦事項(待簽核事項)
 * 專案管理 頁面
-![image](https://user-images.githubusercontent.com/69799370/236857828-85d2f8d7-8655-4dc0-b6bb-737b64330bef.png)
+![image](https://github.com/26ty/eirc_pms_ng/assets/69799370/ffcb8c88-12a0-4d42-998f-d96e406420bc)
+* 專案任務管理 畫面
+![image](https://github.com/26ty/eirc_pms_ng/assets/69799370/a04704b1-449a-4727-859b-d8d11ed0ac02)
 * 工時及資源管理 頁面
-![image](https://user-images.githubusercontent.com/69799370/236858137-77ce61c1-e064-41ba-834b-a4c9b52fe012.png)
+![image](https://github.com/26ty/eirc_pms_ng/assets/69799370/d43a2cf8-1c1d-4c7b-a3f0-0ce0cfe72d4e)
 * 產銷專案管理 頁面
-![image](https://user-images.githubusercontent.com/69799370/236858351-6bca38e5-166b-4a5c-bee9-c45cea3e6cb3.png)
+![image](https://github.com/26ty/eirc_pms_ng/assets/69799370/0bc44a8b-e088-4681-a100-319e9f328065)
 
 ### 系統使用框架、工具
 1. 使用Angular框架及Material、PrimeNG的UI設計，進行網頁前端開發。
