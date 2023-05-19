@@ -29,9 +29,4 @@ https://www.youtube.com/watch?v=jlSs9z7LowQ&ab_channel=%E9%98%BF%E6%9D%B1%E5%B0%
 3. 參與Golang進行API開發供網頁後端使用
 4. 使用PostgreSQL進行資料庫正規化設計及維護
 5. 將Bonitasoft簽核引擎導入API進行流程管理
-### 執行方式
-1. 終端機執行檔案
-```
-ng serve -o
-```
-2. 打開網頁本機位址:5000
+
